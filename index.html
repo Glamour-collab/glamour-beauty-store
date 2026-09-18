@@ -155,6 +155,77 @@
             height: 24px;
             fill: #ffffff;
         }
+
+        /* --- تنسيقات الأزرار العائمة على اليمين --- */
+        .glamour-social-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .glamour-main-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            outline: none;
+        }
+        .glamour-main-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 25px rgba(255, 117, 140, 0.6);
+        }
+        .glamour-social-widget .icon-close { display: none; }
+        .glamour-social-widget.active .icon-open { display: none; }
+        .glamour-social-widget.active .icon-close { display: block; }
+        .social-menu {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 12px;
+            margin-bottom: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        .glamour-social-widget.active .social-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-btn:hover {
+            transform: scale(1.15) translateX(-5px);
+        }
+        .social-btn.whatsapp { background-color: #25d366; }
+        .social-btn.telegram { background-color: #0088cc; }
+        .social-btn.messenger { background-color: #0084ff; }
+        .social-btn.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .social-btn.tiktok { background-color: #000000; }
+        .glamour-social-widget.active .social-menu a:nth-child(1) { transition-delay: 0.05s; }
+        .glamour-social-widget.active .social-menu a:nth-child(2) { transition-delay: 0.1s; }
+        .glamour-social-widget.active .social-menu a:nth-child(3) { transition-delay: 0.15s; }
+        .glamour-social-widget.active .social-menu a:nth-child(4) { transition-delay: 0.2s; }
+        .glamour-social-widget.active .social-menu a:nth-child(5) { transition-delay: 0.25s; }
     </style>
 </head>
 <body>
@@ -196,5 +267,41 @@
         </svg>
     </a>
 
+    <!-- أزرار التواصل الاجتماعي العائمة (على اليمين) -->
+    <div class="glamour-social-widget">
+        <div class="social-menu">
+            <a href="https://wa.me/972567728417" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </a>
+            <a href="https://t.me/GlamourBeauty12" target="_blank" class="social-btn telegram" title="Telegram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.26-2.05-.48-.83-.27-1.49-.42-1.43-.89.03-.25.38-.51 1.06-.78 4.14-1.82 6.9-3.02 8.28-3.61 3.94-1.66 4.76-1.95 5.29-1.96.12 0 .39.03.56.17.15.12.19.28.21.4-.01.06.01.24-.03.45z"/></svg>
+            </a>
+            <a href="https://m.me/61589875641442" target="_blank" class="social-btn messenger" title="Messenger">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.36 2 2 6.13 2 11.7c0 2.9 1.15 5.5 3.04 7.33V22l3.41-1.87c1.02.28 2.11.43 3.25.43 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm1.09 13.06l-2.55-2.72-4.97 2.72 5.47-5.8 2.58 2.72 4.94-2.72-5.47 5.8z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/laila1902154?stkn=b2xzb3RvcngzaHJr" target="_blank" class="social-btn instagram" title="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2.01-3.58.07-4.85C2.39 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.69.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.36-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.69 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.45a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@glamourbeauty060?_r=1&_t=ZS-99poMd5RY1s" target="_blank" class="social-btn tiktok" title="TikTok">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.5z"/></svg>
+            </a>
+        </div>
+        <button class="glamour-main-btn" id="socialToggleBtn" aria-label="Open Social Menu">
+            <svg class="icon-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3 11h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2h2a1 1 0 0 1 0 2z"/></svg>
+            <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18.3 5.71a1 1 0 0 0-1.42 0L12 10.59 7.11 5.7a1 1 0 0 0-1.42 1.42L10.59 12 5.7 16.89a1 1 0 0 0 1.42 1.42L12 13.41l4.89 4.88a1 1 0 0 0 1.42-1.42L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('socialToggleBtn').addEventListener('click', function () {
+            document.querySelector('.glamour-social-widget').classList.toggle('active');
+        });
+        document.addEventListener('click', function(event) {
+            const widget = document.querySelector('.glamour-social-widget');
+            if (!widget.contains(event.target)) {
+                widget.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
