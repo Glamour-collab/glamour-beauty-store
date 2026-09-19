@@ -8,18 +8,17 @@
     <!-- خط تجوال الفاخر -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- TikTok Pixel Code - Start (Engineered & Synchronized) -->
+    <!-- TikTok Pixel Code - Start -->
     <script>
     !function (w, d, t) {
       w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
       var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
       ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-      // تهيئة البكسل الأساسية
       ttq.load('DAMP49BC77U9OQ6PM560');
       ttq.page();
       
-      // 1. الحدث التلقائي عند دخول الصفحة: ViewContent (مشاهدة المحتوى)
+      // حدث مشاهدة الصفحة تلقائياً
       ttq.ready(function() {
           ttq.track('ViewContent');
       });
@@ -42,13 +41,14 @@
             flex-direction: column;
             min-height: 100vh;
             justify-content: space-between;
+            padding-bottom: 90px; /* مسافة لكي لا تغطي الأزرار العائمة المحتوى */
         }
         .main-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px 90px 20px;
+            padding: 40px 20px 20px 20px;
             flex: 1;
         }
         .store-icon-box {
@@ -99,10 +99,6 @@
             transform: scale(1.05);
             box-shadow: 0 20px 40px rgba(37, 211, 102, 0.4);
         }
-        .whatsapp-circle-btn:active {
-            transform: scale(0.92);
-            background: linear-gradient(145deg, #128c7e, #075e54);
-        }
         .whatsapp-circle-btn svg {
             width: 65px;
             height: 65px;
@@ -128,6 +124,47 @@
             margin: 0 auto;
             font-weight: 400;
         }
+
+        /* تنسيق الشريط العائم الذهبي للمنصات في الأسفل */
+        .floating-platforms-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
+        }
+        .gold-platform-icon-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #0f0f0f;
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+        .gold-platform-icon-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7);
+            background: linear-gradient(135deg, #e6c158, #d4af37);
+        }
+        .gold-platform-icon-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #0f0f0f;
+        }
     </style>
 </head>
 <body>
@@ -143,7 +180,7 @@
         <h1>Aura Luxe</h1>
         <div class="subtitle">OFFICIAL STORE</div>
 
-        <!-- زر الواتساب المهندس لتفعيل الأحداث التفاعلية: (2. Contact, 3. Lead, 4. InitiateCheckout) آمن تماماً ضد أي تعارض -->
+        <!-- زر الواتساب الدائري الرئيسي مع الأحداث -->
         <a href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%AA%20%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D8%B9%D9%84%D9%89%20TikTok%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%3F" 
            class="whatsapp-circle-btn" 
            onclick="try { ttq.track('Contact'); ttq.track('Lead'); ttq.track('InitiateCheckout'); } catch(e) {}" 
@@ -159,6 +196,26 @@
         <div class="welcome-text">
             نحن هنا لنقدم لك تجربة تسوق استثنائية. تواصل معنا الآن لخدمتك بسرعة وإتمام طلبك بكل سهولة.
         </div>
+    </div>
+
+    <!-- شريط الأزرار العائمة الذهبي للمنصات في الأسفل (مسنجر، تيك توك، انستجرام، تليجرام) -->
+    <div class="floating-platforms-bar">
+        <!-- فيسبوك ماسنجر -->
+        <a href="https://m.me/YOUR_PAGE" class="gold-platform-icon-btn" onclick="try { ttq.track('Contact'); ttq.track('Lead'); } catch(e) {}" title="Messenger">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.91 1.445 5.502 3.697 7.184V22l3.375-1.852c.905.253 1.871.39 2.868.39 5.523 0 10-4.145 10-9.243C22 6.145 17.523 2 12 2zm1.05 12.338l-2.585-2.755-5.04 2.755 5.545-5.886 2.66 2.754 4.965-2.754-5.545 5.886z"/></svg>
+        </a>
+        <!-- تيك توك -->
+        <a href="https://www.tiktok.com/@YOUR_ACCOUNT" class="gold-platform-icon-btn" onclick="try { ttq.track('Contact'); ttq.track('Lead'); } catch(e) {}" title="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002-.001a2.895 2.895 0 0 1 3.144-4.53v-3.48a6.341 6.341 0 0 0-5.934 6.342 6.344 6.344 0 0 0 6.342 6.342 6.343 6.343 0 0 0 6.342-6.342V9.167a8.21 8.21 0 0 0 4.798 1.515V7.238a4.792 4.792 0 0 1-1.076-.552z"/></svg>
+        </a>
+        <!-- انستجرام -->
+        <a href="https://www.instagram.com/YOUR_ACCOUNT" class="gold-platform-icon-btn" onclick="try { ttq.track('Contact'); ttq.track('Lead'); } catch(e) {}" title="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <!-- تليجرام -->
+        <a href="https://t.me/YOUR_ACCOUNT" class="gold-platform-icon-btn" onclick="try { ttq.track('Contact'); ttq.track('Lead'); } catch(e) {}" title="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.534.26l.213-3.053 5.56-5.023c.242-.213-.054-.334-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.195 1.006.131.832.941z"/></svg>
+        </a>
     </div>
 
 </body>
