@@ -94,28 +94,36 @@
             margin-bottom: 45px;
             text-transform: uppercase;
         }
+
+        /* الزر الدائري الأوسط بلون الواتساب الرسمي الحقيقي مع تأثير الضغط المتناسق */
         .whatsapp-circle-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 125px;
             height: 125px;
-            background: linear-gradient(145deg, #25d366, #128c7e);
+            background: linear-gradient(145deg, #25d366, #1ebe5d);
             border-radius: 50%;
             margin: 0 auto 25px auto;
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .whatsapp-circle-btn:hover {
             transform: scale(1.06);
             box-shadow: 0 20px 45px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-circle-btn:active {
+            background: linear-gradient(145deg, #128c7e, #0e6f63);
+            transform: scale(0.96);
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.5), inset 0 3px 6px rgba(0, 0, 0, 0.3);
         }
         .whatsapp-circle-btn svg {
             width: 65px;
             height: 65px;
             fill: #ffffff;
         }
+
         .action-label {
             font-size: 24px;
             font-weight: 900;
@@ -162,7 +170,7 @@
             background: linear-gradient(135deg, #25d366 0%, #1ebe5d 100%);
             color: #ffffff;
             text-decoration: none;
-            padding: 10px 16px; /* تقليص الحشو ليصبح الزر نحيفاً ومناسباً */
+            padding: 10px 16px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 15px;
@@ -171,14 +179,12 @@
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* تأثير عند مرور الفأرة (Hover) */
         .whatsapp-green-btn:hover {
             background: linear-gradient(135deg, #22bf5b 0%, #179c4d 100%);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.4);
             transform: translateY(-1px);
         }
 
-        /* تأثير عند الضغط على الزر (Active) ليعطي لوناً آخر مختلفاً ومميزاً */
         .whatsapp-green-btn:active {
             background: linear-gradient(135deg, #168542 0%, #0f5c2e 100%);
             box-shadow: 0 2px 8px rgba(15, 92, 46, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.3);
