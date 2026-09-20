@@ -106,6 +106,8 @@
       min-height: 100vh;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .glow {
@@ -132,7 +134,7 @@
 
     header {
       width: 100%;
-      padding: 12px 20px;
+      padding: 8px 16px;
       position: relative;
       z-index: 5;
     }
@@ -148,18 +150,18 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 9px;
-      font-size: 18px;
+      gap: 8px;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
 
     .logo-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: linear-gradient(135deg, #8b7cff, #00d9ff);
-      box-shadow: 0 0 15px rgba(0, 210, 255, 0.7);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
     }
 
     .brand-name {
@@ -171,65 +173,64 @@
     }
 
     .header-button {
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 50px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       backdrop-filter: blur(12px);
     }
 
+    /* تقليص الارتفاع والهوامش لضمان بقاء المحتوى بالكامل في الشاشة الأولى */
     .hero {
       max-width: 900px;
-      margin: auto;
-      min-height: calc(100vh - 60px);
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
       text-align: center;
-      padding: 10px 20px 20px;
+      padding: 5px 15px 15px;
       position: relative;
       z-index: 2;
     }
 
     .hero-top {
-      width: 100%;
+      margin-bottom: 8px;
     }
 
     .hero-content {
-      width: 100%;
-      margin: auto 0;
+      margin-bottom: 15px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 6px 14px;
+      gap: 6px;
+      padding: 5px 12px;
       border-radius: 50px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.10);
       color: #cfd5ff;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       backdrop-filter: blur(12px);
     }
 
     .badge span {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       background: #48e0a4;
       border-radius: 50%;
-      box-shadow: 0 0 10px rgba(72,224,164,0.8);
+      box-shadow: 0 0 8px rgba(72,224,164,0.8);
     }
 
     h1 {
-      font-size: clamp(26px, 4.5vw, 38px);
-      line-height: 1.3;
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.25;
       letter-spacing: -0.4px;
       font-weight: 800;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     h1 .line-break {
@@ -244,16 +245,16 @@
     }
 
     .subtitle {
-      max-width: 580px;
-      margin: auto;
+      max-width: 550px;
+      margin: 0 auto;
       color: #c0c8de;
-      font-size: clamp(14px, 2.1vw, 16.5px);
-      line-height: 1.65;
+      font-size: clamp(13.5px, 2vw, 15.5px);
+      line-height: 1.55;
     }
 
     .cta-area {
       width: 100%;
-      margin-top: 10px;
+      margin-top: 5px;
       margin-bottom: 10px;
     }
 
@@ -268,48 +269,48 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      min-width: 240px;
-      padding: 14px 22px;
-      border-radius: 14px;
+      min-width: 230px;
+      padding: 12px 20px;
+      border-radius: 12px;
       background: linear-gradient(135deg, #20d879, #0fae62);
       color: #ffffff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      box-shadow: 0 12px 35px rgba(24, 201, 111, 0.22);
+      box-shadow: 0 10px 30px rgba(24, 201, 111, 0.22);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .whatsapp-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 45px rgba(24, 201, 111, 0.32);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(24, 201, 111, 0.32);
     }
 
     .whatsapp-icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: currentColor;
     }
 
     .small-note {
-      margin-top: 10px;
+      margin-top: 6px;
       color: #939db8;
-      font-size: 13px;
+      font-size: 12.5px;
     }
 
     .features {
       max-width: 950px;
       margin: 0 auto;
-      padding: 5px 20px 20px;
+      padding: 5px 15px 15px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
       position: relative;
       z-index: 2;
     }
 
     .feature {
-      padding: 16px 14px;
-      border-radius: 14px;
+      padding: 12px 10px;
+      border-radius: 12px;
       background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(14px);
@@ -317,56 +318,56 @@
     }
 
     .feature-icon {
-      width: 36px;
-      height: 36px;
-      margin: 0 auto 10px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(135deg, rgba(139,124,255,0.22), rgba(0,210,255,0.12));
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .feature h3 {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       color: #ffffff;
     }
 
     .feature p {
       color: #b0b8cc;
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 12px;
+      line-height: 1.4;
     }
 
     .social-section {
       max-width: 950px;
-      margin: 5px auto 15px;
-      padding: 0 20px;
+      margin: 5px auto 10px;
+      padding: 0 15px;
       text-align: center;
       position: relative;
       z-index: 2;
     }
 
     .social-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #d1d8ef;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .social-btn {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -379,43 +380,32 @@
     }
 
     .social-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
     }
 
     .social-btn:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       background: rgba(255, 255, 255, 0.15);
       border-color: rgba(139, 124, 255, 0.5);
-      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
     }
 
     footer {
       text-align: center;
-      padding: 10px 20px 20px;
+      padding: 8px 15px 15px;
       color: #8a94ad;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       position: relative;
       z-index: 2;
+      margin-top: auto;
     }
 
     @media (max-width: 700px) {
-      header {
-        padding: 10px 14px;
-      }
-      .hero {
-        padding: 10px 14px 15px;
-      }
-      .whatsapp-button {
-        width: 100%;
-        max-width: 320px;
-      }
       .features {
         grid-template-columns: 1fr;
-        padding: 5px 14px 15px;
-        gap: 10px;
+        gap: 8px;
       }
     }
   </style>
@@ -450,7 +440,7 @@
         </h1>
 
         <p class="subtitle">
-          تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بطريقة سهلة وسريعة. نحن هنا لمساعدتك والإجابة عن استفساراتك.
+          تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بطريقة سهلة وسريعة.
         </p>
       </div>
 
@@ -474,17 +464,17 @@
       <div class="feature">
         <div class="feature-icon">⚡</div>
         <h3>تواصل سريع</h3>
-        <p>وصول مباشر وسهل إلى المحادثة.</p>
+        <p>وصول مباشر وسهل.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">💬</div>
         <h3>إجابة مباشرة</h3>
-        <p>أرسل استفسارك وسنتواصل معك.</p>
+        <p>أرسل استفسارك وسنتواصل.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🔒</div>
         <h3>تجربة بسيطة</h3>
-        <p>بدون خطوات معقدة أو صفحات إضافية.</p>
+        <p>بدون تعقيد.</p>
       </div>
     </section>
 
