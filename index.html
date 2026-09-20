@@ -106,8 +106,6 @@
       min-height: 100vh;
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
     .glow {
@@ -134,7 +132,7 @@
 
     header {
       width: 100%;
-      padding: 8px 16px;
+      padding: 18px 20px;
       position: relative;
       z-index: 5;
     }
@@ -150,18 +148,18 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 16px;
+      gap: 9px;
+      font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
 
     .logo-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: linear-gradient(135deg, #8b7cff, #00d9ff);
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.7);
     }
 
     .brand-name {
@@ -173,64 +171,65 @@
     }
 
     .header-button {
-      padding: 5px 12px;
+      padding: 8px 16px;
       border-radius: 50px;
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       backdrop-filter: blur(12px);
     }
 
-    /* تقليص الارتفاع والهوامش لضمان بقاء المحتوى بالكامل في الشاشة الأولى */
     .hero {
       max-width: 900px;
-      margin: 0 auto;
+      margin: auto;
+      min-height: calc(100vh - 75px);
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-between;
       text-align: center;
-      padding: 5px 15px 15px;
+      padding: 20px 20px 30px;
       position: relative;
       z-index: 2;
     }
 
     .hero-top {
-      margin-bottom: 8px;
+      width: 100%;
     }
 
     .hero-content {
-      margin-bottom: 15px;
+      width: 100%;
+      margin: auto 0;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
+      gap: 7px;
+      padding: 8px 16px;
       border-radius: 50px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.10);
       color: #cfd5ff;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       backdrop-filter: blur(12px);
     }
 
     .badge span {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       background: #48e0a4;
       border-radius: 50%;
-      box-shadow: 0 0 8px rgba(72,224,164,0.8);
+      box-shadow: 0 0 10px rgba(72,224,164,0.8);
     }
 
     h1 {
-      font-size: clamp(24px, 4vw, 34px);
-      line-height: 1.25;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.35;
       letter-spacing: -0.4px;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
     }
 
     h1 .line-break {
@@ -245,17 +244,16 @@
     }
 
     .subtitle {
-      max-width: 550px;
-      margin: 0 auto;
+      max-width: 600px;
+      margin: auto;
       color: #c0c8de;
-      font-size: clamp(13.5px, 2vw, 15.5px);
-      line-height: 1.55;
+      font-size: clamp(15px, 2.3vw, 18px);
+      line-height: 1.75;
     }
 
     .cta-area {
       width: 100%;
-      margin-top: 5px;
-      margin-bottom: 10px;
+      margin-top: 20px;
     }
 
     .cta-wrapper {
@@ -269,48 +267,48 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      min-width: 230px;
-      padding: 12px 20px;
-      border-radius: 12px;
+      min-width: 240px;
+      padding: 15px 24px;
+      border-radius: 14px;
       background: linear-gradient(135deg, #20d879, #0fae62);
       color: #ffffff;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
-      box-shadow: 0 10px 30px rgba(24, 201, 111, 0.22);
+      box-shadow: 0 12px 35px rgba(24, 201, 111, 0.22);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .whatsapp-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(24, 201, 111, 0.32);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px rgba(24, 201, 111, 0.32);
     }
 
     .whatsapp-icon {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       fill: currentColor;
     }
 
     .small-note {
-      margin-top: 6px;
+      margin-top: 12px;
       color: #939db8;
-      font-size: 12.5px;
+      font-size: 13px;
     }
 
     .features {
       max-width: 950px;
       margin: 0 auto;
-      padding: 5px 15px 15px;
+      padding: 10px 20px 30px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 14px;
       position: relative;
       z-index: 2;
     }
 
     .feature {
-      padding: 12px 10px;
-      border-radius: 12px;
+      padding: 20px 18px;
+      border-radius: 16px;
       background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(14px);
@@ -318,56 +316,57 @@
     }
 
     .feature-icon {
-      width: 32px;
-      height: 32px;
-      margin: 0 auto 6px;
-      border-radius: 8px;
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 12px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(135deg, rgba(139,124,255,0.22), rgba(0,210,255,0.12));
-      font-size: 16px;
+      font-size: 20px;
     }
 
     .feature h3 {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 2px;
+      margin-bottom: 6px;
       color: #ffffff;
     }
 
     .feature p {
       color: #b0b8cc;
-      font-size: 12px;
-      line-height: 1.4;
+      font-size: 13.5px;
+      line-height: 1.6;
     }
 
     .social-section {
       max-width: 950px;
-      margin: 5px auto 10px;
-      padding: 0 15px;
+      margin: 10px auto 25px;
+      padding: 0 20px;
       text-align: center;
       position: relative;
       z-index: 2;
     }
 
     .social-title {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       color: #d1d8ef;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .social-btn {
-      width: 38px;
-      height: 38px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -380,32 +379,43 @@
     }
 
     .social-btn svg {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       fill: currentColor;
     }
 
     .social-btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       background: rgba(255, 255, 255, 0.15);
       border-color: rgba(139, 124, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
     }
 
     footer {
       text-align: center;
-      padding: 8px 15px 15px;
+      padding: 15px 20px 30px;
       color: #8a94ad;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       position: relative;
       z-index: 2;
-      margin-top: auto;
     }
 
     @media (max-width: 700px) {
+      header {
+        padding: 14px 16px;
+      }
+      .hero {
+        padding: 20px 16px 25px;
+      }
+      .whatsapp-button {
+        width: 100%;
+        max-width: 320px;
+      }
       .features {
         grid-template-columns: 1fr;
-        gap: 8px;
+        padding: 5px 16px 25px;
+        gap: 12px;
       }
     }
   </style>
@@ -440,7 +450,7 @@
         </h1>
 
         <p class="subtitle">
-          تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بطريقة سهلة وسريعة.
+          تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بطريقة سهلة وسريعة. نحن هنا لمساعدتك والإجابة عن استفساراتك.
         </p>
       </div>
 
@@ -464,17 +474,17 @@
       <div class="feature">
         <div class="feature-icon">⚡</div>
         <h3>تواصل سريع</h3>
-        <p>وصول مباشر وسهل.</p>
+        <p>وصول مباشر وسهل إلى المحادثة.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">💬</div>
         <h3>إجابة مباشرة</h3>
-        <p>أرسل استفسارك وسنتواصل.</p>
+        <p>أرسل استفسارك وسنتواصل معك.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">🔒</div>
         <h3>تجربة بسيطة</h3>
-        <p>بدون تعقيد.</p>
+        <p>بدون خطوات معقدة أو صفحات إضافية.</p>
       </div>
     </section>
 
