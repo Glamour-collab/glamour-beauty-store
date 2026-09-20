@@ -24,7 +24,7 @@
       });
     }(window, document, 'ttq');
 
-    // دالة آمنة ومضمونة لتأخير الانتقال 300 جزء من الثانية لضمان إرسال الأحداث لتيك توك
+    // دالة الانتقال الفوري للواتساب بدون أي تأخير
     function openWhatsAppWithTracking(event, url) {
         event.preventDefault();
         try {
@@ -32,9 +32,7 @@
             ttq.track('Lead');
             ttq.track('InitiateCheckout');
         } catch(e) {}
-        setTimeout(function() {
-            window.location.href = url;
-        }, 300);
+        window.location.href = url;
     }
     </script>
     <!-- TikTok Pixel Code - End -->
@@ -212,7 +210,7 @@
         <h1>Aura Luxe</h1>
         <div class="subtitle">OFFICIAL STORE</div>
 
-        <!-- زر الواتساب الدائري الرئيسي مع دالة التأخير الآمن -->
+        <!-- زر الواتساب الدائري الرئيسي مع الانتقال الفوري -->
         <a href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%A7%D8%AA%20%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D8%B9%D9%84%D9%89%20TikTok%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%3F" 
            class="whatsapp-circle-btn" 
            onclick="openWhatsAppWithTracking(event, this.href)" 
