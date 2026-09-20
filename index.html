@@ -1,30 +1,65 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Luxe - OFFICIAL STORE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <title>Glamour Beauty - تواصل معنا</title>
+  <meta name="description" content="تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بسهولة.">
 
-    <!-- خط تجوال الفاخر -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Google Fonts - Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- TikTok Pixel Code - Start -->
-    <script>
+  <!-- TikTok Pixel Code - Start -->
+  <script>
     !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-      var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-      ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
+      w.TiktokAnalyticsObject = t;
+      var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
+      ttq.setAndDefer = function (t, e) {
+        t[e] = function () {
+          t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+        };
+      };
+      for (var i = 0; i < ttq.methods.length; i++) {
+        ttq.setAndDefer(ttq, ttq.methods[i]);
+      }
+      ttq.instance = function (t) {
+        for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) {
+          ttq.setAndDefer(e, ttq.methods[n]);
+        }
+        return e;
+      };
+      ttq.load = function (e, n) {
+        var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i = ttq._i || {};
+        ttq._i[e] = [];
+        ttq._i[e]._u = i;
+        ttq._t = ttq._t || {};
+        ttq._t[e] = +new Date;
+        ttq._o = ttq._o || {};
+        ttq._o[e] = n || {};
+        var o = document.createElement("script");
+        o.type = "text/javascript";
+        o.async = true;
+        o.src = i + "?sdkid=" + e + "&lib=" + t;
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(o, a);
+      };
+      
+      // تحميل معرّف البكسل المطلوب
       ttq.load('DAMP49BC77U9OQ6PM560');
       ttq.page();
       
-      // حدث مشاهدة الصفحة تلقائياً
+      // حدث مشاهدة الصفحة تلقائياً عند الجاهزية
       ttq.ready(function() {
           ttq.track('ViewContent');
       });
     }(window, document, 'ttq');
 
-    // دالة الانتقال الفوري للواتساب بدون أي تأخير
+    // دالة تتبع الأحداث والانتقال الفوري للواتساب
     function openWhatsAppWithTracking(event, url) {
         event.preventDefault();
         try {
@@ -32,219 +67,449 @@
             ttq.track('Lead');
             ttq.track('InitiateCheckout');
         } catch(e) {}
-        window.location.href = url;
+        
+        // الانتقال الفوري لضمان عدم تأخير العميل
+        setTimeout(function() {
+            window.location.href = url;
+        }, 150);
     }
-    </script>
-    <!-- TikTok Pixel Code - End -->
+  </script>
+  <!-- TikTok Pixel Code - End -->
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #0b0b0b;
-            color: #ffffff;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            justify-content: space-between;
-            padding-bottom: 90px; /* مسافة لكي لا يغطي الشريط السفلي المحتوى */
-        }
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px 20px 20px;
-            flex: 1;
-        }
-        .store-icon-box {
-            width: 85px;
-            height: 85px;
-            background: linear-gradient(135deg, #1c1c1c, #0f0f0f);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-        }
-        .store-icon-box svg {
-            width: 40px;
-            height: 40px;
-            stroke: #d4af37;
-        }
-        h1 {
-            color: #ffffff;
-            font-size: 32px;
-            font-weight: 900;
-            margin-bottom: 6px;
-            letter-spacing: 1.5px;
-        }
-        .subtitle {
-            color: #d4af37;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 45px;
-            text-transform: uppercase;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* الزر الدائري الأوسط بلون الواتساب الرسمي الحقيقي مع تأثير الضغط المتناسق */
-        .whatsapp-circle-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 125px;
-            height: 125px;
-            background: linear-gradient(145deg, #25d366, #1ebe5d);
-            border-radius: 50%;
-            margin: 0 auto 25px auto;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .whatsapp-circle-btn:hover {
-            transform: scale(1.06);
-            box-shadow: 0 20px 45px rgba(37, 211, 102, 0.5);
-        }
-        .whatsapp-circle-btn:active {
-            background: linear-gradient(145deg, #128c7e, #0e6f63);
-            transform: scale(0.96);
-            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.5), inset 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-        .whatsapp-circle-btn svg {
-            width: 65px;
-            height: 65px;
-            fill: #ffffff;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .action-label {
-            font-size: 24px;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-        .action-sub {
-            font-size: 14px;
-            color: #b0b0b0;
-            font-weight: 500;
-            margin-bottom: 35px;
-        }
-        .welcome-text {
-            font-size: 15px;
-            color: #999999;
-            line-height: 1.9;
-            max-width: 350px;
-            margin: 0 auto;
-            font-weight: 400;
-        }
+    body {
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 10%, rgba(95, 80, 255, 0.20), transparent 35%),
+                  radial-gradient(circle at 90% 80%, rgba(0, 200, 255, 0.12), transparent 35%),
+                  #080c18;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* تنسيق الشريط السفلي وزر الواتساب الأخضر بحجم أصغر وأنيق */
-        .footer-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(11, 11, 11, 0.96);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(37, 211, 102, 0.2);
-            padding: 10px 16px;
-            z-index: 1000;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .whatsapp-green-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #25d366 0%, #1ebe5d 100%);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 15px;
-            font-weight: 800;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .whatsapp-green-btn:hover {
-            background: linear-gradient(135deg, #22bf5b 0%, #179c4d 100%);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.4);
-            transform: translateY(-1px);
-        }
+    .page {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .whatsapp-green-btn:active {
-            background: linear-gradient(135deg, #168542 0%, #0f5c2e 100%);
-            box-shadow: 0 2px 8px rgba(15, 92, 46, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.3);
-            transform: translateY(1px);
-        }
+    .glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
 
-        .whatsapp-green-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: #ffffff;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
-        }
-        
-        .whatsapp-green-btn span {
-            letter-spacing: 0.3px;
-        }
-    </style>
+    .glow-one {
+      background: #6c5ce7;
+      top: -100px;
+      right: -100px;
+    }
+
+    .glow-two {
+      background: #00bcd4;
+      bottom: 50px;
+      left: -130px;
+    }
+
+    header {
+      width: 100%;
+      padding: 18px 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .header-inner {
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b7cff, #00d9ff);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.7);
+    }
+
+    .brand-name {
+      background: linear-gradient(90deg, #ffffff, #9d94ff, #66e5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+
+    .header-button {
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      max-width: 900px;
+      margin: auto;
+      min-height: calc(100vh - 75px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 20px 20px 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-top {
+      width: 100%;
+    }
+
+    .hero-content {
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #cfd5ff;
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    .badge span {
+      width: 7px;
+      height: 7px;
+      background: #48e0a4;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(72,224,164,0.8);
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.35;
+      letter-spacing: -0.4px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 .line-break {
+      display: block;
+    }
+
+    h1 .gradient {
+      background: linear-gradient(90deg, #ffffff, #9d94ff, #66e5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      max-width: 600px;
+      margin: auto;
+      color: #c0c8de;
+      font-size: clamp(15px, 2.3vw, 18px);
+      line-height: 1.75;
+    }
+
+    .cta-area {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .cta-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 240px;
+      padding: 15px 24px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #20d879, #0fae62);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 12px 35px rgba(24, 201, 111, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .whatsapp-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px rgba(24, 201, 111, 0.32);
+    }
+
+    .whatsapp-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .small-note {
+      margin-top: 12px;
+      color: #939db8;
+      font-size: 13px;
+    }
+
+    .features {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 10px 20px 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature {
+      padding: 20px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(139,124,255,0.22), rgba(0,210,255,0.12));
+      font-size: 20px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .feature p {
+      color: #b0b8cc;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .social-section {
+      max-width: 950px;
+      margin: 10px auto 25px;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .social-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #d1d8ef;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(139, 124, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px 20px 30px;
+      color: #8a94ad;
+      font-size: 13px;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 14px 16px;
+      }
+      .hero {
+        padding: 20px 16px 25px;
+      }
+      .whatsapp-button {
+        width: 100%;
+        max-width: 320px;
+      }
+      .features {
+        grid-template-columns: 1fr;
+        padding: 5px 16px 25px;
+        gap: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="store-icon-box">
-            <svg viewBox="0 0 24 24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-                <line x1="7" y1="7" x2="7.01" y2="7"></line>
-            </svg>
+  <div class="page">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-dot"></span>
+          <span class="brand-name">Glamour Beauty</span>
         </div>
+        <a href="#contact" class="header-button">ابدأ الآن</a>
+      </div>
+    </header>
 
-        <h1>Aura Luxe</h1>
-        <div class="subtitle">OFFICIAL STORE</div>
+    <section class="hero">
+      <div class="hero-top">
+        <div class="badge">
+          <span></span>
+          خدمة العملاء الفورية
+        </div>
+      </div>
 
-        <!-- زر الواتساب الدائري الرئيسي مع الانتقال الفوري -->
-        <a href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%A7%D8%AA%20%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D8%B9%D9%84%D9%89%20TikTok%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%3F" 
-           class="whatsapp-circle-btn" 
-           onclick="openWhatsAppWithTracking(event, this.href)" 
-           aria-label="راسلنا عبر واتساب">
-            <svg viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+      <div class="hero-content">
+        <h1>
+          كل ما تحتاجه <span class="line-break"><span class="gradient">يبدأ برسالة واحدة</span></span>
+        </h1>
+
+        <p class="subtitle">
+          تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بطريقة سهلة وسريعة. نحن هنا لمساعدتك والإجابة عن استفساراتك.
+        </p>
+      </div>
+
+      <div class="cta-area" id="contact">
+        <div class="cta-wrapper">
+          <!-- زر الواتساب مرتبط بدالة تتبع البكسل والانتقال الفوري -->
+          <a id="whatsappButton" class="whatsapp-button" href="https://wa.me/972567728417" onclick="openWhatsAppWithTracking(event, this.href);" target="_blank" rel="noopener noreferrer" aria-label="التواصل معنا عبر واتساب">
+            <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.53 0 .2 5.33.2 11.88c0 2.09.55 4.13 1.59 5.93L.1 24l6.34-1.66a11.88 11.88 0 0 0 5.64 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.24-6.15-3.45-8.41ZM12.09 21.77h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.99 1-3.66-.23-.38a9.87 9.87 0 0 1-1.51-5.25C2.19 6.43 6.62 2 12.09 2c2.65 0 5.14 1.03 7.01 2.9a9.83 9.83 0 0 1 2.9 7c0 5.47-4.44 9.87-9.91 9.87Zm5.42-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.41.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35Z"/>
             </svg>
+            راسلنا عبر واتساب
+          </a>
+        </div>
+        <div class="small-note">
+          اضغط على الزر للانتقال مباشرة إلى واتساب
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>تواصل سريع</h3>
+        <p>وصول مباشر وسهل إلى المحادثة.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>إجابة مباشرة</h3>
+        <p>أرسل استفسارك وسنتواصل معك.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>تجربة بسيطة</h3>
+        <p>بدون خطوات معقدة أو صفحات إضافية.</p>
+      </div>
+    </section>
+
+    <div class="social-section">
+      <p class="social-title">تابعنا على منصات التواصل</p>
+      <div class="social-links">
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Messenger">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.91 1.442 5.502 3.692 7.214V22l3.376-1.851c.904.252 1.868.386 2.864.386 5.523 0 10-4.145 10-9.292C22 6.145 17.523 2 12 2zm1.03 12.19l-2.585-2.755-5.045 2.755 5.545-5.885 2.645 2.755 4.985-2.755-5.545 5.885z"/></svg>
         </a>
-
-        <div class="action-label">اضغط هنا</div>
-        <div class="action-sub">ابدأ محادثة الطلب الفوري</div>
-
-        <div class="welcome-text">
-            نحن هنا لنقدم لك تجربة تسوق استثنائية. تواصل معنا الآن لخدمتك بسرعة وإتمام طلبك بكل سهولة.
-        </div>
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-2.01 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.05-.78 4.11-1.79 6.85-2.97 8.22-3.55 3.91-1.67 4.72-1.96 5.25-1.97.12 0 .38.03.55.17.14.12.18.28.2.4-.02.07-.02.24-.04.37z"/></svg>
+        </a>
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+        </a>
+      </div>
     </div>
 
-    <!-- شريط أسفل الصفحة يحمل زر الواتساب الأخضر النحيف والأنيق -->
-    <div class="footer-container">
-        <a href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%A7%D8%AA%20%D8%A7%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D8%B9%D9%84%D9%89%20TikTok%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%3F" 
-           class="whatsapp-green-btn" 
-           onclick="openWhatsAppWithTracking(event, this.href)">
-            <svg viewBox="0 0 24 24">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-            </svg>
-            <span>راسلنا عبر الواتساب</span>
-        </a>
-    </div>
+    <footer>
+      Glamour Beauty - جميع الحقوق محفوظة © 2026
+    </footer>
+  </div>
 
 </body>
 </html>
