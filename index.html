@@ -60,14 +60,13 @@
     function openWhatsAppWithTracking(event, url) {
         event.preventDefault();
         try {
-            ttq.track('Contact');
-            ttq.track('Lead');
             ttq.track('InitiateCheckout');
+            ttq.track('Contact');
         } catch(e) {}
         
         setTimeout(function() {
             window.location.href = url;
-        }, 150);
+        }, 300);
     }
   </script>
   <!-- TikTok Pixel Code - End -->
@@ -389,12 +388,16 @@
 
     footer {
       text-align: center;
-      padding: 15px 20px 30px;
+      padding: 25px 20px 40px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       color: #8a94ad;
       font-size: 13px;
       font-weight: 600;
-      position: relative;
-      z-index: 2;
     }
 
     @media (max-width: 700px) {
@@ -406,7 +409,6 @@
         padding: 10px 16px 15px;
       }
 
-      /* رفع زر الواتساب والجملة التي تحته قليلاً داخل شاشة الهاتف */
       .cta-area {
         transform: translateY(-35px);
       }
@@ -554,4 +556,14 @@
         </a>
 
       </div>
-   
+
+    </div>
+
+    <footer>
+      جميع الحقوق محفوظة لـ Glamour Beauty
+    </footer>
+
+  </div>
+
+</body>
+</html>
