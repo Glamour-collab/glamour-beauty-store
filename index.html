@@ -12,79 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- TikTok Pixel Code - Start -->
-  <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject = t;
-      var ttq = w[t] = w[t] || [];
-      ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
-      ttq.setAndDefer = function (t, e) {
-        t[e] = function () {
-          t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-        };
-      };
-      for (var i = 0; i < ttq.methods.length; i++) {
-        ttq.setAndDefer(ttq, ttq.methods[i]);
-      }
-      ttq.instance = function (t) {
-        for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) {
-          ttq.setAndDefer(e, ttq.methods[n]);
-        }
-        return e;
-      };
-      ttq.load = function (e, n) {
-        var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
-        ttq._i = ttq._i || {};
-        ttq._i[e] = [];
-        ttq._i[e]._u = i;
-        ttq._t = ttq._t || {};
-        ttq._t[e] = +new Date;
-        ttq._o = ttq._o || {};
-        ttq._o[e] = n || {};
-        var o = document.createElement("script");
-        o.type = "text/javascript";
-        o.async = true;
-        o.src = i + "?sdkid=" + e + "&lib=" + t;
-        var a = document.getElementsByTagName("script")[0];
-        a.parentNode.insertBefore(o, a);
-      };
-      
-      ttq.load('DAMP49BC77U9OQ6PM560');
-      ttq.page();
-      
-      ttq.ready(function() {
-          ttq.track('ViewContent', {
-              contents: [{
-                  content_id: 'glamour_beauty_general',
-                  content_name: 'Glamour Beauty Service',
-                  quantity: 1,
-                  price: 10.00
-              }],
-              value: 10.00,
-              currency: 'USD'
-          });
-      });
-    }(window, document, 'ttq');
-
-    function openWhatsAppWithTracking(event, url) {
-        event.preventDefault();
-        try {
-            // إرسال حدث Contact فقط بدقة لمتتبع تيك توك
-            ttq.track('Contact', {
-                content_id: 'glamour_beauty_general',
-                content_name: 'Glamour Beauty Service',
-                value: 10.00,
-                currency: 'USD'
-            });
-        } catch(e) {}
-        
-        setTimeout(function() {
-            window.location.href = url;
-        }, 300);
-    }
-  </script>
-  <!-- TikTok Pixel Code - End -->
-
   <style>
     * {
       margin: 0;
@@ -487,8 +414,7 @@
           <a
             id="whatsappButton"
             class="whatsapp-button"
-            href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%Dط%8C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%AA%20%D8%A5%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D8%B9%D9%84%EC%ABTikTok%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%20%D8%9F"
-            onclick="openWhatsAppWithTracking(event, this.href);"
+            href="https://wa.me/972567728417?text=%D9%85%D8%B1%D8%_AD%D8%A8%D8%A7%D9%8B%2C%20%D9%84%D9%82%D8%AF%20%D8%B5%D8%A7%D8%AF%D9%81%D8%AA%20%D8%A5%D8%B9%D9%84%D8%A7%D9%86%D9%83%20%D9%88%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%20%D8%9F"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="التواصل معنا عبر واتساب"
