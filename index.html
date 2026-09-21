@@ -21,15 +21,15 @@
 
     ttq.load('DAOL1OBC77U5LL2S3560');
     
-    // تتبع حدث مشاهدة المحتوى/الصفحة مع البيانات والعملة والقيمة لتجنب التحذيرات
+    // تتبع حدث مشاهدة المحتوى/الصفحة
     ttq.track('ViewContent', {
       contents: [{
         content_id: 'glamour_beauty_page',
         content_name: 'صفحة تواصل سحر الجمال',
         quantity: 1,
-        price: 0
+        price: 20
       }],
-      value: 0,
+      value: 20,
       currency: 'USD'
     });
 
@@ -444,7 +444,7 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="التواصل معنا عبر واتساب"
-            onclick="ttq.track('InitiateCheckout', { contents: [{ content_id: 'glamour_beauty_chat', content_name: 'خدمة عملاء سحر الجمال', quantity: 1, price: 0 }], value: 0, currency: 'USD' });"
+            onclick="ttq.track('InitiateCheckout', { contents: [{ content_id: 'glamour_beauty_chat', content_name: 'خدمة عملاء سحر الجمال', quantity: 1, price: 20 }], value: 20, currency: 'USD' });"
           >
 
             <svg
