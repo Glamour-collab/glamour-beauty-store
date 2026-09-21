@@ -53,15 +53,31 @@
       ttq.page();
       
       ttq.ready(function() {
-          ttq.track('ViewContent');
+          ttq.track('ViewContent', {
+              contents: [{
+                  content_id: 'glamour_beauty_general',
+                  content_name: 'Glamour Beauty Service',
+                  quantity: 1,
+                  price: 10.00
+              }],
+              value: 10.00,
+              currency: 'USD'
+          });
       });
     }(window, document, 'ttq');
 
     function openWhatsAppWithTracking(event, url) {
         event.preventDefault();
         try {
-            ttq.track('InitiateCheckout');
-            ttq.track('Contact');
+            ttq.track('InitiateCheckout', {
+                value: 10.00,
+                currency: 'USD',
+                content_id: 'glamour_beauty_general'
+            });
+            ttq.track('Contact', {
+                value: 10.00,
+                currency: 'USD'
+            });
         } catch(e) {}
         
         setTimeout(function() {
