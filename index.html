@@ -69,12 +69,10 @@
     function openWhatsAppWithTracking(event, url) {
         event.preventDefault();
         try {
-            ttq.track('InitiateCheckout', {
-                value: 10.00,
-                currency: 'USD',
-                content_id: 'glamour_beauty_general'
-            });
+            // إرسال حدث Contact فقط بدقة لمتتبع تيك توك
             ttq.track('Contact', {
+                content_id: 'glamour_beauty_general',
+                content_name: 'Glamour Beauty Service',
                 value: 10.00,
                 currency: 'USD'
             });
@@ -489,12 +487,13 @@
           <a
             id="whatsappButton"
             class="whatsapp-button"
-            href="https://wa.me/972567728417"
+            href="https://wa.me/972567728417?text=%Dsubscription=%D9%8مرحبا%D0%8C%20لقد%20صادفت%20إعلانك%20على%20TikTok%20وأود%20معرفة%20المزيد%20؟"
             onclick="openWhatsAppWithTracking(event, this.href);"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="التواصل معنا عبر واتساب"
           >
+          <!-- تم تحديث رابط الواتساب أعلاه ليشمل الرسالة الجاهزة -->
 
             <svg
               class="whatsapp-icon"
