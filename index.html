@@ -714,10 +714,31 @@
     const whatsappButton = document.getElementById("whatsappButton");
 
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9USIfC7F2jEC1yzdc1hYLXJnRu7WubSCNyeRe9hdqeWPKg0DZ6jWmIkR1ZnKHba8_/exec";
+    
+    // رابط سيرفر ريندر الوسيط الخاص بك لتتبع الأحداث
+    const PIXEL_SERVER_URL = "https://glamour-beauty-store.onrender.com/track";
+
+    // دالة إرسال الأحداث للخلفية (Events API)
+    function sendToServer(eventName, eventData = {}) {
+      fetch(PIXEL_SERVER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          event: eventName,
+          ...eventData
+        })
+      }).catch(err => console.log("Pixel Server Error:", err));
+    }
 
     whatsappButton.addEventListener("click", function() {
       ttq.track('InitiateCheckout');
       ttq.track('Contact');
+      
+      // إرسال الأحداث للسيرفر الوسيط
+      sendToServer('InitiateCheckout');
+      sendToServer('Contact');
     });
 
     orderForm.addEventListener("submit", async function(e) {
@@ -745,6 +766,7 @@
           orderForm.reset();
 
           ttq.track('Contact');
+          sendToServer('Contact', { type: 'Order_Submitted' });
         } else {
           throw new Error(result.error || "فشل إرسال الطلب");
         }
