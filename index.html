@@ -684,18 +684,21 @@
       }).catch(err => console.log("Pixel Server Error:", err));
     }
 
-    // --- 1. تتبع زر الواتساب (ClickButton مضمون للظهور كهدف تحسين) ---
+    // --- 1. تتبع زر الواتساب (إرسال InitiateCheckout للتحسين + Contact للقياس في نفس الوقت) ---
     whatsappButton.addEventListener("click", function() {
-      const eventId = generateEventId();
+      const eventIdCheckout = generateEventId();
+      const eventIdContact = generateEventId();
       
-      // إرسال المتصفح
-      ttq.track('ClickButton', { event_id: eventId, button_name: 'WhatsApp' });
+      // إرسال المتصفح (InitiateCheckout كهدف تحسين + Contact للقياس)
+      ttq.track('InitiateCheckout', { event_id: eventIdCheckout, value: 20, currency: 'USD' });
+      ttq.track('Contact', { event_id: eventIdContact });
       
       // إرسال السيرفر الوسيط
-      sendToServer('ClickButton', eventId, { source: 'WhatsApp_Button' });
+      sendToServer('InitiateCheckout', eventIdCheckout, { source: 'WhatsApp_Button', value: 20, currency: 'USD' });
+      sendToServer('Contact', eventIdContact, { source: 'WhatsApp_Button' });
     });
 
-    // --- 2. تتبع نموذج الطلب (InitiateCheckout قوي ومضمون للظهور) ---
+    // --- 2. تتبع نموذج الطلب (SubmitForm دقيق ومخصص لنجاح إرسال النموذج) ---
     orderForm.addEventListener("submit", async function(e) {
       e.preventDefault();
 
@@ -722,11 +725,11 @@
 
           const eventId = generateEventId();
           
-          // إرسال المتصفح
-          ttq.track('InitiateCheckout', { event_id: eventId, value: 20, currency: 'USD' });
+          // إرسال المتصفح (SubmitForm)
+          ttq.track('SubmitForm', { event_id: eventId, value: 20, currency: 'USD' });
           
           // إرسال السيرفر الوسيط مع رقم الهاتف لرفع دقة الاستهداف
-          sendToServer('InitiateCheckout', eventId, { type: 'Order_Submitted', value: 20, currency: 'USD' }, { phone: customerPhone });
+          sendToServer('SubmitForm', eventId, { type: 'Order_Submitted', value: 20, currency: 'USD' }, { phone: customerPhone });
           
         } else {
           throw new Error(result.error || "فشل إرسال الطلب");
