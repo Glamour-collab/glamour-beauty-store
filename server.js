@@ -1,9 +1,18 @@
 const express = require('express');
 const cors = require('cors');
+const crypto = require('crypto');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// دالة لتنظيف وتشفير رقم الهاتف بـ SHA256 (مطلوبة لرفع دقة مطابقة تيك توك Advanced Matching)
+function hashPhoneNumber(phone) {
+    if (!phone) return null;
+    // تنظيف الرقم وإزالة أي رموز أو مسافات، والابقاء على الأرقام فقط
+    const cleaned = phone.replace(/\D/g, '');
+    return crypto.createHash('sha256').update(cleaned).digest('hex');
+}
 
 // صفحة الفحص للتأكد أن السيرفر يعمل
 app.get('/', (req, res) => {
@@ -15,13 +24,16 @@ app.post('/track', async (req, res) => {
     try {
         const { event, event_id, properties, user } = req.body;
 
-        // إعداد بيانات المستخدم (Advanced Matching)
+        // إعداد بيانات المستخدم المشفرة (Advanced Matching) لجميع الأحداث (مثل SubmitForm أو غيرها)
         let userData = {};
         if (user && user.phone) {
-            userData.phone = [user.phone.trim()];
+            const hashedPhone = hashPhoneNumber(user.phone);
+            if (hashedPhone) {
+                userData.phone = [hashedPhone];
+            }
         }
 
-        // بناء حمولة الطلب (Payload) الموجهة إلى تيك توك
+        // بناء حمولة الطلب (Payload) الموجهة إلى تيك توك (تدعم InitiateCheckout, Contact, SubmitForm تلقائياً)
         const tiktokPayload = {
             pixel_code: "DAOL1OBC77U5LL2S3560", // رقم البكسل الخاص بك
             event: event,
