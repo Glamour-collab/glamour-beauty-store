@@ -684,17 +684,28 @@
       }).catch(err => console.log("Pixel Server Error:", err));
     }
 
-    // --- 1. تتبع زر الواتساب (إرسال InitiateCheckout للتحسين + Contact للقياس في نفس الوقت) ---
+    // --- 1. تتبع زر الواتساب (إرسال InitiateCheckout مع الـ contents لتجنب أي تحذير + Contact للقياس) ---
     whatsappButton.addEventListener("click", function() {
       const eventIdCheckout = generateEventId();
       const eventIdContact = generateEventId();
       
-      // إرسال المتصفح (InitiateCheckout كهدف تحسين + Contact للقياس)
-      ttq.track('InitiateCheckout', { event_id: eventIdCheckout, value: 20, currency: 'USD' });
+      const eventData = {
+        contents: [{
+          content_id: 'glamour_beauty_whatsapp',
+          content_name: 'تواصل واتساب سحر الجمال',
+          quantity: 1,
+          price: 20
+        }],
+        value: 20,
+        currency: 'USD'
+      };
+
+      // إرسال المتصفح
+      ttq.track('InitiateCheckout', Object.assign({ event_id: eventIdCheckout }, eventData));
       ttq.track('Contact', { event_id: eventIdContact });
       
       // إرسال السيرفر الوسيط
-      sendToServer('InitiateCheckout', eventIdCheckout, { source: 'WhatsApp_Button', value: 20, currency: 'USD' });
+      sendToServer('InitiateCheckout', eventIdCheckout, Object.assign({ source: 'WhatsApp_Button' }, eventData));
       sendToServer('Contact', eventIdContact, { source: 'WhatsApp_Button' });
     });
 
@@ -724,12 +735,22 @@
           orderForm.reset();
 
           const eventId = generateEventId();
+          const submitEventData = {
+            contents: [{
+              content_id: 'glamour_beauty_order',
+              content_name: 'طلب شراء سحر الجمال',
+              quantity: 1,
+              price: 20
+            }],
+            value: 20,
+            currency: 'USD'
+          };
           
           // إرسال المتصفح (SubmitForm)
-          ttq.track('SubmitForm', { event_id: eventId, value: 20, currency: 'USD' });
+          ttq.track('SubmitForm', Object.assign({ event_id: eventId }, submitEventData));
           
           // إرسال السيرفر الوسيط مع رقم الهاتف لرفع دقة الاستهداف
-          sendToServer('SubmitForm', eventId, { type: 'Order_Submitted', value: 20, currency: 'USD' }, { phone: customerPhone });
+          sendToServer('SubmitForm', eventId, Object.assign({ type: 'Order_Submitted' }, submitEventData), { phone: customerPhone });
           
         } else {
           throw new Error(result.error || "فشل إرسال الطلب");
