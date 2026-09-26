@@ -684,7 +684,7 @@
       }).catch(err => console.log("Pixel Server Error:", err));
     }
 
-    // --- 1. تتبع زر الواتساب (إرسال InitiateCheckout مع الـ contents لتجنب أي تحذير + Contact للقياس) ---
+    // --- 1. تتبع زر الواتساب ---
     whatsappButton.addEventListener("click", function() {
       const eventIdCheckout = generateEventId();
       const eventIdContact = generateEventId();
@@ -709,7 +709,7 @@
       sendToServer('Contact', eventIdContact, { source: 'WhatsApp_Button' });
     });
 
-    // --- 2. تتبع نموذج الطلب (SubmitForm دقيق ومخصص لنجاح إرسال النموذج) ---
+    // --- 2. تتبع نموذج الطلب (مع إضافة حدث Contact بجانب SubmitForm لقراءة النقرات) ---
     orderForm.addEventListener("submit", async function(e) {
       e.preventDefault();
 
@@ -718,7 +718,7 @@
       orderStatus.style.display = "none";
 
       const formData = new FormData(orderForm);
-      const customerPhone = formData.get('phone'); // التقاط رقم الهاتف للتحسين (Advanced Matching)
+      const customerPhone = formData.get('phone');
 
       try {
         const response = await fetch(SCRIPT_URL, {
@@ -735,6 +735,8 @@
           orderForm.reset();
 
           const eventId = generateEventId();
+          const eventIdContact = generateEventId(); // معرف خاص بحدث Contact للنقرات
+          
           const submitEventData = {
             contents: [{
               content_id: 'glamour_beauty_order',
@@ -746,11 +748,13 @@
             currency: 'USD'
           };
           
-          // إرسال المتصفح (SubmitForm)
+          // إرسال المتصفح (SubmitForm + Contact)
           ttq.track('SubmitForm', Object.assign({ event_id: eventId }, submitEventData));
+          ttq.track('Contact', { event_id: eventIdContact });
           
-          // إرسال السيرفر الوسيط مع رقم الهاتف لرفع دقة الاستهداف
+          // إرسال السيرفر الوسيط
           sendToServer('SubmitForm', eventId, Object.assign({ type: 'Order_Submitted' }, submitEventData), { phone: customerPhone });
+          sendToServer('Contact', eventIdContact, { type: 'Order_Contact_Click' }, { phone: customerPhone });
           
         } else {
           throw new Error(result.error || "فشل إرسال الطلب");
