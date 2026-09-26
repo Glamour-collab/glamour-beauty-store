@@ -5,8 +5,58 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// صفحة الفحص للتأكد أن السيرفر يعمل
 app.get('/', (req, res) => {
     res.send('Glamour Beauty Server is Running perfectly!');
+});
+
+// مسار استقبال الأحداث من صفحة الهبوط وتمريرها لـ TikTok Events API
+app.post('/track', async (req, res) => {
+    try {
+        const { event, event_id, properties, user } = req.body;
+
+        // إعداد بيانات المستخدم (Advanced Matching)
+        let userData = {};
+        if (user && user.phone) {
+            userData.phone = [user.phone.trim()];
+        }
+
+        // بناء حمولة الطلب (Payload) الموجهة إلى تيك توك
+        const tiktokPayload = {
+            pixel_code: "DAOL1OBC77U5LL2S3560", // رقم البكسل الخاص بك
+            event: event,
+            event_id: event_id, // رقم منع التكرار (Deduplication)
+            timestamp: new Date().toISOString(),
+            context: {
+                user: userData,
+                ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+                user_agent: req.headers['user-agent']
+            },
+            properties: properties || {}
+        };
+
+        const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN || '';
+        
+        // إذا توفر رمز الوصول، يتم إرسال الحدث لخوادم تيك توك برمجياً
+        if (TIKTOK_ACCESS_TOKEN) {
+            const response = await fetch('https://business-api.tiktok.com/open_api/v1.3/pixel/track/', {
+                method: 'POST',
+                headers: {
+                    'Access-Token': TIKTOK_ACCESS_TOKEN,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tiktokPayload)
+            });
+
+            const result = await response.json();
+            console.log('TikTok API Response:', result);
+        }
+
+        res.status(200).json({ success: true, message: 'Event tracked successfully via Server' });
+    } catch (error) {
+        console.error('Server Track Error:', error.message);
+        res.status(500).json({ success: false, error: 'Failed to process event' });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
