@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+6<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -206,6 +206,43 @@
         transform 0.2s ease,
         box-shadow 0.2s ease,
         background 0.15s ease;
+
+      /* إضافة تأثير الموجات فقط */
+      position: relative;
+      isolation: isolate;
+    }
+
+    .center-whatsapp-button::before,
+    .center-whatsapp-button::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,230,129,0.32);
+      pointer-events: none;
+      z-index: -1;
+      animation: whatsappPulse 2.4s ease-out infinite;
+    }
+
+    .center-whatsapp-button::after {
+      animation-delay: 1.2s;
+    }
+
+    @keyframes whatsappPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.65;
+      }
+
+      70% {
+        transform: scale(1.65);
+        opacity: 0.16;
+      }
+
+      100% {
+        transform: scale(1.9);
+        opacity: 0;
+      }
     }
 
     .center-whatsapp-button:hover {
