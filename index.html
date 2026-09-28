@@ -1,4 +1,4 @@
-6<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -207,7 +207,7 @@
         box-shadow 0.2s ease,
         background 0.15s ease;
 
-      /* إضافة تأثير الموجات فقط */
+      /* تأثير الموجات */
       position: relative;
       isolation: isolate;
     }
@@ -843,8 +843,25 @@
       sendToServer('Contact', eventIdContact, { source: 'WhatsApp_Button' });
     }
 
-    whatsappButton.addEventListener("click", trackWhatsAppClick);
-    centerWhatsappButton.addEventListener("click", trackWhatsAppClick);
+    /* منع الضغط المتكرر السريع على أزرار واتساب فقط */
+    let whatsappClickLocked = false;
+
+    function handleWhatsAppClick(e) {
+      if (whatsappClickLocked) {
+        e.preventDefault();
+        return;
+      }
+
+      whatsappClickLocked = true;
+      trackWhatsAppClick();
+
+      setTimeout(() => {
+        whatsappClickLocked = false;
+      }, 1500);
+    }
+
+    whatsappButton.addEventListener("click", handleWhatsAppClick);
+    centerWhatsappButton.addEventListener("click", handleWhatsAppClick);
 
     orderForm.addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -871,6 +888,7 @@
           orderForm.reset();
 
           const eventId = generateEventId();
+          const contactEventId = generateEventId();
 
           const submitEventData = {
             contents: [{
@@ -889,6 +907,16 @@
             'SubmitForm',
             eventId,
             Object.assign({ type: 'Order_Submitted' }, submitEventData),
+            { phone: customerPhone }
+          );
+
+          /* تسجيل نفس حدث Contact الموجود أصلًا عند نجاح الطلب */
+          ttq.track('Contact', { event_id: contactEventId });
+
+          sendToServer(
+            'Contact',
+            contactEventId,
+            { source: 'Order_Submitted' },
             { phone: customerPhone }
           );
 
