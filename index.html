@@ -1,193 +1,874 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Asala Store</title>
-    
-    <!-- كود تيك توك بكسل (TikTok Pixel Code) -->
-    <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=0;e<ttq.instances.length;e++)if(ttq.instances[e][0]===t)return ttq.instances[e][1]};ttq.load=function(e,n){var i=null,eug=w.location.search.match(new RegExp("[?&]tt_clid=([^&#]*)"));i=eug&&eug[1];var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://analytics.tiktok.com/i18n/pixel/events.js?sdkid="+e+"&lib="+t;var n=document.getElementsByTagName("script");n[0].parentNode.insertBefore(o,n[0])};
-      
-      // استبدل 'YOUR_PIXEL_ID' برقم بكسل تيك توك الخاص بك
-      ttq.load('YOUR_PIXEL_ID');
-      ttq.page();
-    }(window, document, 'ttq');
-    </script>
-    <!-- نهاية كود البكسل -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>Glamour Beauty - تواصل معنا</title>
+  <meta name="description" content="تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بسهولة.">
 
-    <style>
-        :root {
-            --primary-color: #111827;
-            --whatsapp-color: #25d366; /* لون واتساب الشهير */
-            --whatsapp-hover: #1ebd5d;
-            --bg-color: #0b0f19; /* خلفية فاخرة داكنة */
-            --text-color: #9ca3af;
-            --card-bg: #1f2937; /* لون بطاقة فاخر وراقي */
-        }
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+    ttq.load('DAOL1OBC77U5LL2S3560');
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    ttq.page();
 
-        header {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            color: #ffffff;
-            text-align: center;
-            padding: 3rem 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid #374151;
-        }
+    ttq.track('ViewContent', {
+      contents: [{
+        content_id: 'glamour_beauty_page',
+        content_name: 'صفحة تواصل سحر الجمال',
+        quantity: 1,
+        price: 20
+      }],
+      value: 20,
+      currency: 'USD'
+    });
 
-        header h1 {
-            font-size: 2.4rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            direction: ltr;
-            color: #f3f4f6;
-        }
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
 
-        header p {
-            font-size: 1.05rem;
-            color: #9ca3af;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        main {
-            flex: 1;
-            max-width: 700px;
-            width: 100%;
-            margin: 2.5rem auto;
-            padding: 0 1rem;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2.5rem 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            border: 1px solid #374151;
-        }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(139,124,255,0.12), transparent 35%),
+        radial-gradient(circle at 90% 80%, rgba(0,210,255,0.07), transparent 35%),
+        #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        .card h2 {
-            font-size: 1.6rem;
-            color: #f3f4f6;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .card p {
-            margin-bottom: 2rem;
-            color: #9ca3af;
-            font-size: 1.05rem;
-        }
+    .page {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* تنسيق زر واتساب الاحترافي */
-        .whatsapp-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background-color: var(--whatsapp-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 700;
-            padding: 1.1rem 2rem;
-            border-radius: 50px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
-            transition: all 0.25s ease-in-out;
-            cursor: pointer;
-        }
+    .glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.20;
+      pointer-events: none;
+    }
 
-        .whatsapp-cta-btn:hover {
-            background-color: var(--whatsapp-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
-        }
+    .glow-one {
+      background: #6c5ce7;
+      top: -100px;
+      right: -100px;
+    }
 
-        .whatsapp-cta-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
+    .glow-two {
+      background: #00bcd4;
+      bottom: 50px;
+      left: -130px;
+    }
 
-        footer {
-            background-color: #111827;
-            color: #6b7280;
-            text-align: center;
-            padding: 2rem 1rem;
-            font-size: 0.9rem;
-            margin-top: auto;
-            border-top: 1px solid #374151;
-        }
+    header {
+      width: 100%;
+      padding: 18px 20px;
+      position: relative;
+      z-index: 5;
+    }
 
-        footer p {
-            margin-bottom: 1.25rem;
-        }
-    </style>
+    .header-inner {
+      max-width: 1050px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b7cff, #00d9ff);
+      box-shadow: 0 0 15px rgba(0,210,255,0.55);
+    }
+
+    .brand-name {
+      background: linear-gradient(90deg, #ffffff, #9d94ff, #66e5ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+
+    .header-button {
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      max-width: 900px;
+      margin: auto;
+      min-height: calc(100vh - 75px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 10px 20px 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-top {
+      width: 100%;
+    }
+
+    .hero-content {
+      width: 100%;
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-12px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #dddddd;
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    .badge span {
+      width: 7px;
+      height: 7px;
+      background: #48e0a4;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(72,224,164,0.8);
+    }
+
+    .center-whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #25e681, #0db563);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow:
+        0 16px 38px rgba(0,0,0,0.42),
+        0 10px 32px rgba(24,201,111,0.26),
+        0 0 0 6px rgba(37,230,129,0.055),
+        0 0 38px rgba(24,201,111,0.20);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.15s ease;
+    }
+
+    .center-whatsapp-button:hover {
+      transform: translateY(-3px) scale(1.035);
+      background: linear-gradient(145deg, #2bea87, #0fbd69);
+      box-shadow:
+        0 20px 44px rgba(0,0,0,0.46),
+        0 14px 38px rgba(24,201,111,0.32),
+        0 0 0 8px rgba(37,230,129,0.065),
+        0 0 46px rgba(24,201,111,0.25);
+    }
+
+    .center-whatsapp-button:active {
+      transform: scale(0.94);
+      background: linear-gradient(145deg, #18c970, #078f50);
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.38),
+        0 6px 20px rgba(24,201,111,0.20),
+        0 0 0 4px rgba(37,230,129,0.045);
+    }
+
+    .center-whatsapp-icon {
+      width: 46px;
+      height: 46px;
+      fill: currentColor;
+    }
+
+    .whatsapp-promo {
+      margin-top: 19px;
+      text-align: center;
+      line-height: 1.65;
+    }
+
+    .whatsapp-promo-title {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      margin-bottom: 3px;
+    }
+
+    .whatsapp-promo-text {
+      color: #b9b9b9;
+      font-size: 14px;
+      font-weight: 600;
+      max-width: 330px;
+      margin: 0 auto;
+    }
+
+    .cta-area {
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    .cta-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 220px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #20d879, #0fae62);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 12px 35px rgba(24, 201, 111, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .whatsapp-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px rgba(24, 201, 111, 0.32);
+    }
+
+    .whatsapp-icon {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .small-note {
+      margin-top: 12px;
+      color: #b9b9b9;
+      font-size: 14px;
+    }
+
+    .features {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 10px 20px 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature {
+      padding: 20px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.09);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        135deg,
+        rgba(139,124,255,0.20),
+        rgba(0,210,255,0.08)
+      );
+      font-size: 20px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .feature p {
+      color: #aaaaaa;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .order-section {
+      max-width: 650px;
+      margin: 15px auto 30px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+      scroll-margin-top: 20px;
+    }
+
+    .order-box {
+      padding: 24px 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+    }
+
+    .order-title {
+      text-align: center;
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .order-subtitle {
+      text-align: center;
+      color: #aaaaaa;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .order-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .order-input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .order-input::placeholder {
+      color: #b8b8b8;
+    }
+
+    .order-input:focus {
+      border-color: rgba(139,124,255,0.65);
+      background: rgba(255,255,255,0.07);
+    }
+
+    textarea.order-input {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .order-submit {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 15px 20px;
+      margin-top: 3px;
+      background: linear-gradient(135deg, #6c5ce7, #00a8c6);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(108,92,231,0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .order-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(108,92,231,0.32);
+    }
+
+    .order-status {
+      display: none;
+      text-align: center;
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .social-section {
+      max-width: 950px;
+      margin: 10px auto 25px;
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .social-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #cccccc;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(139,124,255,0.50);
+      box-shadow: 0 6px 20px rgba(108,92,231,0.30);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 20px 40px;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 14px 16px;
+      }
+
+      .hero {
+        padding: 10px 16px 15px;
+      }
+
+      .hero-content {
+        transform: translateY(-12px);
+      }
+
+      .center-whatsapp-button {
+        width: 88px;
+        height: 88px;
+      }
+
+      .center-whatsapp-icon {
+        width: 42px;
+        height: 42px;
+      }
+
+      .whatsapp-promo {
+        margin-top: 18px;
+      }
+
+      .whatsapp-promo-title {
+        font-size: 17px;
+      }
+
+      .whatsapp-promo-text {
+        font-size: 13.5px;
+        max-width: 310px;
+      }
+
+      .cta-area {
+        transform: translateY(-35px);
+      }
+
+      .whatsapp-button {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        padding: 5px 16px 25px;
+        gap: 12px;
+      }
+
+      .order-section {
+        padding: 0 16px;
+      }
+
+      .order-box {
+        padding: 22px 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- رأس الصفحة -->
+  <div class="page">
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
     <header>
-        <h1>Al-Asala Store</h1>
-        <p>نقدم لك أفضل المنتجات الأصلية بجودة عالية وأسعار تنافسية. اطلب الآن عبر الواتساب!</p>
+      <div class="header-inner">
+
+        <div class="logo">
+          <span class="logo-dot"></span>
+          <span class="brand-name">Glamour Beauty</span>
+        </div>
+
+        <a href="#order" class="header-button">تواصل معنا</a>
+
+      </div>
     </header>
 
-    <!-- محتوى الصفحة -->
-    <main>
-        <!-- القسم الأوسط الذي يحتوي على زر الواتساب الأساسي لاتخاذ الإجراء -->
-        <div class="card">
-            <h2>اطلب منتجك الآن بكل سهولة</h2>
-            <p>انقر على الزر أدناه للتواصل المباشر مع فريق المبيعات عبر الواتساب وإتمام طلبك فوراً.</p>
-            
-            <!-- زر الواتساب الأوسط (الرئيسي لاتخاذ الإجراء) -->
-            <a href="https://wa.me/972539764836" class="whatsapp-cta-btn" target="_blank" onclick="trackWhatsAppClick()">
-                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                اطلب الآن عبر واتساب
-            </a>
-        </div>
-    </main>
+    <section class="hero">
 
-    <!-- الفوتر مع الزر السفلي -->
-    <footer>
-        <p>&copy; 2026 Al-Asala Store. جميع الحقوق محفوظة.</p>
-        
-        <!-- زر الواتساب السفلي -->
-        <a href="https://wa.me/972539764836" class="whatsapp-cta-btn" target="_blank" onclick="trackWhatsAppClick()" style="margin: 0 auto; max-width: 350px;">
-            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-            تواصل عبر واتساب
+      <div class="hero-top">
+        <div class="badge">
+          <span></span>
+          خدمة العملاء الفورية
+        </div>
+      </div>
+
+      <div class="hero-content">
+
+        <a
+          id="centerWhatsappButton"
+          class="center-whatsapp-button"
+          href="https://wa.me/972567728417?text=مرحبًا،%20شاهدت%20إعلانكم%20على%20TikTok%20وأود%20معرفة%20المزيد."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="التواصل معنا عبر واتساب"
+        >
+          <svg class="center-whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.53 .2 .2 5.33 .2 11.88c0 2.09 .55 4.13 1.59 5.93L.1 24l6.34-1.66a11.88 11.88 0 0 0 5.64 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.24-6.15-3.45-8.41ZM12.09 21.77h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.99 1-3.66-.23-.38a9.87 9.87 0 0 1-1.51-5.25C2.19 6.43 6.62 2 12.09 2c2.65 0 5.14 1.03 7.01 2.9a9.83 9.83 0 0 1 2.9 7c0 5.47-4.44 9.87-9.91 9.87Zm5.42-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.2-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.41.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35Z"/>
+          </svg>
         </a>
+
+        <div class="whatsapp-promo">
+          <div class="whatsapp-promo-title">جاهز لطلبك؟</div>
+          <div class="whatsapp-promo-text">راسلنا الآن عبر واتساب واحصل على التفاصيل مباشرة</div>
+        </div>
+
+      </div>
+
+      <div class="cta-area" id="contact">
+        <div class="cta-wrapper">
+          <a
+            id="whatsappButton"
+            class="whatsapp-button"
+            href="https://wa.me/972567728417?text=مرحبًا،%20شاهدت%20إعلانكم%20على%20TikTok%20وأود%20معرفة%20المزيد."
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="التواصل معنا عبر واتساب"
+          >
+            <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.53 .2 .2 5.33 .2 11.88c0 2.09 .55 4.13 1.59 5.93L.1 24l6.34-1.66a11.88 11.88 0 0 0 5.64 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.24-6.15-3.45-8.41ZM12.09 21.77h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.76.99 1-3.66-.23-.38a9.87 9.87 0 0 1-1.51-5.25C2.19 6.43 6.62 2 12.09 2c2.65 0 5.14 1.03 7.01 2.9a9.83 9.83 0 0 1 2.9 7c0 5.47-4.44 9.87-9.91 9.87Zm5.42-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.2-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.41.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35Z"/>
+            </svg>
+            راسلنا عبر واتساب
+          </a>
+        </div>
+        <div class="small-note">
+          اضغط على الزر للانتقال مباشرة إلى واتساب
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>تواصل سريع</h3>
+        <p>وصول مباشر وسهل إلى المحادثة.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>إجابة مباشرة</h3>
+        <p>أرسل استفسارك وسنتواصل معك.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>تجربة بسيطة</h3>
+        <p>بدون خطوات معقدة أو صفحات إضافية.</p>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="order-box">
+        <h2 class="order-title">إرسال طلب شراء</h2>
+
+        <p class="order-subtitle">
+          أدخل بياناتك وسنقوم بالتواصل معك لتأكيد الطلب
+        </p>
+
+        <form class="order-form" id="orderForm">
+
+          <input
+            class="order-input"
+            type="text"
+            name="name"
+            placeholder="الاسم الكامل"
+            autocomplete="name"
+            required
+          >
+
+          <input
+            class="order-input"
+            type="tel"
+            name="phone"
+            placeholder="رقم الهاتف"
+            autocomplete="tel"
+            required
+          >
+
+          <input
+            class="order-input"
+            type="text"
+            name="address"
+            placeholder="العنوان / المنطقة"
+            autocomplete="street-address"
+            required
+          >
+
+          <textarea
+            class="order-input"
+            name="notes"
+            placeholder="ملاحظات إضافية (اختياري)"
+          ></textarea>
+
+          <button type="submit" class="order-submit" id="orderSubmit">
+            إرسال الطلب
+          </button>
+
+          <div class="order-status" id="orderStatus"></div>
+
+        </form>
+      </div>
+    </section>
+
+    <div class="social-section">
+
+      <p class="social-title">تابعنا على منصات التواصل</p>
+
+      <div class="social-links">
+
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Messenger">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.91 1.442 5.502 3.692 7.214V22l3.376-1.851c.904.252 1.868.386 2.864.386 5.523 0 10-4.145 10-9.292C22 6.145 17.523 2 12 2zm1.03 12.19l-2.585-2.755-5.045 2.755 5.545-5.885 2.645 2.755 2.645 2.755 4.985-2.755-5.545 5.885z"/>
+          </svg>
+        </a>
+
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-2.01 1.28-5.69 3.77-.54.37-1.03.55-1.47.54-.48-.01-1.4-.27-2.08-.49-.84-.27-1.51-.42-1.45-.89.03-.25.38-.51 1.05-.78 4.11-1.79 6.85-2.97 8.22-3.55 3.91-1.67 4.72-1.96 5.25-1.97.12 0 .38.03.55.17.14.12.18.28.2.4-.02.07-.02.24-.04.37z"/>
+          </svg>
+        </a>
+
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.28-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.78 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 3.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.204-.013-3.583-.07-4.849-.149-3.227-1.664-4.771-4.919-4.919-1.266-.057-1.645-.069-4.849-.069zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+
+        <a href="#" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg viewBox="0 0 24 24">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+
+    <footer>
+      جميع الحقوق محفوظة لـ Glamour Beauty
     </footer>
 
-    <!-- سكربت تتبع الضغطات للبكسل -->
-    <script>
-        function trackWhatsAppClick() {
-            if (typeof ttq !== 'undefined') {
-                ttq.track('ClickButton');
-            }
+  </div>
+
+  <script>
+    const orderForm = document.getElementById("orderForm");
+    const orderSubmit = document.getElementById("orderSubmit");
+    const orderStatus = document.getElementById("orderStatus");
+    const whatsappButton = document.getElementById("whatsappButton");
+    const centerWhatsappButton = document.getElementById("centerWhatsappButton");
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9USIfC7F2jEC1yzdc1hYLXJnRu7WubSCNyeRe9hdqeWPKg0DZ6jWmIkR1ZnKHba8_/exec";
+    const PIXEL_SERVER_URL = "https://glamour-beauty-store.onrender.com/track";
+
+    function generateEventId() {
+      return 'event_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    function sendToServer(eventName, eventId, eventData = {}, userData = {}) {
+      fetch(PIXEL_SERVER_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          event: eventName,
+          event_id: eventId,
+          properties: eventData,
+          user: userData
+        })
+      }).catch(err => console.log("Pixel Server Error:", err));
+    }
+
+    function trackWhatsAppClick() {
+      const eventIdCheckout = generateEventId();
+      const eventIdContact = generateEventId();
+
+      const eventData = {
+        contents: [{
+          content_id: 'glamour_beauty_whatsapp',
+          content_name: 'تواصل واتساب سحر الجمال',
+          quantity: 1,
+          price: 20
+        }],
+        value: 20,
+        currency: 'USD'
+      };
+
+      ttq.track('InitiateCheckout', Object.assign({ event_id: eventIdCheckout }, eventData));
+      ttq.track('Contact', { event_id: eventIdContact });
+
+      sendToServer('InitiateCheckout', eventIdCheckout, Object.assign({ source: 'WhatsApp_Button' }, eventData));
+      sendToServer('Contact', eventIdContact, { source: 'WhatsApp_Button' });
+    }
+
+    whatsappButton.addEventListener("click", trackWhatsAppClick);
+    centerWhatsappButton.addEventListener("click", trackWhatsAppClick);
+
+    orderForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      orderSubmit.disabled = true;
+      orderSubmit.textContent = "جاري إرسال الطلب...";
+      orderStatus.style.display = "none";
+
+      const formData = new FormData(orderForm);
+      const customerPhone = formData.get('phone');
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          orderStatus.style.display = "block";
+          orderStatus.style.color = "#48e0a4";
+          orderStatus.textContent = "تم إرسال طلبك بنجاح ✓";
+          orderForm.reset();
+
+          const eventId = generateEventId();
+
+          const submitEventData = {
+            contents: [{
+              content_id: 'glamour_beauty_order',
+              content_name: 'طلب شراء سحر الجمال',
+              quantity: 1,
+              price: 20
+            }],
+            value: 20,
+            currency: 'USD'
+          };
+
+          ttq.track('SubmitForm', Object.assign({ event_id: eventId }, submitEventData));
+
+          sendToServer(
+            'SubmitForm',
+            eventId,
+            Object.assign({ type: 'Order_Submitted' }, submitEventData),
+            { phone: customerPhone }
+          );
+
+        } else {
+          throw new Error(result.error || "فشل إرسال الطلب");
         }
-    </script>
+
+      } catch (error) {
+        orderStatus.style.display = "block";
+        orderStatus.style.color = "#ff7b8a";
+        orderStatus.textContent = "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.";
+      }
+
+      orderSubmit.disabled = false;
+      orderSubmit.textContent = "إرسال الطلب";
+    });
+  </script>
+
 </body>
 </html>
