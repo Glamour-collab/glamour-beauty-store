@@ -7,10 +7,12 @@
   <title>Glamour Beauty - تواصل معنا</title>
   <meta name="description" content="تواصل معنا مباشرة في متجر سحر الجمال للحصول على المعلومات التي تحتاجها بسهولة.">
 
-  <!-- preconnect لتسريع الاتصال بالخوادم الخارجية -->
-  <link rel="preconnect" href="https://analytics.tiktok.com">
-  <link rel="preconnect" href="https://glamour-beauty-store.onrender.com">
-  <link rel="preconnect" href="https://script.google.com">
+  <!-- تسريع الاتصال المسبق بالخوادم الخارجية -->
+  <link rel="dns-prefetch" href="//analytics.tiktok.com">
+  <link rel="dns-prefetch" href="//glamour-beauty-store.onrender.com">
+  <link rel="dns-prefetch" href="//script.google.com">
+  <link rel="preconnect" href="https://analytics.tiktok.com" crossorigin>
+  <link rel="preconnect" href="https://glamour-beauty-store.onrender.com" crossorigin>
 
   <!-- TikTok Pixel Code Start -->
   <script>
@@ -58,13 +60,13 @@
       ttq._o=ttq._o||{};
       ttq._o[e]=n||{};
 
-      n=document.createElement("script");
-      n.type="text/javascript";
-      n.async=!0;
-      n.src=r+"?sdkid="+e+"&lib="+t;
+      var s=document.createElement("script");
+      s.type="text/javascript";
+      s.async=!0;
+      s.src=r+"?sdkid="+e+"&lib="+t;
 
-      e=document.getElementsByTagName("script")[0];
-      e.parentNode.insertBefore(n,e);
+      var x=document.getElementsByTagName("script")[0];
+      x.parentNode.insertBefore(s,x);
     };
 
     ttq.load('DAOL1OBC77U5LL2S3560');
@@ -921,7 +923,6 @@
 
     /*
       الحصول على ttclid
-      وتخزينه حتى يبقى متاحًا عند حدوث التحويل
     */
     function getTTCLID() {
 
@@ -1016,7 +1017,7 @@
 
 
     /*
-      إرسال الحدث إلى Render
+      إرسال الحدث إلى Render بشكل غير معطل مع keepalive
     */
     function sendToServer(
       eventName,
@@ -1033,6 +1034,8 @@
           headers: {
             "Content-Type": "application/json"
           },
+
+          keepalive: true,
 
           body: JSON.stringify({
 
@@ -1063,8 +1066,6 @@
 
     /*
       الزران العلوي والسفلي
-      نفس الحدثين تمامًا:
-      InitiateCheckout + Contact
     */
     function trackWhatsAppClick() {
 
@@ -1103,29 +1104,30 @@
       /*
         Browser Pixel
       */
+      if (window.ttq) {
+        ttq.track(
+          "InitiateCheckout",
 
-      ttq.track(
-        "InitiateCheckout",
+          Object.assign(
+            {
+              event_id:
+                eventIdCheckout
+            },
 
-        Object.assign(
+            eventData
+          )
+        );
+
+
+        ttq.track(
+          "Contact",
+
           {
             event_id:
-              eventIdCheckout
-          },
-
-          eventData
-        )
-      );
-
-
-      ttq.track(
-        "Contact",
-
-        {
-          event_id:
-            eventIdContact
-        }
-      );
+              eventIdContact
+          }
+        );
+      }
 
 
       /*
@@ -1165,28 +1167,18 @@
     function handleWhatsAppClick(e) {
 
       if (whatsappClickLocked) {
-
-        e.preventDefault();
-
         return;
-
       }
-
 
       whatsappClickLocked = true;
 
-
       trackWhatsAppClick();
-
 
       setTimeout(
         () => {
-
           whatsappClickLocked =
             false;
-
         },
-
         1500
       );
 
@@ -1196,174 +1188,181 @@
     /*
       الزر العلوي
     */
-    centerWhatsappButton.addEventListener(
-      "click",
-      handleWhatsAppClick
-    );
+    if (centerWhatsappButton) {
+      centerWhatsappButton.addEventListener(
+        "click",
+        handleWhatsAppClick
+      );
+    }
 
 
     /*
       الزر السفلي
     */
-    whatsappButton.addEventListener(
-      "click",
-      handleWhatsAppClick
-    );
+    if (whatsappButton) {
+      whatsappButton.addEventListener(
+        "click",
+        handleWhatsAppClick
+      );
+    }
 
 
     /*
       إرسال نموذج الطلب
-      SubmitForm فقط
     */
-    orderForm.addEventListener(
-      "submit",
-      async function(e) {
+    if (orderForm) {
+      orderForm.addEventListener(
+        "submit",
+        async function(e) {
 
-        e.preventDefault();
-
-
-        orderSubmit.disabled =
-          true;
-
-        orderSubmit.textContent =
-          "جاري إرسال الطلب...";
-
-        orderStatus.style.display =
-          "none";
+          e.preventDefault();
 
 
-        const formData =
-          new FormData(orderForm);
+          orderSubmit.disabled =
+            true;
 
-        const customerPhone =
-          formData.get("phone");
+          orderSubmit.textContent =
+            "جاري إرسال الطلب...";
+
+          orderStatus.style.display =
+            "none";
 
 
-        try {
+          const formData =
+            new FormData(orderForm);
 
-          const response =
-            await fetch(
-              SCRIPT_URL,
+          const customerPhone =
+            formData.get("phone");
+
+
+          try {
+
+            const response =
+              await fetch(
+                SCRIPT_URL,
+                {
+                  method: "POST",
+                  body: formData
+                }
+              );
+
+
+            const result =
+              await response.json();
+
+
+            if (!result.success) {
+
+              throw new Error(
+                result.error ||
+                "فشل إرسال الطلب"
+              );
+
+            }
+
+
+            orderStatus.style.display =
+              "block";
+
+            orderStatus.style.color =
+              "#48e0a4";
+
+            orderStatus.textContent =
+              "تم إرسال طلبك بنجاح ✓";
+
+
+            orderForm.reset();
+
+
+            const eventId =
+              generateEventId();
+
+
+            const submitEventData = {
+
+              contents: [{
+
+                content_id:
+                  "glamour_beauty_order",
+
+                content_name:
+                  "طلب شراء سحر الجمال",
+
+                quantity: 1,
+
+                price: 20
+
+              }],
+
+              value: 20,
+
+              currency: "USD",
+
+              type:
+                "Order_Submitted"
+
+            };
+
+
+            /*
+              Browser Pixel
+            */
+            if (window.ttq) {
+              ttq.track(
+                "SubmitForm",
+
+                Object.assign(
+                  {
+                    event_id:
+                      eventId
+                  },
+
+                  submitEventData
+                )
+              );
+            }
+
+
+            /*
+              Server
+            */
+            sendToServer(
+              "SubmitForm",
+
+              eventId,
+
+              submitEventData,
+
               {
-                method: "POST",
-                body: formData
+                phone:
+                  customerPhone
               }
             );
 
 
-          const result =
-            await response.json();
+          } catch (error) {
 
+            orderStatus.style.display =
+              "block";
 
-          if (!result.success) {
+            orderStatus.style.color =
+              "#ff7b8a";
 
-            throw new Error(
-              result.error ||
-              "فشل إرسال الطلب"
-            );
+            orderStatus.textContent =
+              "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.";
 
           }
 
 
-          orderStatus.style.display =
-            "block";
+          orderSubmit.disabled =
+            false;
 
-          orderStatus.style.color =
-            "#48e0a4";
-
-          orderStatus.textContent =
-            "تم إرسال طلبك بنجاح ✓";
-
-
-          orderForm.reset();
-
-
-          const eventId =
-            generateEventId();
-
-
-          const submitEventData = {
-
-            contents: [{
-
-              content_id:
-                "glamour_beauty_order",
-
-              content_name:
-                "طلب شراء سحر الجمال",
-
-              quantity: 1,
-
-              price: 20
-
-            }],
-
-            value: 20,
-
-            currency: "USD",
-
-            type:
-              "Order_Submitted"
-
-          };
-
-
-          /*
-            Browser Pixel
-          */
-          ttq.track(
-            "SubmitForm",
-
-            Object.assign(
-              {
-                event_id:
-                  eventId
-              },
-
-              submitEventData
-            )
-          );
-
-
-          /*
-            Server
-          */
-          sendToServer(
-            "SubmitForm",
-
-            eventId,
-
-            submitEventData,
-
-            {
-              phone:
-                customerPhone
-            }
-          );
-
-
-        } catch (error) {
-
-          orderStatus.style.display =
-            "block";
-
-          orderStatus.style.color =
-            "#ff7b8a";
-
-          orderStatus.textContent =
-            "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.";
+          orderSubmit.textContent =
+            "إرسال الطلب";
 
         }
-
-
-        orderSubmit.disabled =
-          false;
-
-        orderSubmit.textContent =
-          "إرسال الطلب";
-
-      }
-    );
+      );
+    }
 
   </script>
 
