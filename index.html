@@ -75,16 +75,7 @@
     ttq.page();
 
     /* ViewContent */
-    ttq.track('ViewContent', {
-      contents: [{
-        content_id: 'glamour_beauty_page',
-        content_name: 'صفحة تواصل سحر الجمال',
-        quantity: 1,
-        price: 20
-      }],
-      value: 20,
-      currency: 'USD'
-    });
+    ttq.track('ViewContent');
 
   }(window, document, 'ttq');
   </script>
@@ -1065,11 +1056,11 @@
 
 
     /*
-      الزران العلوي والسفلي (تتبع نقي للواتساب بدون متغيرات السعر والمنتج)
+      الزران العلوي والسفلي (ClickButton & Contact فقط)
     */
     function trackWhatsAppClick() {
 
-      const eventIdClick =
+      const eventIdClickButton =
         generateEventId();
 
       const eventIdContact =
@@ -1082,16 +1073,17 @@
 
 
       /*
-        Browser Pixel
+        Browser Pixel (ClickButton & Contact)
       */
       if (window.ttq) {
+
         ttq.track(
-          "Click",
+          "ClickButton",
 
           Object.assign(
             {
               event_id:
-                eventIdClick
+                eventIdClickButton
             },
 
             eventData
@@ -1111,17 +1103,18 @@
             eventData
           )
         );
+
       }
 
 
       /*
-        Server
+        Server (ClickButton & Contact)
       */
 
       sendToServer(
-        "Click",
+        "ClickButton",
 
-        eventIdClick,
+        eventIdClickButton,
 
         eventData
       );
