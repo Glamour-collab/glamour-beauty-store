@@ -74,6 +74,18 @@
     /* PageView */
     ttq.page();
 
+    /* ViewContent */
+    ttq.track('ViewContent', {
+      contents: [{
+        content_id: 'glamour_beauty_page',
+        content_name: 'صفحة تواصل سحر الجمال',
+        quantity: 1,
+        price: 20
+      }],
+      value: 20,
+      currency: 'USD'
+    });
+
   }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
@@ -1053,11 +1065,11 @@
 
 
     /*
-      الزران العلوي والسفلي (تتبع ClickButton و Contact)
+      الزران العلوي والسفلي
     */
     function trackWhatsAppClick() {
 
-      const eventIdClickButton =
+      const eventIdCheckout =
         generateEventId();
 
       const eventIdContact =
@@ -1065,22 +1077,41 @@
 
 
       const eventData = {
+
+        contents: [{
+
+          content_id:
+            "glamour_beauty_whatsapp",
+
+          content_name:
+            "تواصل واتساب سحر الجمال",
+
+          quantity: 1,
+
+          price: 20
+
+        }],
+
+        value: 20,
+
+        currency: "USD",
+
         source: "WhatsApp_Button"
+
       };
 
 
       /*
-        Browser Pixel (ClickButton & Contact)
+        Browser Pixel
       */
       if (window.ttq) {
-
         ttq.track(
-          "ClickButton",
+          "InitiateCheckout",
 
           Object.assign(
             {
               event_id:
-                eventIdClickButton
+                eventIdCheckout
             },
 
             eventData
@@ -1091,27 +1122,22 @@
         ttq.track(
           "Contact",
 
-          Object.assign(
-            {
-              event_id:
-                eventIdContact
-            },
-
-            eventData
-          )
+          {
+            event_id:
+              eventIdContact
+          }
         );
-
       }
 
 
       /*
-        Server (ClickButton & Contact)
+        Server
       */
 
       sendToServer(
-        "ClickButton",
+        "InitiateCheckout",
 
-        eventIdClickButton,
+        eventIdCheckout,
 
         eventData
       );
@@ -1122,7 +1148,10 @@
 
         eventIdContact,
 
-        eventData
+        {
+          source:
+            "WhatsApp_Button"
+        }
       );
 
     }
