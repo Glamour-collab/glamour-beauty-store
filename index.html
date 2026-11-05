@@ -1069,7 +1069,7 @@
     */
     function trackWhatsAppClick() {
 
-      const eventIdCheckout =
+      const eventIdClick =
         generateEventId();
 
       const eventIdContact =
@@ -1106,12 +1106,12 @@
       */
       if (window.ttq) {
         ttq.track(
-          "InitiateCheckout",
+          "Click",
 
           Object.assign(
             {
               event_id:
-                eventIdCheckout
+                eventIdClick
             },
 
             eventData
@@ -1135,9 +1135,9 @@
       */
 
       sendToServer(
-        "InitiateCheckout",
+        "Click",
 
-        eventIdCheckout,
+        eventIdClick,
 
         eventData
       );
