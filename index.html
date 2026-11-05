@@ -1065,7 +1065,7 @@
 
 
     /*
-      الزران العلوي والسفلي
+      الزران العلوي والسفلي (تتبع نقي للواتساب بدون متغيرات السعر والمنتج)
     */
     function trackWhatsAppClick() {
 
@@ -1077,27 +1077,7 @@
 
 
       const eventData = {
-
-        contents: [{
-
-          content_id:
-            "glamour_beauty_whatsapp",
-
-          content_name:
-            "تواصل واتساب سحر الجمال",
-
-          quantity: 1,
-
-          price: 20
-
-        }],
-
-        value: 20,
-
-        currency: "USD",
-
         source: "WhatsApp_Button"
-
       };
 
 
@@ -1122,10 +1102,14 @@
         ttq.track(
           "Contact",
 
-          {
-            event_id:
-              eventIdContact
-          }
+          Object.assign(
+            {
+              event_id:
+                eventIdContact
+            },
+
+            eventData
+          )
         );
       }
 
@@ -1148,10 +1132,7 @@
 
         eventIdContact,
 
-        {
-          source:
-            "WhatsApp_Button"
-        }
+        eventData
       );
 
     }
