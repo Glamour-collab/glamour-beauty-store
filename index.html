@@ -883,7 +883,6 @@
   </div>
 
   <script>
-
     const orderForm =
       document.getElementById("orderForm");
 
@@ -910,14 +909,12 @@
       إنشاء Event ID فريد
     */
     function generateEventId() {
-
       return "event_" +
         Date.now() +
         "_" +
         Math.random()
           .toString(36)
           .substr(2, 9);
-
     }
 
 
@@ -925,9 +922,7 @@
       الحصول على ttclid
     */
     function getTTCLID() {
-
       try {
-
         const params =
           new URLSearchParams(
             window.location.search
@@ -937,7 +932,6 @@
           params.get("ttclid");
 
         if (ttclid) {
-
           localStorage.setItem(
             "tiktok_ttclid",
             ttclid
@@ -951,11 +945,8 @@
         ) || null;
 
       } catch (error) {
-
         return null;
-
       }
-
     }
 
 
@@ -963,9 +954,7 @@
       الحصول على _ttp
     */
     function getTTP() {
-
       try {
-
         const match =
           document.cookie.match(
             /(?:^|;\s*)_ttp=([^;]+)/
@@ -976,11 +965,8 @@
           : null;
 
       } catch (error) {
-
         return null;
-
       }
-
     }
 
 
@@ -990,7 +976,6 @@
     function getTikTokUserData(
       phone = null
     ) {
-
       const user = {};
 
       const ttclid =
@@ -1012,12 +997,11 @@
       }
 
       return user;
-
     }
 
 
     /*
-      إرسال الحدث إلى Render بشكل غير معطل مع keepalive
+      إرسال الحدث إلى Render
     */
     function sendToServer(
       eventName,
@@ -1025,7 +1009,6 @@
       eventData = {},
       userData = {}
     ) {
-
       fetch(
         PIXEL_SERVER_URL,
         {
@@ -1038,7 +1021,6 @@
           keepalive: true,
 
           body: JSON.stringify({
-
             event: eventName,
 
             event_id: eventId,
@@ -1048,19 +1030,52 @@
             user: getTikTokUserData(
               userData.phone || null
             )
-
           })
         }
       )
       .catch(err => {
-
         console.log(
           "Pixel Server Error:",
           err
         );
-
       });
+    }
 
+
+    /*
+      إرسال الحدث نفسه إلى Pixel وServer
+      باستخدام Event ID موحد
+    */
+    function trackEvent(
+      eventName,
+      eventId,
+      eventData = {},
+      userData = {}
+    ) {
+
+      /*
+        Browser Pixel
+        event_id في الوسيط الثالث
+      */
+      if (window.ttq) {
+        ttq.track(
+          eventName,
+          eventData,
+          {
+            event_id: eventId
+          }
+        );
+      }
+
+      /*
+        Server Events
+      */
+      sendToServer(
+        eventName,
+        eventId,
+        eventData,
+        userData
+      );
     }
 
 
@@ -1069,100 +1084,48 @@
     */
     function trackWhatsAppClick() {
 
-      const eventIdCheckout =
+      const eventIdClickButton =
         generateEventId();
 
       const eventIdContact =
         generateEventId();
 
 
-      const eventData = {
-
-        contents: [{
-
-          content_id:
-            "glamour_beauty_whatsapp",
-
-          content_name:
-            "تواصل واتساب سحر الجمال",
-
-          quantity: 1,
-
-          price: 20
-
-        }],
-
-        value: 20,
-
-        currency: "USD",
-
+      /* ClickButton بدون بيانات سعر أو شراء */
+      const clickButtonData = {
         source: "WhatsApp_Button"
-
       };
 
 
       /*
-        Browser Pixel
+        ClickButton
+        بدلاً من InitiateCheckout
       */
-      if (window.ttq) {
-        ttq.track(
-          "InitiateCheckout",
-
-          Object.assign(
-            {
-              event_id:
-                eventIdCheckout
-            },
-
-            eventData
-          )
-        );
-
-
-        ttq.track(
-          "Contact",
-
-          {
-            event_id:
-              eventIdContact
-          }
-        );
-      }
+      trackEvent(
+        "ClickButton",
+        eventIdClickButton,
+        clickButtonData
+      );
 
 
       /*
-        Server
+        Contact
+        الإبقاء عليه كما هو
       */
-
-      sendToServer(
-        "InitiateCheckout",
-
-        eventIdCheckout,
-
-        eventData
-      );
-
-
-      sendToServer(
+      trackEvent(
         "Contact",
-
         eventIdContact,
-
         {
-          source:
-            "WhatsApp_Button"
+          source: "WhatsApp_Button"
         }
       );
-
     }
 
 
     /*
       منع الضغط المتكرر السريع
     */
-    let whatsappClickLocked =
-      false;
-
+    let whatsappClickLocked = false;
 
     function handleWhatsAppClick(e) {
 
@@ -1176,12 +1139,10 @@
 
       setTimeout(
         () => {
-          whatsappClickLocked =
-            false;
+          whatsappClickLocked = false;
         },
         1500
       );
-
     }
 
 
@@ -1217,9 +1178,7 @@
 
           e.preventDefault();
 
-
-          orderSubmit.disabled =
-            true;
+          orderSubmit.disabled = true;
 
           orderSubmit.textContent =
             "جاري إرسال الطلب...";
@@ -1252,12 +1211,10 @@
 
 
             if (!result.success) {
-
               throw new Error(
                 result.error ||
                 "فشل إرسال الطلب"
               );
-
             }
 
 
@@ -1279,9 +1236,7 @@
 
 
             const submitEventData = {
-
               contents: [{
-
                 content_id:
                   "glamour_beauty_order",
 
@@ -1291,51 +1246,26 @@
                 quantity: 1,
 
                 price: 20
-
               }],
 
               value: 20,
 
               currency: "USD",
 
-              type:
-                "Order_Submitted"
-
+              type: "Order_Submitted"
             };
 
 
             /*
-              Browser Pixel
+              SubmitForm
+              نفس Event ID للمتصفح والسيرفر
             */
-            if (window.ttq) {
-              ttq.track(
-                "SubmitForm",
-
-                Object.assign(
-                  {
-                    event_id:
-                      eventId
-                  },
-
-                  submitEventData
-                )
-              );
-            }
-
-
-            /*
-              Server
-            */
-            sendToServer(
+            trackEvent(
               "SubmitForm",
-
               eventId,
-
               submitEventData,
-
               {
-                phone:
-                  customerPhone
+                phone: customerPhone
               }
             );
 
@@ -1350,12 +1280,10 @@
 
             orderStatus.textContent =
               "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى.";
-
           }
 
 
-          orderSubmit.disabled =
-            false;
+          orderSubmit.disabled = false;
 
           orderSubmit.textContent =
             "إرسال الطلب";
