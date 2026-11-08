@@ -883,6 +883,71 @@
   </div>
 
   <script>
+    /*
+      ==========================================================
+      جدول المسوقين: الرمز المختصر + أرقام هواتفهم
+      ==========================================================
+    */
+    const marketers = {
+      "as": "972567845326",   // أسماء (asmaa)
+      "so": "970567031881",   // سوما (soma)
+      "de": "972567341418"    // ضياء (deyaa)
+    };
+
+    /*
+      الرقم الافتراضي عند الدخول دون رابط مسوق
+    */
+    const defaultPhone = "972567938099";
+
+    /*
+      قراءة رمز المسوق من الرابط
+      مثال: ?ref=as
+    */
+    const urlParams = new URLSearchParams(
+      window.location.search
+    );
+
+    const requestedMarketerCode = (
+      urlParams.get("ref") || ""
+    ).trim().toLowerCase();
+
+    /*
+      اعتماد الرمز إذا كان موجوداً في جدول المسوقين
+      وإلا يتم تسجيل الزيارة على أنها direct
+    */
+    const activeMarketerCode =
+      Object.prototype.hasOwnProperty.call(
+        marketers,
+        requestedMarketerCode
+      )
+        ? requestedMarketerCode
+        : "direct";
+
+    /*
+      تحديد رقم واتساب المستهدف
+    */
+    const targetPhone =
+      activeMarketerCode === "direct"
+        ? defaultPhone
+        : marketers[activeMarketerCode];
+
+    /*
+      إنشاء رسالة واتساب
+    */
+    const displayCode =
+      activeMarketerCode === "direct"
+        ? ""
+        : ` (${activeMarketerCode})`;
+
+    const rawMessage =
+      `مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${displayCode}`;
+
+    const finalWhatsAppUrl =
+      `https://wa.me/${targetPhone}?text=${encodeURIComponent(rawMessage)}`;
+
+    /*
+      ربط رابط واتساب بالزرين
+    */
     const orderForm =
       document.getElementById("orderForm");
 
@@ -897,6 +962,14 @@
 
     const centerWhatsappButton =
       document.getElementById("centerWhatsappButton");
+
+    if (whatsappButton) {
+      whatsappButton.href = finalWhatsAppUrl;
+    }
+
+    if (centerWhatsappButton) {
+      centerWhatsappButton.href = finalWhatsAppUrl;
+    }
 
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbw9USIfC7F2jEC1yzdc1hYLXJnRu7WubSCNyeRe9hdqeWPKg0DZ6jWmIkR1ZnKHba8_/exec";
@@ -1090,34 +1163,35 @@
       const eventIdContact =
         generateEventId();
 
-
-      /* ClickButton بدون بيانات سعر أو شراء */
-      const clickButtonData = {
-        source: "WhatsApp_Button"
+      /*
+        بيانات مصدر الضغط ورمز المسوق
+        تظهر أيضاً direct للزائر المباشر
+      */
+      const attributionData = {
+        source: "WhatsApp_Button",
+        marketer_code: activeMarketerCode
       };
 
 
       /*
         ClickButton
-        بدلاً من InitiateCheckout
+        بدون بيانات سعر أو شراء
       */
       trackEvent(
         "ClickButton",
         eventIdClickButton,
-        clickButtonData
+        attributionData
       );
 
 
       /*
         Contact
-        الإبقاء عليه كما هو
+        مع الاحتفاظ بالحدث وإضافة رمز المسوق
       */
       trackEvent(
         "Contact",
         eventIdContact,
-        {
-          source: "WhatsApp_Button"
-        }
+        attributionData
       );
     }
 
