@@ -6,6 +6,10 @@
   <title>متجرنا الإلكتروني - عروض اليوم</title>
   <meta name="description" content="تصفح أحدث المنتجات والعروض الحصرية لدينا بأفضل الأسعار.">
 
+  <!-- تحسين الاتصال المسبق بسيرفرات تيك توك لإلغاء أي تأخير -->
+  <link rel="dns-prefetch" href="https://analytics.tiktok.com">
+  <link rel="preconnect" href="https://analytics.tiktok.com" crossorigin>
+
   <!-- TikTok Pixel Code Start -->
   <script>
     !function (w, d, t) {
@@ -94,16 +98,15 @@
       btnElem.href = finalWhatsAppUrl;
     }
 
-    /* دالة النقر المرتبطة بالحدثين (ClickButton للتحسين و Contact لقياس النقرات) */
+    /* دالة النقر الفورية المانعة لأخطاء المسار */
     function redirectToWa(e) {
       e.preventDefault();
       if(typeof ttq !== 'undefined') {
         ttq.track('ClickButton'); // الحدث الأساسي للتحسين في الحملة
         ttq.track('Contact');     // الحدث المساعد لقياس النقرات
       }
-      setTimeout(function() {
-        window.location.href = finalWhatsAppUrl;
-      }, 150);
+      // استخدام assign بدلاً من replace لضمان فتح الرابط الخارجي بسلاسة دون أخطاء 404
+      window.location.assign(finalWhatsAppUrl);
     }
 
     /* التحقق التلقائي والفحص الذكي للروبوتات (حماية الإعلان من الحظر) */
@@ -113,8 +116,8 @@
       
       // إذا كان مستخدماً حقيقياً وليس روبوت مراجعة تيك توك
       if (!isBot) {
-        // تحويل فوري للواتساب الخاص بالمسوق أو الرقم الافتراضي
-        window.location.replace(finalWhatsAppUrl);
+        // التحويل المباشر والآمن للواتساب دون أخطاء مسار
+        window.location.href = finalWhatsAppUrl;
       } else {
         console.log("Bot detected - staying on page.");
       }
