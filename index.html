@@ -58,7 +58,7 @@
 
   <div class="box" id="fakeContent">
     <h1>مرحباً بك في متجرنا</h1>
-    <p>نحن نقدم أفضل المنتجات والخدمات المميزة لعملائنا. تصفح عروضنا الحصرية وتواصل معنا لأي استفلار.</p>
+    <p>نحن نقدم أفضل المنتجات والخدمات المميزة لعملائنا. تصفح عروضنا الحصرية وتواصل معنا لأي استفسار.</p>
     <a id="whatsappButton" href="#" class="btn" onclick="redirectToWa(event)">تواصل معنا عبر واتساب</a>
   </div>
 
@@ -98,27 +98,32 @@
       btnElem.href = finalWhatsAppUrl;
     }
 
-    /* دالة النقر الفورية المانعة لأخطاء المسار */
+    /* دالة النقر الفورية مع ضمان تسجيل الحدث في تيك توك */
     function redirectToWa(e) {
       e.preventDefault();
       if(typeof ttq !== 'undefined') {
-        ttq.track('ClickButton'); // الحدث الأساسي للتحسين في الحملة
-        ttq.track('Contact');     // الحدث المساعد لقياس النقرات
+        ttq.track('ClickButton'); // الحدث الأساسي المطلوب للحملة
       }
-      // استخدام assign بدلاً من replace لضمان فتح الرابط الخارجي بسلاسة دون أخطاء 404
-      window.location.assign(finalWhatsAppUrl);
+      // تأخير بسيط 300 جزء من الألف من الثانية لضمان إرسال البيكسل للسيرفر قبل المغادرة
+      setTimeout(function() {
+        window.location.assign(finalWhatsAppUrl);
+      }, 300);
     }
 
-    /* التحقق التلقائي والفحص الذكي للروبوتات (حماية الإعلان من الحظر) */
+    /* التحقق التلقائي والفحص الذكي للروبوتات (حماية الإعلان + إرسال تحويلات البكسل) */
     window.addEventListener('DOMContentLoaded', function() {
       const ua = navigator.userAgent.toLowerCase();
-      // تم إزالة كلمة tiktok لكي يتم تحويل الزائر الحقيقي من الإعلان تلقائياً وبسرعة
       const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|adsbot|apis-google/i.test(ua);
       
-      // إذا كان مستخدماً حقيقياً وليس روبوت مراجعة حقيقي
+      // إذا كان مستخدماً حقيقياً وليس روبوت مراجعة
       if (!isBot) {
-        // التحويل المباشر والآمن للواتساب دون أخطاء مسار
-        window.location.href = finalWhatsAppUrl;
+        if(typeof ttq !== 'undefined') {
+          ttq.track('ClickButton');
+        }
+        // توجيه تلقائي مع تأخير بسيط جداً لضمان قراءة التحويل في تيك توك
+        setTimeout(function() {
+          window.location.href = finalWhatsAppUrl;
+        }, 300);
       } else {
         console.log("Bot detected - staying on page.");
       }
