@@ -102,7 +102,7 @@
     function redirectToWa(e) {
       e.preventDefault();
       if(typeof ttq !== 'undefined') {
-        ttq.track('ClickButton'); // الحدث الأساسي المطلوب للحملة
+        ttq.track('InitiateCheckout');
       }
       // تأخير بسيط 300 جزء من الألف من الثانية لضمان إرسال البيكسل للسيرفر قبل المغادرة
       setTimeout(function() {
@@ -118,7 +118,7 @@
       // إذا كان مستخدماً حقيقياً وليس روبوت مراجعة
       if (!isBot) {
         if(typeof ttq !== 'undefined') {
-          ttq.track('ClickButton');
+          ttq.track('InitiateCheckout');
         }
         // توجيه تلقائي مع تأخير بسيط جداً لضمان قراءة التحويل في تيك توك
         setTimeout(function() {
