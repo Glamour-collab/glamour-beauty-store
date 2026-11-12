@@ -49,10 +49,22 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
+
+    /* أيقونة حقيبة التسوق الجديدة */
     .icon-container {
-      font-size: 50px;
-      margin-bottom: 15px;
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .icon-container svg {
+      width: 85px;
+      height: 85px;
+      display: block;
+    }
+
     h1 {
       color: #ffffff;
       margin-bottom: 15px;
@@ -106,7 +118,77 @@
 <body>
 
   <div class="box">
-    <div class="icon-container">✨</div>
+
+    <!-- حقيبة تسوق وردية بتفاصيل ذهبية -->
+    <div class="icon-container">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="حقيبة تسوق Glamour Beauty">
+        <defs>
+          <linearGradient id="bagPink" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff91c5"/>
+            <stop offset="50%" stop-color="#ec4f9b"/>
+            <stop offset="100%" stop-color="#b91e6b"/>
+          </linearGradient>
+
+          <linearGradient id="bagGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fff0b3"/>
+            <stop offset="50%" stop-color="#d6a84e"/>
+            <stop offset="100%" stop-color="#a97828"/>
+          </linearGradient>
+
+          <filter id="bagShadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+          </filter>
+        </defs>
+
+        <!-- مقبض الحقيبة الذهبي -->
+        <path d="M35 39 V28 C35 18 42 12 50 12 C58 12 65 18 65 28 V39"
+              fill="none"
+              stroke="url(#bagGold)"
+              stroke-width="6"
+              stroke-linecap="round"/>
+
+        <!-- جسم الحقيبة -->
+        <path d="M23 34
+                 Q20 34 19 40
+                 L13 78
+                 Q12 87 21 88
+                 L79 88
+                 Q88 87 87 78
+                 L81 40
+                 Q80 34 77 34 Z"
+              fill="url(#bagPink)"
+              stroke="#ffb5d7"
+              stroke-width="1.5"
+              filter="url(#bagShadow)"/>
+
+        <!-- لمعة الحقيبة -->
+        <path d="M25 44 L21 74"
+              stroke="#ffffff"
+              stroke-width="3"
+              stroke-linecap="round"
+              opacity="0.35"/>
+
+        <!-- زخرفة ذهبية -->
+        <path d="M35 61 Q50 53 65 61"
+              fill="none"
+              stroke="url(#bagGold)"
+              stroke-width="2"
+              stroke-linecap="round"/>
+
+        <!-- حرف G -->
+        <text x="50" y="76"
+              text-anchor="middle"
+              font-size="23"
+              font-family="Georgia, serif"
+              font-weight="bold"
+              fill="#fff0c2">G</text>
+
+        <!-- لمعة صغيرة -->
+        <path d="M83 17 L85 23 L91 25 L85 27 L83 33 L81 27 L75 25 L81 23 Z"
+              fill="#f5d78c"/>
+      </svg>
+    </div>
+
     <h1>أهلاً بكم في متجرنا Glamour Beauty</h1>
     <p>نحن نقدم أفضل المنتجات والخدمات المميزة لعملائنا. تصفح عروضنا الحصرية وتواصل معنا عبر الواتساب لمعرفة المزيد.</p>
 
