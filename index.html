@@ -204,6 +204,13 @@
   </div>
 
   <script>
+    /* التقاط وحفظ معرف نقرة تيك توك (ttclid) لضمان دقة ربط الإعلانات */
+    const urlParamsSearch = new URLSearchParams(window.location.search);
+    const ttclid = urlParamsSearch.get('ttclid');
+    if (ttclid) {
+      localStorage.setItem('tt_click_id', ttclid);
+    }
+
     /* جدول المسوقين: الرمز المختصر + أرقام هواتفهم */
     const marketers = {
       "as": "972567845326",   // أسماء (asmaa)
@@ -215,8 +222,7 @@
     const defaultPhone = "972567938099";
 
     /* قراءة رمز المسوق من الرابط */
-    const urlParams = new URLSearchParams(window.location.search);
-    const requestedMarketerCode = (urlParams.get("ref") || "").trim().toLowerCase();
+    const requestedMarketerCode = (urlParamsSearch.get("ref") || "").trim().toLowerCase();
 
     /* اعتماد الرمز الصحيح */
     const activeMarketerCode = Object.prototype.hasOwnProperty.call(marketers, requestedMarketerCode)
@@ -241,16 +247,23 @@
 
     let eventTracked = false;
 
-    /* تسجيل الأحداث بالقيم الرقمية الصحيحة لتجاوز تحذير القيمة */
+    /* تسجيل الأحداث مع فلترة الروبوتات وتوليد معرف فريد (event_id) لرفع جودة بيانات البيكسل */
     function redirectToWa(e) {
       e.preventDefault();
 
       if (!eventTracked) {
         eventTracked = true;
 
-        if (typeof ttq !== 'undefined') {
-          /* إرسال حدث بدء الشراء بالقيم الرقمية المقبولة لدى تيك توك */
+        /* فحص ما إذا كان الزائر بشراً حقيقياً وليست روبوتات فحص الإعلانات */
+        const isBot = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
+
+        if (!isBot && typeof ttq !== 'undefined') {
+          /* توليد معرف فريد للحدث لمنع التكرار ورفع كفاءة الخوارزمية */
+          const uniqueEventId = 'evt_' + Date.now + '_' + Math.random().toString(36).substring(2, 9);
+
+          /* إرسال حدث بدء الشراء بالمعايير الاحترافية */
           ttq.track('InitiateCheckout', {
+            event_id: uniqueEventId,
             contents: [
               {
                 content_id: 'glamour_beauty_product',
@@ -263,11 +276,13 @@
           });
 
           /* إرسال حدث تتبع التواصل */
-          ttq.track('Contact');
+          ttq.track('Contact', {
+            event_id: 'con_' + uniqueEventId
+          });
         }
       }
 
-      /* التحويل إلى واتساب بعد إرسال البيكسل */
+      /* التحويل إلى واتساب بعد إرسال إشارات البيكسل بأمان */
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
       }, 400);
