@@ -146,7 +146,7 @@
       ? defaultPhone
       : marketers[activeMarketerCode];
 
-    /* إنشاء رسالة واتساب */
+    /* إنشاء رسالة واتساب مع إظهار كود المسوق إن وجد */
     const displayCode = activeMarketerCode === "direct" ? "" : ` (${activeMarketerCode})`;
     const rawMessage = `مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${displayCode}`;
     const finalWhatsAppUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(rawMessage)}`;
@@ -159,19 +159,20 @@
 
     let eventTracked = false;
 
-    /* تسجيل InitiateCheckout و Contact عند الضغط على واتساب */
+    /* تسجيل الحدثين مرة واحدة مع السماح بكل نقرات واتساب */
     function redirectToWa(e) {
       e.preventDefault();
 
-      if (eventTracked) return;
+      if (!eventTracked) {
+        eventTracked = true;
 
-      eventTracked = true;
-
-      if (typeof ttq !== 'undefined') {
-        ttq.track('InitiateCheckout');
-        ttq.track('Contact');
+        if (typeof ttq !== 'undefined') {
+          ttq.track('InitiateCheckout');
+          ttq.track('Contact');
+        }
       }
 
+      /* التحويل إلى واتساب في كل ضغطة */
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
       }, 300);
