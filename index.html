@@ -247,7 +247,7 @@
 
     let eventTracked = false;
 
-    /* تسجيل الأحداث مع فلترة الروبوتات وتوليد معرف فريد (event_id) لرفع جودة بيانات البيكسل */
+    /* تسجيل الأحداث مع فلترة الروبوتات وتوليد معرف فريد (event_id) بالصيغة السليمة */
     function redirectToWa(e) {
       e.preventDefault();
 
@@ -258,10 +258,10 @@
         const isBot = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
 
         if (!isBot && typeof ttq !== 'undefined') {
-          /* توليد معرف فريد للحدث لمنع التكرار ورفع كفاءة الخوارزمية */
-          const uniqueEventId = 'evt_' + Date.now + '_' + Math.random().toString(36).substring(2, 9);
+          /* توليد معرف فريد للحدث بشكل صحيح ومضبوط */
+          const uniqueEventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
 
-          /* إرسال حدث بدء الشراء بالمعايير الاحترافية */
+          /* إرسال حدث بدء الشراء بالمعايير الاحترافية والقيم الصحيحة */
           ttq.track('InitiateCheckout', {
             event_id: uniqueEventId,
             contents: [
