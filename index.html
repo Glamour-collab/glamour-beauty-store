@@ -241,7 +241,7 @@
 
     let eventTracked = false;
 
-    /* تسجيل الأحداث والتحويل إلى واتساب */
+    /* تسجيل الأحداث بالشكل المعياري المعتمد لتيك توك لتفادي أي تحذير */
     function redirectToWa(e) {
       e.preventDefault();
 
@@ -249,29 +249,25 @@
         eventTracked = true;
 
         if (typeof ttq !== 'undefined') {
-          /* حدث بدء الشراء مع بيانات المحتوى لتجاوز التحذير الأصفر في تيك توك */
+          /* إرسال بدء الشراء بالطريقة القياسية المبسطة لضمان القبول الفوري */
           ttq.track('InitiateCheckout', {
-            contents: [
-              {
-                content_id: "glamour_beauty_product",
-                content_name: "Glamour Beauty Offer",
-                quantity: 1,
-                price: 0.00
-              }
-            ],
+            content_id: 'glamour_beauty_product',
+            content_type: 'product',
+            quantity: 1,
+            price: 0.00,
             value: 0.00,
-            currency: "USD"
+            currency: 'USD'
           });
 
-          /* حدث تتبع التواصل */
+          /* إرسال حدث التواصل */
           ttq.track('Contact');
         }
       }
 
-      /* التحويل إلى واتساب بعد إرسال البكسل */
+      /* تأخير بسيط لضمان إرسال إشارات البيكسل قبل مغادرة الصفحة إلى واتساب */
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
-      }, 300);
+      }, 400);
     }
   </script>
 
