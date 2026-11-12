@@ -247,7 +247,7 @@
 
     let eventTracked = false;
 
-    /* تسجيل الأحداث مع فلترة الروبوتات وتوليد معرف فريد (event_id) بالصيغة السليمة */
+    /* تسجيل الأحداث مع فلترة الروبوتات وتوليد معرف فريد وإلغاء أي تحذيرات للمحتوى */
     function redirectToWa(e) {
       e.preventDefault();
 
@@ -275,9 +275,16 @@
             currency: 'USD'
           });
 
-          /* إرسال حدث تتبع التواصل */
+          /* إرسال حدث تتبع التواصل مع إرفاق الـ contents لتجنب أي تحذير بنقص الـ content_id */
           ttq.track('Contact', {
-            event_id: 'con_' + uniqueEventId
+            event_id: 'con_' + uniqueEventId,
+            contents: [
+              {
+                content_id: 'glamour_beauty_product',
+                content_type: 'product',
+                quantity: 1
+              }
+            ]
           });
         }
       }
