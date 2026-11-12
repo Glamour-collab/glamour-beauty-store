@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجرنا الإلكتروني - عروض اليوم</title>
+  <title>متجرنا الإلكتروني - العروض الحصرية</title>
   <meta name="description" content="تصفح أحدث المنتجات والعروض الحصرية لدينا بأفضل الأسعار.">
 
-  <!-- تحسين الاتصال المسبق بسيرفرات تيك توك لإلغاء أي تأخير -->
+  <!-- تحسين الاتصال المسبق بسيرفرات تيك توك -->
   <link rel="dns-prefetch" href="https://analytics.tiktok.com">
   <link rel="preconnect" href="https://analytics.tiktok.com" crossorigin>
 
@@ -17,49 +17,94 @@
       var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
       ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-      // بيكسل تيك توك الخاص بك
       ttq.load('DAOL1OBC77U5LL2S3560');
-      ttq.page(); // 1. حدث عرض الصفحة (View Page)
+      ttq.page();
     }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      background: #f4f4f4;
-      color: #333;
-      font-family: Arial, sans-serif;
+      background: #0f1115; /* خلفية سوداء داكنة وفخمة مريحة للعين */
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      padding: 50px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .box {
-      background: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      max-width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: #181b22; /* صندوق كحلي داكن وأنيق للمحتوى */
+      padding: 45px 30px;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    h1 { color: #222; margin-bottom: 15px; }
-    p { color: #666; line-height: 1.6; }
+    .icon-container {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+    h1 {
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    p {
+      color: #9ba1a6;
+      line-height: 1.7;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
     .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #25D366;
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #25D366, #1EBE5D); /* تدرج أخضر واتسابي رائع */
       color: #fff;
-      padding: 12px 30px;
-      border-radius: 50px;
+      padding: 16px 20px;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 17px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #1EBE5D, #189e4c);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .secure-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #6c757d;
     }
   </style>
 </head>
 <body>
 
-  <div class="box" id="fakeContent">
-    <h1>مرحباً بك في متجرنا</h1>
-    <p>نحن نقدم أفضل المنتجات والخدمات المميزة لعملائنا. تصفح عروضنا الحصرية وتواصل معنا لأي استفسار.</p>
-    <a id="whatsappButton" href="#" class="btn" onclick="redirectToWa(event)">تواصل معنا عبر واتساب</a>
+  <div class="box">
+    <div class="icon-container">🛍️</div>
+    <h1>أهلاً بك في متجرنا الرقمي</h1>
+    <p>انقر على الزر أدناه للتواصل المباشر مع فريق المبيعات عبر الواتساب والحصول على العرض الحصري الخاص بك فوراً.</p>
+    
+    <a id="whatsappButton" href="#" class="btn" onclick="redirectToWa(event)">
+      💬 اضغط هنا للتواصل عبر واتساب
+    </a>
+
+    <div class="secure-note">🔒 تواصل آمن وسريع عبر تطبيق واتساب</div>
   </div>
 
   <script>
@@ -92,42 +137,25 @@
     const rawMessage = `مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${displayCode}`;
     const finalWhatsAppUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(rawMessage)}`;
 
-    /* ربط الرابط بالزر في الصفحة البديلة */
+    /* ربط الرابط بالزر */
     const btnElem = document.getElementById("whatsappButton");
     if (btnElem) {
       btnElem.href = finalWhatsAppUrl;
     }
 
-    /* دالة النقر الفورية مع ضمان تسجيل الحدث في تيك توك */
+    let eventTracked = false;
+
+    /* دالة النقر اليدوي: تسجيل التحويلة عند الضغط فقط مع تأخير 300ms لضمان وصولها للسيرفر */
     function redirectToWa(e) {
       e.preventDefault();
-      if(typeof ttq !== 'undefined') {
+      if (!eventTracked && typeof ttq !== 'undefined') {
         ttq.track('InitiateCheckout');
+        eventTracked = true;
       }
-      // تأخير بسيط 300 جزء من الألف من الثانية لضمان إرسال البيكسل للسيرفر قبل المغادرة
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
       }, 300);
     }
-
-    /* التحقق التلقائي والفحص الذكي للروبوتات (حماية الإعلان + إرسال تحويلات البكسل) */
-    window.addEventListener('DOMContentLoaded', function() {
-      const ua = navigator.userAgent.toLowerCase();
-      const isBot = /bot|googlebot|crawler|spider|robot|crawling|facebookexternalhit|adsbot|apis-google/i.test(ua);
-      
-      // إذا كان مستخدماً حقيقياً وليس روبوت مراجعة
-      if (!isBot) {
-        if(typeof ttq !== 'undefined') {
-          ttq.track('InitiateCheckout');
-        }
-        // توجيه تلقائي مع تأخير بسيط جداً لضمان قراءة التحويل في تيك توك
-        setTimeout(function() {
-          window.location.href = finalWhatsAppUrl;
-        }, 300);
-      } else {
-        console.log("Bot detected - staying on page.");
-      }
-    });
   </script>
 
 </body>
