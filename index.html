@@ -241,7 +241,7 @@
 
     let eventTracked = false;
 
-    /* تسجيل الأحداث بالشكل المعياري المعتمد لتيك توك لتفادي أي تحذير */
+    /* تسجيل الأحداث بالقيم الرقمية الصحيحة لتجاوز تحذير القيمة */
     function redirectToWa(e) {
       e.preventDefault();
 
@@ -249,22 +249,25 @@
         eventTracked = true;
 
         if (typeof ttq !== 'undefined') {
-          /* إرسال بدء الشراء بالطريقة القياسية المبسطة لضمان القبول الفوري */
+          /* إرسال حدث بدء الشراء بالقيم الرقمية المقبولة لدى تيك توك */
           ttq.track('InitiateCheckout', {
-            content_id: 'glamour_beauty_product',
-            content_type: 'product',
-            quantity: 1,
-            price: 0.00,
-            value: 0.00,
+            contents: [
+              {
+                content_id: 'glamour_beauty_product',
+                content_type: 'product',
+                quantity: 1
+              }
+            ],
+            value: 1,
             currency: 'USD'
           });
 
-          /* إرسال حدث التواصل */
+          /* إرسال حدث تتبع التواصل */
           ttq.track('Contact');
         }
       }
 
-      /* تأخير بسيط لضمان إرسال إشارات البيكسل قبل مغادرة الصفحة إلى واتساب */
+      /* التحويل إلى واتساب بعد إرسال البيكسل */
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
       }, 400);
