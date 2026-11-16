@@ -521,51 +521,68 @@
         centerWhatsappButton.href = finalWhatsAppUrl;
     }
 
+    /* منع تكرار أحداث واتساب على مستوى المتصفح */
+    const eventStorageKey = 'glamour_whatsapp_event_sent';
     let eventTracked = false;
 
-    /* تسجيل الأحداث مع منع التكرار، فلترة الروبوتات، وتأخير التحويل */
+    /* تسجيل الأحداث مرة واحدة لكل متصفح مع السماح بالتحويل في كل ضغطة */
     function redirectToWa(e) {
       e.preventDefault();
 
-      if (!eventTracked) {
-        eventTracked = true;
+      /* كود فلترة ومنع الروبوتات والزواحف الإلكترونية من تشغيل الأحداث الوهمية */
+      const isBot = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
 
-        /* كود فلترة ومنع الروبوتات والزواحف الإلكترونية من تشغيل الأحداث الوهمية */
-        const isBot = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
+      let alreadyTracked = eventTracked;
 
-        if (!isBot && typeof ttq !== 'undefined') {
-          /* توليد معرف فريد للحدث */
-          const uniqueEventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
-
-          /* إرسال حدث InitiateCheckout */
-          ttq.track('InitiateCheckout', {
-            event_id: uniqueEventId,
-            contents: [
-              {
-                content_id: 'glamour_beauty_product',
-                content_type: 'product',
-                quantity: 1
-              }
-            ],
-            value: 1,
-            currency: 'USD'
-          });
-
-          /* إرسال حدث Contact */
-          ttq.track('Contact', {
-            event_id: 'con_' + uniqueEventId,
-            contents: [
-              {
-                content_id: 'glamour_beauty_product',
-                content_type: 'product',
-                quantity: 1
-              }
-            ]
-          });
+      try {
+        if (localStorage.getItem(eventStorageKey) === '1') {
+          alreadyTracked = true;
         }
+      } catch (error) {
+        /* استخدام منع التكرار داخل الصفحة إذا تعذر الوصول إلى التخزين */
       }
 
-      /* التحويل الفوري إلى واتساب مع تأخير 400 جزء من الثانية لضمان إرسال إشارات البكسل للمرة الأولى فقط */
+      if (!alreadyTracked && !isBot && typeof ttq !== 'undefined' && typeof ttq.track === 'function') {
+        eventTracked = true;
+
+        /* حفظ علامة التسجيل قبل إرسال الأحداث لمنع تكرارها */
+        try {
+          localStorage.setItem(eventStorageKey, '1');
+        } catch (error) {
+          /* يستمر منع التكرار داخل الصفحة عند تعذر التخزين */
+        }
+
+        /* توليد معرف فريد للحدث */
+        const uniqueEventId = 'evt_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+
+        /* إرسال حدث InitiateCheckout */
+        ttq.track('InitiateCheckout', {
+          event_id: uniqueEventId,
+          contents: [
+            {
+              content_id: 'glamour_beauty_product',
+              content_type: 'product',
+              quantity: 1
+            }
+          ],
+          value: 1,
+          currency: 'USD'
+        });
+
+        /* إرسال حدث Contact */
+        ttq.track('Contact', {
+          event_id: 'con_' + uniqueEventId,
+          contents: [
+            {
+              content_id: 'glamour_beauty_product',
+              content_type: 'product',
+              quantity: 1
+            }
+          ]
+        });
+      }
+
+      /* التحويل إلى واتساب في كل ضغطة سواء سُجلت الأحداث أم لا */
       setTimeout(function() {
         window.location.assign(finalWhatsAppUrl);
       }, 400);
