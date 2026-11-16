@@ -521,11 +521,11 @@
         centerWhatsappButton.href = finalWhatsAppUrl;
     }
 
-    /* منع تكرار أحداث واتساب على مستوى المتصفح */
+    /* منع تكرار أحداث واتساب داخل جلسة التصفح الحالية */
     const eventStorageKey = 'glamour_whatsapp_event_sent';
     let eventTracked = false;
 
-    /* تسجيل الأحداث مرة واحدة لكل متصفح مع السماح بالتحويل في كل ضغطة */
+    /* تسجيل الأحداث مرة واحدة في الجلسة الحالية مع السماح بالتحويل في كل ضغطة */
     function redirectToWa(e) {
       e.preventDefault();
 
@@ -535,7 +535,7 @@
       let alreadyTracked = eventTracked;
 
       try {
-        if (localStorage.getItem(eventStorageKey) === '1') {
+        if (sessionStorage.getItem(eventStorageKey) === '1') {
           alreadyTracked = true;
         }
       } catch (error) {
@@ -547,7 +547,7 @@
 
         /* حفظ علامة التسجيل قبل إرسال الأحداث لمنع تكرارها */
         try {
-          localStorage.setItem(eventStorageKey, '1');
+          sessionStorage.setItem(eventStorageKey, '1');
         } catch (error) {
           /* يستمر منع التكرار داخل الصفحة عند تعذر التخزين */
         }
