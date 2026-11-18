@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة إدارة المسوقين - Glamour Beauty</title>
 <style>
-/* ==========================================
-   1. التنسيقات العامة والأساسية
-   ========================================== */
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
 .card{background:#161616;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;width:100%;max-width:480px;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
@@ -32,9 +29,7 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
 
 <div class="card">
     
-    <!-- ==========================================
-       2. قسم تسجيل الدخول
-       ========================================== -->
+    <!-- قسم تسجيل الدخول -->
     <div id="loginBox" class="login-box">
         <h2>تسجيل الدخول للأداة</h2>
         <div class="group">
@@ -44,13 +39,11 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
         <button class="btn" onclick="checkLogin()">دخول</button>
     </div>
 
-    <!-- ==========================================
-       3. لوحة التحكم الرئيسية
-       ========================================== -->
+    <!-- لوحة التحكم الرئيسية -->
     <div id="panelBox" class="panel-box">
         <h2>لوحة التحكم المركزية للمسوقين</h2>
         
-        <!-- قسم رقم الطوارئ الأساسي -->
+        <!-- رقم الطوارئ الأساسي -->
         <div class="section-box">
             <div class="group" style="margin-bottom:0">
                 <label>رقم المتجر الأساسي (خط الطوارئ عند الحظر)</label>
@@ -58,7 +51,7 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
             </div>
         </div>
 
-        <!-- قسم إضافة أو تحديث المسوق -->
+        <!-- إضافة أو تحديث مسوق -->
         <div class="section-box">
             <h3>➕ إضافة أو تحديث مسوق</h3>
             <div class="group">
@@ -76,13 +69,13 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
             <button class="btn" onclick="addOrUpdateAffiliate()">حفظ وتوليد الرابط</button>
         </div>
 
-        <!-- قسم القائمة المنسدلة وإدارة المسوقين -->
+        <!-- القائمة المنسدلة النظيفة -->
         <div class="section-box">
-            <h3>📋 القائمة المنسدلة وإدارة المسوقين</h3>
+            <h3>📋 قائمة المسوقين</h3>
             <div class="group">
-                <label>اختر مسوقاً للاستعراض أو الفحص:</label>
+                <label>اختر مسوقاً لإدارة رابطه أو فحصه:</label>
                 <select id="affSelect" onchange="onAffiliateSelect()">
-                    <option value="">-- اختر مسوقاً من القائمة --</option>
+                    <option value="">-- اختر مسوقاً --</option>
                 </select>
             </div>
             
@@ -90,7 +83,6 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
                 <label style="color:#00d9ff;margin-bottom:2px">الرابط المولد:</label>
                 <div id="selectedLinkBox" class="copy-box" onclick="copySelectedLink()" title="اضغط للنسخ"></div>
                 
-                <!-- أداة فحص واختبار الرابط -->
                 <button class="btn btn-test" onclick="testSelectedLink()">🔍 فحص واختبار الرابط (تجربة الواتساب)</button>
                 <button class="btn btn-danger" onclick="deleteSelectedAffiliate()">🗑️ حذف هذا المسوق</button>
             </div>
@@ -98,7 +90,7 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
 
         <hr>
 
-        <!-- قسم التصدير وتحديث ملف config.json -->
+        <!-- تصدير التحديث -->
         <div class="section-box" style="border-color:#3b32a8">
             <button class="btn" style="background:#6c5ce7;margin-top:0" onclick="exportJsonFile()">نسخ كود التحديث لملف config.json</button>
             <div id="outputArea" style="margin-top:10px"></div>
@@ -107,14 +99,10 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
     </div>
 </div>
 
-<!-- ==========================================
-   4. المنطق البرمجي (JavaScript) لإدارة المسوقين
-   ========================================== -->
 <script>
-const CORRECT_PASS = "admin123"; // كلمة المرور الافتراضية
+const CORRECT_PASS = "admin123";
 let currentConfig = { defaultPhone: "972567938099", affiliates: {} };
 
-// وظيفة التحقق من تسجيل الدخول
 function checkLogin() {
     if (document.getElementById('adminPass').value === CORRECT_PASS) {
         document.getElementById('loginBox').style.display = 'none';
@@ -125,7 +113,6 @@ function checkLogin() {
     }
 }
 
-// وظيفة جلب البيانات من ملف config.json الخارجي
 function loadConfig() {
     fetch('config.json?t=' + Date.now())
     .then(res => res.json())
@@ -139,10 +126,10 @@ function loadConfig() {
     });
 }
 
-// وظيفة تحديث القائمة المنسدلة
+// القائمة أصبحت تعرض الاسم فقط بشكل مرتب وخالٍ من الزحمة
 function renderSelectDropdown() {
     const select = document.getElementById('affSelect');
-    select.innerHTML = '<option value="">-- اختر مسوقاً من القائمة --</option>';
+    select.innerHTML = '<option value="">-- اختر مسوقاً --</option>';
     document.getElementById('selectedAffDetails').style.display = 'none';
 
     if (!currentConfig.affiliates) currentConfig.affiliates = {};
@@ -150,16 +137,14 @@ function renderSelectDropdown() {
     for (let key in currentConfig.affiliates) {
         const aff = currentConfig.affiliates[key];
         const name = (typeof aff === 'object' && aff.name) ? aff.name : key;
-        const phone = typeof aff === 'object' ? aff.phone : aff;
         
         const opt = document.createElement('option');
         opt.value = key;
-        opt.textContent = `${name} (المعرف: ${key} - ${phone})`;
+        opt.textContent = name; // عرض الاسم فقط بكل نظافة وسلاسة
         select.appendChild(opt);
     }
 }
 
-// وظيفة اختيار المسوق وعرض رابطه
 function onAffiliateSelect() {
     const key = document.getElementById('affSelect').value;
     const detailsDiv = document.getElementById('selectedAffDetails');
@@ -182,7 +167,6 @@ function onAffiliateSelect() {
     detailsDiv.style.display = 'block';
 }
 
-// وظيفة نسخ الرابط
 function copySelectedLink() {
     const key = document.getElementById('affSelect').value;
     if(!key) return;
@@ -191,7 +175,6 @@ function copySelectedLink() {
     alert('تم نسخ الرابط بنجاح!');
 }
 
-// وظيفة فحص واختبار الرابط
 function testSelectedLink() {
     const key = document.getElementById('affSelect').value;
     if (!key) return;
@@ -204,7 +187,6 @@ function testSelectedLink() {
     window.open(testUrl, '_blank');
 }
 
-// إضافة أو تحديث المسوق
 function addOrUpdateAffiliate() {
     const name = document.getElementById('mName').value.trim();
     const phone = document.getElementById('mPhone').value.trim();
@@ -229,7 +211,6 @@ function addOrUpdateAffiliate() {
     alert('تم حفظ المسوق بنجاح! لا تنسَ نسخ كود التحديث بالأسفل ولصقه في config.json.');
 }
 
-// حذف المسوق
 function deleteSelectedAffiliate() {
     const key = document.getElementById('affSelect').value;
     if (!key) return;
@@ -241,7 +222,6 @@ function deleteSelectedAffiliate() {
     }
 }
 
-// تصدير كود التحديث لملف config.json
 function exportJsonFile() {
     currentConfig.defaultPhone = document.getElementById('dfPhone').value.trim();
     const jsonString = JSON.stringify(currentConfig, null, 2);
