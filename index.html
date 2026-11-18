@@ -67,21 +67,36 @@ const p=new URLSearchParams(window.location.search);
 const c=p.get('ttclid');
 if(c)localStorage.setItem('tt_click_id',c);
 
-// معالجة وحفظ كود المسوق (ref) في الذاكرة المؤقتة لضمان عدم ضياعه
-let urlRef = (p.get("ref") || "").trim().toLowerCase();
-if (urlRef) {
-    localStorage.setItem('glamour_saved_ref', urlRef);
-} else {
-    urlRef = localStorage.getItem('glamour_saved_ref') || "";
-}
-
+// --- المنطق المحصن لإدارة الـ ref وحل مشكلة الذاكرة العالقة نهائياً ---
 const m={"as":"972567845326","so":"970567031881","de":"972567341418"};
 const df="972567938099";
-const ac=Object.prototype.hasOwnProperty.call(m,urlRef)?urlRef:"direct";
-const tp=ac==="direct"?df:m[ac];
-const cp=tp.replace(/[^0-9]/g, '');
-const dc=ac==="direct"?"":` (${ac})`;
-const fu=`https://wa.me/${cp}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${dc}`)}`;
+
+let urlRef = p.get("ref");
+
+if (urlRef !== null) {
+    urlRef = urlRef.trim().toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(m, urlRef)) {
+        localStorage.setItem('glamour_saved_ref', urlRef);
+    } else {
+        localStorage.removeItem('glamour_saved_ref');
+        urlRef = "";
+    }
+} else {
+    localStorage.removeItem('glamour_saved_ref');
+    urlRef = "";
+}
+
+const activeRef = urlRef && Object.prototype.hasOwnProperty.call(m, urlRef) ? urlRef : (localStorage.getItem('glamour_saved_ref') && Object.prototype.hasOwnProperty.call(m, localStorage.getItem('glamour_saved_ref')) ? localStorage.getItem('glamour_saved_ref') : "direct");
+
+// تعديل احتياطي إضافي: إذا لم يكن الزائر برابط ref مباشر حالي، نتحقق إن كان مسجلاً مسبقاً أو نعود للرقم الأساسي
+const finalRef = (p.get("ref") !== null && Object.prototype.hasOwnProperty.call(m, (p.get("ref")||"").trim().toLowerCase())) ? (p.get("ref")||"").trim().toLowerCase() : (urlRef ? urlRef : "direct");
+
+// التصفية النهائية والدقيقة للرقم والرسالة
+const validRefKey = Object.prototype.hasOwnProperty.call(m, finalRef) ? finalRef : "direct";
+const targetPhone = validRefKey === "direct" ? df : m[validRefKey];
+const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
+const descText = validRefKey === "direct" ? "" : ` (${validRefKey})`;
+const fu = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${descText}`)}`;
 
 const wb=document.getElementById("whatsappButton");
 const cb=document.getElementById("centerWhatsappButton");
