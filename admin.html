@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة إدارة المسوقين والتحليلات - Glamour Beauty</title>
+<title>لوحة إدارة المسوقين - Glamour Beauty</title>
 <style>
 /* ==========================================
    1. التنسيقات العامة والأساسية
@@ -22,7 +22,6 @@ input:focus,select:focus{outline:none;border-color:#00d9ff}
 .btn-danger{background:#e74c3c;margin-top:5px}
 .btn-test{background:#3498db;margin-top:5px}
 .copy-box{background:#111;padding:8px;border-radius:6px;font-size:11px;direction:ltr;text-align:left;color:#48e0a4;word-break:break-all;margin-top:6px;cursor:pointer}
-.stats-box{background:#111;padding:10px;border-radius:8px;margin-top:8px;font-size:13px;border:1px solid #222;color:#ffd700}
 .login-box{display:block}
 .panel-box{display:none}
 hr{border:0;border-top:1px solid #222;margin:15px 0}
@@ -46,10 +45,10 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
     </div>
 
     <!-- ==========================================
-       3. لوحة التحكم الرئيسية والتحليلات
+       3. لوحة التحكم الرئيسية
        ========================================== -->
     <div id="panelBox" class="panel-box">
-        <h2>لوحة التحكم والتحليلات الذكية</h2>
+        <h2>لوحة التحكم المركزية للمسوقين</h2>
         
         <!-- قسم رقم الطوارئ الأساسي -->
         <div class="section-box">
@@ -59,7 +58,7 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
             </div>
         </div>
 
-        <!-- قسم إضافة أو تحديث المسوقين -->
+        <!-- قسم إضافة أو تحديث المسوق -->
         <div class="section-box">
             <h3>➕ إضافة أو تحديث مسوق</h3>
             <div class="group">
@@ -77,21 +76,18 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
             <button class="btn" onclick="addOrUpdateAffiliate()">حفظ وتوليد الرابط</button>
         </div>
 
-        <!-- قسم القائمة المنسدلة ومراقبة إحصائيات النقرات -->
+        <!-- قسم القائمة المنسدلة وإدارة المسوقين -->
         <div class="section-box">
-            <h3>📊 القائمة المنسدلة وإحصائيات الأداء</h3>
+            <h3>📋 القائمة المنسدلة وإدارة المسوقين</h3>
             <div class="group">
-                <label>اختر مسوقاً لمتابعة نقراته أو فحصه:</label>
+                <label>اختر مسوقاً للاستعراض أو الفحص:</label>
                 <select id="affSelect" onchange="onAffiliateSelect()">
                     <option value="">-- اختر مسوقاً من القائمة --</option>
                 </select>
             </div>
             
             <div id="selectedAffDetails" style="display:none;background:#111;padding:10px;border-radius:8px;margin-top:10px;border:1px solid #333">
-                <!-- قسم إحصائيات النقرات والنشاط -->
-                <div id="affStatsDisplay" class="stats-box"></div>
-
-                <label style="color:#00d9ff;margin-top:8px;margin-bottom:2px">الرابط المولد:</label>
+                <label style="color:#00d9ff;margin-bottom:2px">الرابط المولد:</label>
                 <div id="selectedLinkBox" class="copy-box" onclick="copySelectedLink()" title="اضغط للنسخ"></div>
                 
                 <!-- أداة فحص واختبار الرابط -->
@@ -112,7 +108,7 @@ hr{border:0;border-top:1px solid #222;margin:15px 0}
 </div>
 
 <!-- ==========================================
-   4. المنطق البرمجي (JavaScript) لإدارة البيانات والتحليلات
+   4. المنطق البرمجي (JavaScript) لإدارة المسوقين
    ========================================== -->
 <script>
 const CORRECT_PASS = "admin123"; // كلمة المرور الافتراضية
@@ -154,16 +150,16 @@ function renderSelectDropdown() {
     for (let key in currentConfig.affiliates) {
         const aff = currentConfig.affiliates[key];
         const name = (typeof aff === 'object' && aff.name) ? aff.name : key;
-        const clicks = (typeof aff === 'object' && aff.clicks !== undefined) ? aff.clicks : 0;
+        const phone = typeof aff === 'object' ? aff.phone : aff;
         
         const opt = document.createElement('option');
         opt.value = key;
-        opt.textContent = `${name} (النقرات: ${clicks})`;
+        opt.textContent = `${name} (المعرف: ${key} - ${phone})`;
         select.appendChild(opt);
     }
 }
 
-// وظيفة اختيار المسوق وعرض إحصائياته ورابطه
+// وظيفة اختيار المسوق وعرض رابطه
 function onAffiliateSelect() {
     const key = document.getElementById('affSelect').value;
     const detailsDiv = document.getElementById('selectedAffDetails');
@@ -176,18 +172,10 @@ function onAffiliateSelect() {
     const aff = currentConfig.affiliates[key];
     const phone = typeof aff === 'object' ? aff.phone : aff;
     const name = (typeof aff === 'object' && aff.name) ? aff.name : "";
-    const clicks = (typeof aff === 'object' && aff.clicks !== undefined) ? aff.clicks : 0;
-    const lastClick = (typeof aff === 'object' && aff.lastClick) ? aff.lastClick : "لا توجد نقرات مسجلة بعد";
 
     document.getElementById('mKey').value = key;
     document.getElementById('mPhone').value = phone;
     document.getElementById('mName').value = name;
-
-    // عرض صندوق الإحصائيات الحية
-    document.getElementById('affStatsDisplay').innerHTML = `
-        📈 إجمالي النقرات: <b>${clicks}</b><br>
-        🕒 آخر نشاط: <span style="color:#fff;font-size:11px">${lastClick}</span>
-    `;
 
     const fullLink = "https://glamourbeauty.online/?ref=" + key;
     document.getElementById('selectedLinkBox').innerHTML = `🔗 ${fullLink}`;
@@ -216,7 +204,7 @@ function testSelectedLink() {
     window.open(testUrl, '_blank');
 }
 
-// إضافة أو تحديث المسوق مع الحفاظ على سجل النقرات إن وجد
+// إضافة أو تحديث المسوق
 function addOrUpdateAffiliate() {
     const name = document.getElementById('mName').value.trim();
     const phone = document.getElementById('mPhone').value.trim();
@@ -227,19 +215,9 @@ function addOrUpdateAffiliate() {
         return;
     }
 
-    // الاحتفاظ بعداد النقرات القديم في حال كان المسوق موجوداً مسبقاً
-    let existingClicks = 0;
-    let existingLastClick = "";
-    if (currentConfig.affiliates[key] && typeof currentConfig.affiliates[key] === 'object') {
-        existingClicks = currentConfig.affiliates[key].clicks || 0;
-        existingLastClick = currentConfig.affiliates[key].lastClick || "";
-    }
-
     currentConfig.affiliates[key] = {
         phone: phone,
-        name: name || key,
-        clicks: existingClicks,
-        lastClick: existingLastClick
+        name: name || key
     };
 
     renderSelectDropdown();
