@@ -59,7 +59,7 @@ function getOrCreateExternalId() {
 
 // تحميل بكسل تيك توك بعد 300 جزء من الألف من الثانية لضمان ظهور الصفحة بسرعة البرق أولاً
 !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=r;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};ttq._o[e]=n||{};setTimeout(function(){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(n,s)},300)};
-ttq.load('DAOL1OBC77U5LL2S3560');
+ttq.load('DBI8H4JC77UF91063JE0');
 ttq.identify({external_id: getOrCreateExternalId()});
 ttq.page()}(window,document,'ttq');
 
@@ -67,46 +67,63 @@ const p=new URLSearchParams(window.location.search);
 const c=p.get('ttclid');
 if(c)localStorage.setItem('tt_click_id',c);
 
-// --- المنطق المحصن لإدارة الـ ref وحل مشكلة الذاكرة العالقة نهائياً ---
-const m={"as":"972567845326","so":"970567031881","de":"972567341418"};
-const df="972567938099";
+// --- المنطق المحدث: جلب الإعدادات من config.json الخارجي مع الحفاظ على خطة الأمان الفورية ---
+let fu = "https://wa.me/972567938099";
 
-let urlRef = p.get("ref");
+function applyRouting(m, df) {
+    let urlRef = p.get("ref");
 
-if (urlRef !== null) {
-    urlRef = urlRef.trim().toLowerCase();
-    if (Object.prototype.hasOwnProperty.call(m, urlRef)) {
-        localStorage.setItem('glamour_saved_ref', urlRef);
+    if (urlRef !== null) {
+        urlRef = urlRef.trim().toLowerCase();
+        if (Object.prototype.hasOwnProperty.call(m, urlRef)) {
+            localStorage.setItem('glamour_saved_ref', urlRef);
+        } else {
+            localStorage.removeItem('glamour_saved_ref');
+            urlRef = "";
+        }
     } else {
         localStorage.removeItem('glamour_saved_ref');
         urlRef = "";
     }
-} else {
-    localStorage.removeItem('glamour_saved_ref');
-    urlRef = "";
+
+    const savedRef = localStorage.getItem('glamour_saved_ref');
+    const finalRef = (p.get("ref") !== null && Object.prototype.hasOwnProperty.call(m, (p.get("ref")||"").trim().toLowerCase())) ? (p.get("ref")||"").trim().toLowerCase() : (urlRef ? urlRef : (savedRef && Object.prototype.hasOwnProperty.call(m, savedRef) ? savedRef : "direct"));
+
+    const validRefKey = Object.prototype.hasOwnProperty.call(m, finalRef) ? finalRef : "direct";
+    const targetPhone = validRefKey === "direct" ? df : m[validRefKey];
+    const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
+    const descText = validRefKey === "direct" ? "" : ` (${validRefKey})`;
+    fu = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${descText}`)}`;
+
+    const wb=document.getElementById("whatsappButton");
+    const cb=document.getElementById("centerWhatsappButton");
+    if(wb)wb.href=fu;
+    if(cb)cb.href=fu;
 }
 
-const activeRef = urlRef && Object.prototype.hasOwnProperty.call(m, urlRef) ? urlRef : (localStorage.getItem('glamour_saved_ref') && Object.prototype.hasOwnProperty.call(m, localStorage.getItem('glamour_saved_ref')) ? localStorage.getItem('glamour_saved_ref') : "direct");
+// القيم الافتراضية كخطة أمان فورية لتعمل الصفحة بسرعة البرق لحين استجابة الملف الخارجي
+let defaultM = {"as": "972567845326", "so": "970567031881", "de": "972567341418"};
+let defaultDf = "972567938099";
+applyRouting(defaultM, defaultDf);
 
-// تعديل احتياطي إضافي: إذا لم يكن الزائر برابط ref مباشر حالي، نتحقق إن كان مسجلاً مسبقاً أو نعود للرقم الأساسي
-const finalRef = (p.get("ref") !== null && Object.prototype.hasOwnProperty.call(m, (p.get("ref")||"").trim().toLowerCase())) ? (p.get("ref")||"").trim().toLowerCase() : (urlRef ? urlRef : "direct");
-
-// التصفية النهائية والدقيقة للرقم والرسالة
-const validRefKey = Object.prototype.hasOwnProperty.call(m, finalRef) ? finalRef : "direct";
-const targetPhone = validRefKey === "direct" ? df : m[validRefKey];
-const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-const descText = validRefKey === "direct" ? "" : ` (${validRefKey})`;
-const fu = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${descText}`)}`;
-
-const wb=document.getElementById("whatsappButton");
-const cb=document.getElementById("centerWhatsappButton");
-if(wb)wb.href=fu;
-if(cb)cb.href=fu;
+// جلب التحديثات والأرقام من config.json في الخلفية بصمت
+fetch('./config.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(res => res.json())
+  .then(data => {
+      const df = data.defaultPhone || defaultDf;
+      const m = data.affiliates || defaultM;
+      applyRouting(m, df);
+  })
+  .catch(err => {
+      console.log('Using fallback numbers');
+  });
 
 let userQualified = false;
 function activateButtons() {
     if (!userQualified) {
         userQualified = true;
+        const wb = document.getElementById("whatsappButton");
+        const cb = document.getElementById("centerWhatsappButton");
         if(wb) wb.classList.add('active-btn');
         if(cb) cb.classList.add('active-btn');
     }
