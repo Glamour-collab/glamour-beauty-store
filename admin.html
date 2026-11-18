@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة إدارة المسوقين - Glamour Beauty</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}.card{background:#161616;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;width:100%;max-width:480px;box-shadow:0 10px 30px rgba(0,0,0,0.5)}h2{font-size:18px;margin-bottom:15px;text-align:center;color:#00d9ff}.group{margin-bottom:12px}label{display:block;font-size:12px;color:#bbb;margin-bottom:4px}input{width:100%;padding:10px;border-radius:8px;background:#222;border:1px solid #333;color:#fff;font-size:14px}input:focus{outline:none;border-color:#00d9ff}.btn{width:100%;padding:11px;border-radius:8px;background:linear-gradient(135deg,#20d879,#0fae62);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-top:8px}.btn:active{transform:scale(0.98)}.btn-danger{background:#e74c3c;margin-top:5px}.aff-item{background:#222;padding:12px;border-radius:8px;margin-bottom:10px;font-size:13px;border:1px solid #333}.aff-info{display:flex;justify-content:space-between;margin-bottom:6px;color:#ccc}.copy-box{background:#111;padding:8px;border-radius:6px;font-size:11px;direction:ltr;text-align:left;color:#48e0a4;word-break:break-all;margin-top:6px;cursor:pointer}.login-box{display:block}.panel-box{display:none}hr{border:0;border-top:1px solid #222;margin:15px 0}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <!-- شاشة تسجيل الدخول -->
+    <div id="loginBox" class="login-box">
+        <h2>تسجيل الدخول للأداة</h2>
+        <div class="group">
+            <label>كلمة المرور</label>
+            <input type="password" id="adminPass" placeholder="أدخل كلمة المرور" style="direction:ltr;text-align:left">
+        </div>
+        <button class="btn" onclick="checkLogin()">دخول</button>
+    </div>
+
+    <!-- لوحة التحكم والأداة -->
+    <div id="panelBox" class="panel-box">
+        <h2>أداة إدارة المسوقين</h2>
+        
+        <div class="group">
+            <label>رقم المتجر الأساسي (في حال حظر رقمك المباشر)</label>
+            <input type="text" id="dfPhone" placeholder="972567938099" style="direction:ltr;text-align:left">
+        </div>
+
+        <hr>
+
+        <h3 style="font-size:15px;color:#00d9ff;margin-bottom:10px">➕ إضافة مسوق جديد</h3>
+        <div class="group">
+            <label>اسم المسوق</label>
+            <input type="text" id="mName" placeholder="مثال: أسماء">
+        </div>
+        <div class="group">
+            <label>رقم واتساب المسوق (مع مفتاح الدولة بدون +)</label>
+            <input type="text" id="mPhone" placeholder="مثال: 972567845326" style="direction:ltr;text-align:left">
+        </div>
+        <div class="group">
+            <label>اختصار اسمه (في رابط الإعلان مثل: as)</label>
+            <input type="text" id="mKey" placeholder="مثال: as" style="direction:ltr;text-align:left">
+        </div>
+        
+        <button class="btn" onclick="addOrUpdateAffiliate()">توليد الرابط وحفظ المسوق</button>
+
+        <hr>
+
+        <h3 style="font-size:15px;color:#fff;margin-bottom:10px">📋 قائمة المسوقين وروابطهم الجاهزة</h3>
+        <div id="affiliatesList"></div>
+
+        <hr>
+        <button class="btn" style="background:#6c5ce7" onclick="exportJsonFile()">نسخ كود التحديث لملف config.json</button>
+        <div id="outputArea" style="margin-top:10px"></div>
+    </div>
+</div>
+
+<script>
+const CORRECT_PASS = "admin123"; // يمكنك تغيير كلمة المرور هنا متى شئت
+let currentConfig = { defaultPhone: "972567938099", affiliates: {} };
+
+function checkLogin() {
+    if (document.getElementById('adminPass').value === CORRECT_PASS) {
+        document.getElementById('loginBox').style.display = 'none';
+        document.getElementById('panelBox').style.display = 'block';
+        loadConfig();
+    } else {
+        alert('كلمة المرور خاطئة!');
+    }
+}
+
+function loadConfig() {
+    fetch('config.json?t=' + Date.now())
+    .then(res => res.json())
+    .then(data => {
+        currentConfig = data;
+        document.getElementById('dfPhone').value = currentConfig.defaultPhone || "972567938099";
+        renderAffiliates();
+    })
+    .catch(err => {
+        renderAffiliates();
+    });
+}
+
+function renderAffiliates() {
+    const listDiv = document.getElementById('affiliatesList');
+    listDiv.innerHTML = '';
+    const domain = "https://glamourbeauty.online/?ref=";
+
+    for (let key in currentConfig.affiliates) {
+        const phone = currentConfig.affiliates[key];
+        const fullLink = domain + key;
+        
+        listDiv.innerHTML += `
+            <div class="aff-item">
+                <div class="aff-info">
+                    <strong>المعرف: (${key})</strong>
+                    <span>الرقم: ${phone}</span>
+                </div>
+                <div class="copy-box" onclick="navigator.clipboard.writeText('${fullLink}');alert('تم نسخ رابط ${key} بنجاح!');" title="اضغط للنسخ">
+                    🔗 ${fullLink}
+                </div>
+                <button class="btn btn-danger" style="padding:6px;font-size:12px;margin-top:6px" onclick="deleteAffiliate('${key}')">حذف المسوق</button>
+            </div>
+        `;
+    }
+}
+
+function addOrUpdateAffiliate() {
+    const name = document.getElementById('mName').value.trim();
+    const phone = document.getElementById('mPhone').value.trim();
+    const key = document.getElementById('mKey').value.trim().toLowerCase();
+
+    if (!phone || !key) {
+        alert('يرجى إدخال رقم الواتساب واختصار الاسم على الأقل!');
+        return;
+    }
+
+    currentConfig.affiliates[key] = phone;
+    renderAffiliates();
+    
+    document.getElementById('mName').value = '';
+    document.getElementById('mPhone').value = '';
+    document.getElementById('mKey').value = '';
+    
+    alert('تم توليد الرابط وإضافة المسوق بنجاح! لا تنسَ الضغط أسفل الصفحة لنسخ الكود وتحديث ملف config.json في جيت هب.');
+}
+
+function deleteAffiliate(key) {
+    if (confirm('هل أنت متأكد من حذف هذا المسوق؟')) {
+        delete currentConfig.affiliates[key];
+        renderAffiliates();
+    }
+}
+
+function exportJsonFile() {
+    currentConfig.defaultPhone = document.getElementById('dfPhone').value.trim();
+    const jsonString = JSON.stringify(currentConfig, null, 2);
+    
+    document.getElementById('outputArea').innerHTML = `
+        <label style="color:#00d9ff">انسخ هذا المحتوى بالكامل ولصقه داخل ملف config.json في جيت هب:</label>
+        <textarea style="width:100%;height:130px;background:#111;color:#48e0a4;padding:8px;font-size:12px;direction:ltr;border:1px solid #333;border-radius:6px" readonly>${jsonString}</textarea>
+    `;
+}
+</script>
+</body>
+</html>
