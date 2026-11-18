@@ -67,9 +67,7 @@ const p=new URLSearchParams(window.location.search);
 const c=p.get('ttclid');
 if(c)localStorage.setItem('tt_click_id',c);
 
-// المتغيرات العامة للتوجيه ورابط الواتساب الحالي واسم المسوق النشط
 let fu = "https://wa.me/972567938099";
-let activeRefKey = "direct";
 
 function applyRouting(m, df) {
     let urlRef = p.get("ref");
@@ -90,14 +88,13 @@ function applyRouting(m, df) {
     const savedRef = localStorage.getItem('glamour_saved_ref');
     const finalRef = (p.get("ref") !== null && Object.prototype.hasOwnProperty.call(m, (p.get("ref")||"").trim().toLowerCase())) ? (p.get("ref")||"").trim().toLowerCase() : (urlRef ? urlRef : (savedRef && Object.prototype.hasOwnProperty.call(m, savedRef) ? savedRef : "direct"));
 
-    activeRefKey = Object.prototype.hasOwnProperty.call(m, finalRef) ? finalRef : "direct";
-    const targetAff = activeRefKey === "direct" ? df : m[activeRefKey];
+    const validRefKey = Object.prototype.hasOwnProperty.call(m, finalRef) ? finalRef : "direct";
+    const targetAff = validRefKey === "direct" ? df : m[validRefKey];
     
-    // دعم البنية الجديدة (كائن يحتوي رقم) أو البنية القديمة (نص الرقم مباشرة)
     const targetPhone = typeof targetAff === 'object' ? targetAff.phone : targetAff;
     
     const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-    const descText = activeRefKey === "direct" ? "" : ` (${activeRefKey})`;
+    const descText = validRefKey === "direct" ? "" : ` (${validRefKey})`;
     fu = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${descText}`)}`;
 
     const wb=document.getElementById("whatsappButton");
@@ -106,17 +103,13 @@ function applyRouting(m, df) {
     if(cb)cb.href=fu;
 }
 
-// القيم الافتراضية كخطة أمان فورية
 let defaultM = {"as": "972567845326", "so": "970567031881", "de": "972567341418"};
 let defaultDf = "972567938099";
 applyRouting(defaultM, defaultDf);
 
-// جلب التحديثات والأرقام من config.json في الخلفية
-let fetchedConfigData = null;
 fetch('./config.json?t=' + Date.now(), { cache: 'no-store' })
   .then(res => res.json())
   .then(data => {
-      fetchedConfigData = data;
       const df = data.defaultPhone || defaultDf;
       const m = data.affiliates || defaultM;
       applyRouting(m, df);
@@ -149,7 +142,6 @@ function redirectToWa(e){
     let at=et;
     try{if(sessionStorage.getItem(sk)==='1')at=true;}catch(err){}
     
-    // تتبع الأحداث عبر بكسل تيك توك
     if(!at&&!ib&&typeof ttq!=='undefined'&&typeof ttq.track==='function'){
         et=true;
         try{sessionStorage.setItem(sk,'1');}catch(err){}
@@ -167,30 +159,6 @@ function redirectToWa(e){
         ttq.track('Contact', {event_id: 'con_'+id, contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}], click_id: clickId}, {external_id: getOrCreateExternalId()});
     }
 
-    // ⭐ تسجيل وزيادة عدد النقرات وتحديث وقت آخر زيارة للمسوق النشط
-    if (activeRefKey !== "direct" && fetchedConfigData && fetchedConfigData.affiliates && fetchedConfigData.affiliates[activeRefKey]) {
-        let affObj = fetchedConfigData.affiliates[activeRefKey];
-        if (typeof affObj === 'object') {
-            affObj.clicks = (affObj.clicks || 0) + 1;
-            
-            // ضبط التوقيت المحلي بدقة
-            const now = new Date();
-            affObj.lastClick = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-            
-            // إرسال تحديث صامت لملف config.json أو تنبيه المستخدم بنسخ الكود المحدث في لوحة التحكم
-            // (بما أن ملف config.json مستضاف ثابت على جيت هب، يتم تخزين النقرات محلياً لترى ملخصها في لوحة التحكم)
-            try {
-                let localStats = JSON.parse(localStorage.getItem('glamour_local_clicks') || '{}');
-                localStats[activeRefKey] = {
-                    clicks: affObj.clicks,
-                    lastClick: affObj.lastClick
-                };
-                localStorage.setItem('glamour_local_clicks', JSON.stringify(localStats));
-            } catch(e) {}
-        }
-    }
-
-    // الانتقال الفعلي إلى تطبيق واتساب بعد جزء من الثانية
     setTimeout(function(){
         window.location.href = fu;
     }, 300);
