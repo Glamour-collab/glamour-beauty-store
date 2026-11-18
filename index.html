@@ -66,14 +66,23 @@ ttq.page()}(window,document,'ttq');
 const p=new URLSearchParams(window.location.search);
 const c=p.get('ttclid');
 if(c)localStorage.setItem('tt_click_id',c);
+
+// معالجة وحفظ كود المسوق (ref) في الذاكرة المؤقتة لضمان عدم ضياعه
+let urlRef = (p.get("ref") || "").trim().toLowerCase();
+if (urlRef) {
+    localStorage.setItem('glamour_saved_ref', urlRef);
+} else {
+    urlRef = localStorage.getItem('glamour_saved_ref') || "";
+}
+
 const m={"as":"972567845326","so":"970567031881","de":"972567341418"};
 const df="972567938099";
-const r=(p.get("ref")||"").trim().toLowerCase();
-const ac=Object.prototype.hasOwnProperty.call(m,r)?r:"direct";
+const ac=Object.prototype.hasOwnProperty.call(m,urlRef)?urlRef:"direct";
 const tp=ac==="direct"?df:m[ac];
-const cp=tp.replace(/[^0-9]/g,'');
+const cp=tp.replace(/[^0-9]/g, '');
 const dc=ac==="direct"?"":` (${ac})`;
 const fu=`https://wa.me/${cp}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${dc}`)}`;
+const appFu=`whatsapp://send?phone=${cp}&text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${dc}`)}`;
 
 const wb=document.getElementById("whatsappButton");
 const cb=document.getElementById("centerWhatsappButton");
@@ -96,19 +105,48 @@ setTimeout(activateButtons, 2500);
 const sk='glamour_whatsapp_event_sent';
 let et=false;
 function redirectToWa(e){
-e.preventDefault();
-if(!userQualified) return;
-const ib=/bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
-let at=et;
-try{if(sessionStorage.getItem(sk)==='1')at=true;}catch(err){}
-if(!at&&!ib&&typeof ttq!=='undefined'&&typeof ttq.track==='function'){
-et=true;
-try{sessionStorage.setItem(sk,'1');}catch(err){}
-const id='evt_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);
-ttq.track('InitiateCheckout',{event_id:id,contents:[{content_id:'glamour_beauty_product',content_type:'product',quantity:1}],value:1,currency:'USD'},{external_id: getOrCreateExternalId()});
-ttq.track('Contact',{event_id:'con_'+id,contents:[{content_id:'glamour_beauty_product',content_type:'product',quantity:1}]},{external_id: getOrCreateExternalId()});
-}
-setTimeout(function(){window.location.assign(fu);},300);
+    e.preventDefault();
+    if(!userQualified) return;
+    const ib=/bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
+    let at=et;
+    try{if(sessionStorage.getItem(sk)==='1')at=true;}catch(err){}
+    if(!at&&!ib&&typeof ttq!=='undefined'&&typeof ttq.track==='function'){
+        et=true;
+        try{sessionStorage.setItem(sk,'1');}catch(err){}
+        const id='evt_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);
+        const clickId = localStorage.getItem('tt_click_id') || '';
+
+        const eventProperties = {
+            event_id: id,
+            contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}],
+            value: 1,
+            currency: 'USD',
+            click_id: clickId
+        };
+        ttq.track('InitiateCheckout', eventProperties, {external_id: getOrCreateExternalId()});
+        ttq.track('Contact', {event_id: 'con_'+id, contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}], click_id: clickId}, {external_id: getOrCreateExternalId()});
+    }
+
+    setTimeout(function(){
+        let fallbackTimer = setTimeout(function(){
+            window.location.href = fu;
+        }, 600);
+
+        function cancelFallback() {
+            clearTimeout(fallbackTimer);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
+            window.removeEventListener('blur', cancelFallback);
+        }
+
+        function onVisibilityChange() {
+            if (document.hidden) cancelFallback();
+        }
+
+        document.addEventListener('visibilitychange', onVisibilityChange);
+        window.addEventListener('blur', cancelFallback, {once: true});
+
+        window.location.assign(appFu);
+    }, 300);
 }
 </script>
 </body>
