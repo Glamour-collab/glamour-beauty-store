@@ -82,7 +82,6 @@ const tp=ac==="direct"?df:m[ac];
 const cp=tp.replace(/[^0-9]/g, '');
 const dc=ac==="direct"?"":` (${ac})`;
 const fu=`https://wa.me/${cp}?text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${dc}`)}`;
-const appFu=`whatsapp://send?phone=${cp}&text=${encodeURIComponent(`مرحبًا، شاهدت إعلانكم على TikTok وأود معرفة المزيد.${dc}`)}`;
 
 const wb=document.getElementById("whatsappButton");
 const cb=document.getElementById("centerWhatsappButton");
@@ -128,24 +127,7 @@ function redirectToWa(e){
     }
 
     setTimeout(function(){
-        let fallbackTimer = setTimeout(function(){
-            window.location.href = fu;
-        }, 600);
-
-        function cancelFallback() {
-            clearTimeout(fallbackTimer);
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-            window.removeEventListener('blur', cancelFallback);
-        }
-
-        function onVisibilityChange() {
-            if (document.hidden) cancelFallback();
-        }
-
-        document.addEventListener('visibilitychange', onVisibilityChange);
-        window.addEventListener('blur', cancelFallback, {once: true});
-
-        window.location.assign(appFu);
+        window.location.href = fu;
     }, 300);
 }
 </script>
