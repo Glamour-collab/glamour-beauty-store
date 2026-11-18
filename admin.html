@@ -5,231 +5,606 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة إدارة المسوقين - Glamour Beauty</title>
 <style>
+:root{
+  --bg-page:#070b14;
+  --bg-card:#101827;
+  --bg-section:#162033;
+  --bg-input:#0b1220;
+  --border-subtle:rgba(255,255,255,0.09);
+  --border-input:#273854;
+  --text-main:#f8fafc;
+  --text-muted:#94a3b8;
+  --accent:#38bdf8;
+  --accent-soft:rgba(56,189,248,0.12);
+  --btn-primary:#16a34a;
+  --btn-primary-hover:#15803d;
+  --btn-test:#2563eb;
+  --btn-copy:#334155;
+  --btn-export:#4f46e5;
+  --btn-danger:#dc2626;
+  --btn-ghost:#1e293b;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
-.card{background:#161616;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;width:100%;max-width:480px;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-h2{font-size:18px;margin-bottom:15px;text-align:center;color:#00d9ff}
-h3{font-size:15px;color:#00d9ff;margin-bottom:10px}
-.group{margin-bottom:12px}
-label{display:block;font-size:12px;color:#bbb;margin-bottom:4px}
-input,select{width:100%;padding:10px;border-radius:8px;background:#222;border:1px solid #333;color:#fff;font-size:14px}
-input:focus,select:focus{outline:none;border-color:#00d9ff}
-.btn{width:100%;padding:11px;border-radius:8px;background:linear-gradient(135deg,#20d879,#0fae62);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;margin-top:8px}
+
+body{
+  font-family:system-ui,-apple-system,sans-serif;
+  background:radial-gradient(circle at top,#111d36 0%,var(--bg-page) 60%);
+  color:var(--text-main);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  line-height:1.5;
+}
+
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border-subtle);
+  border-radius:18px;
+  padding:18px;
+  width:100%;
+  max-width:480px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.65);
+}
+
+.page-title{
+  font-size:18px;
+  font-weight:700;
+  text-align:center;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+
+.status-bar{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  background:var(--bg-input);
+  border:1px solid var(--border-subtle);
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:14px;
+}
+
+.status-item{
+  background:var(--bg-section);
+  border-radius:9px;
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+.status-label{
+  display:block;
+  font-size:11px;
+  color:var(--text-muted);
+}
+
+.status-value{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:#e2e8f0;
+  margin-top:2px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.section-box{
+  background:var(--bg-section);
+  border:1px solid var(--border-subtle);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:14px;
+}
+
+.section-title{
+  font-size:14px;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:12px;
+  padding-bottom:7px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+
+.field-group{margin-bottom:11px}
+.field-group:last-child{margin-bottom:0}
+
+label{
+  display:block;
+  font-size:12px;
+  color:var(--text-muted);
+  margin-bottom:5px;
+}
+
+.sub-label{
+  color:var(--accent);
+  font-weight:600;
+  margin-top:8px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  background:var(--bg-input);
+  border:1px solid var(--border-input);
+  color:var(--text-main);
+  font-size:14px;
+  transition:border-color 0.2s ease,box-shadow 0.2s ease;
+}
+
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft);
+}
+
+.ltr-input{
+  direction:ltr;
+  text-align:left;
+}
+
+.link-preview{
+  background:var(--bg-input);
+  border:1px dashed #3b527a;
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:12px;
+  direction:ltr;
+  text-align:left;
+  color:#4ade80;
+  word-break:break-all;
+  cursor:pointer;
+  margin-top:4px;
+  transition:background 0.2s ease;
+}
+
+.link-preview:hover{background:#0f192d}
+
+.btn{
+  width:100%;
+  padding:11px 14px;
+  border-radius:10px;
+  border:none;
+  color:#ffffff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:8px;
+  transition:opacity 0.15s ease,transform 0.1s ease,filter 0.15s ease;
+}
+
+.btn:hover{filter:brightness(1.06)}
 .btn:active{transform:scale(0.98)}
-.btn-danger{background:#e74c3c;margin-top:5px}
-.btn-test{background:#3498db;margin-top:5px}
-.copy-box{background:#111;padding:8px;border-radius:6px;font-size:11px;direction:ltr;text-align:left;color:#48e0a4;word-break:break-all;margin-top:6px;cursor:pointer}
+
+.btn-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:8px;
+}
+
+.btn-row .btn{margin-top:0}
+
+.btn-primary{background:var(--btn-primary)}
+.btn-primary:hover{background:var(--btn-primary-hover)}
+.btn-test{background:var(--btn-test)}
+.btn-copy{background:var(--btn-copy)}
+.btn-export{background:var(--btn-export);margin-top:0}
+.btn-danger{background:var(--btn-danger)}
+.btn-ghost{background:var(--btn-ghost);border:1px solid var(--border-input);color:#cbd5e1}
+
+.details-box{
+  display:none;
+  background:var(--bg-input);
+  border:1px solid var(--border-input);
+  border-radius:12px;
+  padding:12px;
+  margin-top:12px;
+}
+
 .login-box{display:block}
 .panel-box{display:none}
-hr{border:0;border-top:1px solid #222;margin:15px 0}
-.section-box{background:#1a1a1a;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #262626}
+.output-box{margin-top:12px}
+
+.json-textarea{
+  height:145px;
+  font-size:12px;
+  font-family:monospace;
+  color:#4ade80;
+  resize:vertical;
+}
+
+.toast{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:#0f172a;
+  color:#f8fafc;
+  border:1px solid rgba(56,189,248,0.45);
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,0.6);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.22s ease,transform 0.22s ease;
+  z-index:999;
+  max-width:90%;
+  text-align:center;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
 </style>
 </head>
 <body>
 
 <div class="card">
-    
-    <!-- قسم تسجيل الدخول -->
-    <div id="loginBox" class="login-box">
-        <h2>تسجيل الدخول للأداة</h2>
-        <div class="group">
-            <label>كلمة المرور</label>
-            <input type="password" id="adminPass" placeholder="أدخل كلمة المرور" style="direction:ltr;text-align:left">
-        </div>
-        <button class="btn" onclick="checkLogin()">دخول</button>
+
+  <!-- 1. قسم تسجيل الدخول -->
+  <div id="loginBox" class="login-box">
+    <h1 class="page-title">تسجيل الدخول للوحة الإدارة</h1>
+    <div class="section-box">
+      <div class="field-group">
+        <label for="adminPass">كلمة المرور</label>
+        <input type="password" id="adminPass" class="ltr-input" placeholder="أدخل كلمة المرور" onkeydown="if(event.key==='Enter')checkLogin()">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="checkLogin()">دخول</button>
+    </div>
+  </div>
+
+  <!-- 2. لوحة التحكم الرئيسية -->
+  <div id="panelBox" class="panel-box">
+    <h1 class="page-title">لوحة التحكم المركزية للمسوقين</h1>
+
+    <!-- شريط حالة سريع -->
+    <div class="status-bar" aria-label="ملخص الحالة">
+      <div class="status-item">
+        <span class="status-label">عدد المسوقين</span>
+        <span id="statAffCount" class="status-value">0</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">الرقم الأساسي الحالي</span>
+        <span id="statDefaultPhone" class="status-value ltr-input">-</span>
+      </div>
     </div>
 
-    <!-- لوحة التحكم الرئيسية -->
-    <div id="panelBox" class="panel-box">
-        <h2>لوحة التحكم المركزية للمسوقين</h2>
-        
-        <!-- رقم الطوارئ الأساسي -->
-        <div class="section-box">
-            <div class="group" style="margin-bottom:0">
-                <label>رقم المتجر الأساسي (خط الطوارئ عند الحظر)</label>
-                <input type="text" id="dfPhone" placeholder="972567938099" style="direction:ltr;text-align:left">
-            </div>
+    <!-- القسم الأول: الرقم والرابط الرئيسي للمتجر -->
+    <section class="section-box" aria-label="الرقم والرابط الرئيسي">
+      <h2 class="section-title">📞 الرقم والرابط الرئيسي للمتجر</h2>
+
+      <div class="field-group">
+        <label for="dfPhone">رقم المتجر الأساسي (خط الطوارئ عند الحظر)</label>
+        <input type="text" id="dfPhone" class="ltr-input" placeholder="972567938099" oninput="syncDefaultPhone()">
+      </div>
+
+      <div class="field-group">
+        <label for="quickPhoneSelect">اختيار سريع من أرقام المسوقين</label>
+        <select id="quickPhoneSelect" onchange="applyQuickPhone()">
+          <option value="">-- اختر مسوقاً لتعيين رقمه كرقم أساسي --</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="sub-label">الرابط الرئيسي للمتجر (بدون كود مسوق)</label>
+        <div class="link-preview" onclick="copyMainLink()" title="اضغط لنسخ الرابط">🔗 https://glamourbeauty.online/</div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-copy" onclick="copyMainLink()">📋 نسخ الرابط</button>
+          <button type="button" class="btn btn-test" onclick="testMainPhone()">🔍 فحص الرقم</button>
         </div>
+      </div>
+    </section>
 
-        <!-- إضافة أو تحديث مسوق -->
-        <div class="section-box">
-            <h3>➕ إضافة أو تحديث مسوق</h3>
-            <div class="group">
-                <label>اسم المسوق</label>
-                <input type="text" id="mName" placeholder="مثال: أسماء">
-            </div>
-            <div class="group">
-                <label>رقم واتساب المسوق (مع مفتاح الدولة بدون +)</label>
-                <input type="text" id="mPhone" placeholder="مثال: 972567845326" style="direction:ltr;text-align:left">
-            </div>
-            <div class="group">
-                <label>اختصار اسمه (في رابط الإعلان مثل: as)</label>
-                <input type="text" id="mKey" placeholder="مثال: as" style="direction:ltr;text-align:left">
-            </div>
-            <button class="btn" onclick="addOrUpdateAffiliate()">حفظ وتوليد الرابط</button>
+    <!-- القسم الثاني: إضافة أو تحديث بيانات مسوق -->
+    <section class="section-box" aria-label="إضافة أو تحديث مسوق">
+      <h2 class="section-title">➕ إضافة أو تحديث مسوق</h2>
+
+      <div class="field-group">
+        <label for="mName">اسم المسوق</label>
+        <input type="text" id="mName" placeholder="مثال: أسماء">
+      </div>
+
+      <div class="field-group">
+        <label for="mPhone">رقم واتساب المسوق (مع مفتاح الدولة بدون +)</label>
+        <input type="text" id="mPhone" class="ltr-input" placeholder="مثال: 972567845326">
+      </div>
+
+      <div class="field-group">
+        <label for="mKey">اختصار المسوق (في رابط الإعلان مثل: as)</label>
+        <input type="text" id="mKey" class="ltr-input" placeholder="مثال: as">
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" onclick="addOrUpdateAffiliate()">💾 حفظ وتوليد</button>
+        <button type="button" class="btn btn-ghost" onclick="clearAffiliateForm()">↺ تفريغ الحقول</button>
+      </div>
+    </section>
+
+    <!-- القسم الثالث: إدارة وفحص المسوقين الحاليين -->
+    <section class="section-box" aria-label="قائمة المسوقين">
+      <h2 class="section-title">📋 قائمة المسوقين</h2>
+
+      <div class="field-group">
+        <label for="affSelect">اختر مسوقاً لعرض رابطه أو اختباره</label>
+        <select id="affSelect" onchange="onAffiliateSelect()">
+          <option value="">-- اختر مسوقاً --</option>
+        </select>
+      </div>
+
+      <div id="selectedAffDetails" class="details-box">
+        <label class="sub-label">الرابط المولد للمسوق</label>
+        <div id="selectedLinkBox" class="link-preview" onclick="copySelectedLink()" title="اضغط لنسخ الرابط"></div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-copy" onclick="copySelectedLink()">📋 نسخ الرابط</button>
+          <button type="button" class="btn btn-test" onclick="testSelectedLink()">🔍 فحص الرابط</button>
         </div>
+        <button type="button" class="btn btn-danger" onclick="deleteSelectedAffiliate()">🗑️ حذف هذا المسوق</button>
+      </div>
+    </section>
 
-        <!-- القائمة المنسدلة النظيفة -->
-        <div class="section-box">
-            <h3>📋 قائمة المسوقين</h3>
-            <div class="group">
-                <label>اختر مسوقاً لإدارة رابطه أو فحصه:</label>
-                <select id="affSelect" onchange="onAffiliateSelect()">
-                    <option value="">-- اختر مسوقاً --</option>
-                </select>
-            </div>
-            
-            <div id="selectedAffDetails" style="display:none;background:#111;padding:10px;border-radius:8px;margin-top:10px;border:1px solid #333">
-                <label style="color:#00d9ff;margin-bottom:2px">الرابط المولد:</label>
-                <div id="selectedLinkBox" class="copy-box" onclick="copySelectedLink()" title="اضغط للنسخ"></div>
-                
-                <button class="btn btn-test" onclick="testSelectedLink()">🔍 فحص واختبار الرابط (تجربة الواتساب)</button>
-                <button class="btn btn-danger" onclick="deleteSelectedAffiliate()">🗑️ حذف هذا المسوق</button>
-            </div>
-        </div>
+    <!-- القسم الرابع: تصدير ملف الإعدادات config.json -->
+    <section class="section-box" aria-label="تصدير الإعدادات">
+      <h2 class="section-title">⚙️ تصدير التحديثات</h2>
+      <button type="button" class="btn btn-export" onclick="exportJsonFile()">📤 توليد كود التحديث لملف config.json</button>
+      <div id="outputArea" class="output-box"></div>
+    </section>
+  </div>
 
-        <hr>
-
-        <!-- تصدير التحديث -->
-        <div class="section-box" style="border-color:#3b32a8">
-            <button class="btn" style="background:#6c5ce7;margin-top:0" onclick="exportJsonFile()">نسخ كود التحديث لملف config.json</button>
-            <div id="outputArea" style="margin-top:10px"></div>
-        </div>
-
-    </div>
 </div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
 const CORRECT_PASS = "admin123";
-let currentConfig = { defaultPhone: "972567938099", affiliates: {} };
+const MAIN_URL = "https://glamourbeauty.online/";
+
+let currentConfig = {
+  defaultPhone: "972567938099",
+  affiliates: {}
+};
+
+let toastTimer = null;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
+}
+
+function updateSummaryBar() {
+  const count = Object.keys(currentConfig.affiliates || {}).length;
+  document.getElementById("statAffCount").textContent = String(count);
+  document.getElementById("statDefaultPhone").textContent = currentConfig.defaultPhone || "-";
+}
 
 function checkLogin() {
-    if (document.getElementById('adminPass').value === CORRECT_PASS) {
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('panelBox').style.display = 'block';
-        loadConfig();
-    } else {
-        alert('كلمة المرور خاطئة!');
-    }
+  const passInput = document.getElementById("adminPass").value;
+  if (passInput === CORRECT_PASS) {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("panelBox").style.display = "block";
+    loadConfig();
+  } else {
+    showToast("كلمة المرور غير صحيحة");
+  }
 }
 
 function loadConfig() {
-    fetch('config.json?t=' + Date.now())
-    .then(res => res.json())
-    .then(data => {
-        currentConfig = data;
-        document.getElementById('dfPhone').value = currentConfig.defaultPhone || "972567938099";
-        renderSelectDropdown();
+  fetch("config.json?t=" + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to fetch config.json");
+      return res.json();
     })
-    .catch(err => {
-        renderSelectDropdown();
+    .then(data => {
+      currentConfig = {
+        defaultPhone: data.defaultPhone || "972567938099",
+        affiliates: (data.affiliates && typeof data.affiliates === "object") ? data.affiliates : {}
+      };
+      document.getElementById("dfPhone").value = currentConfig.defaultPhone;
+      renderSelectDropdowns();
+      updateSummaryBar();
+    })
+    .catch(() => {
+      document.getElementById("dfPhone").value = currentConfig.defaultPhone;
+      renderSelectDropdowns();
+      updateSummaryBar();
     });
 }
 
-// القائمة أصبحت تعرض الاسم فقط بشكل مرتب وخالٍ من الزحمة
-function renderSelectDropdown() {
-    const select = document.getElementById('affSelect');
-    select.innerHTML = '<option value="">-- اختر مسوقاً --</option>';
-    document.getElementById('selectedAffDetails').style.display = 'none';
+function syncDefaultPhone() {
+  currentConfig.defaultPhone = document.getElementById("dfPhone").value.trim();
+  updateSummaryBar();
+}
 
-    if (!currentConfig.affiliates) currentConfig.affiliates = {};
+function copyToClipboard(text, successMsg) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(() => showToast(successMsg))
+      .catch(() => fallbackCopy(text, successMsg));
+  } else {
+    fallbackCopy(text, successMsg);
+  }
+}
 
-    for (let key in currentConfig.affiliates) {
-        const aff = currentConfig.affiliates[key];
-        const name = (typeof aff === 'object' && aff.name) ? aff.name : key;
-        
-        const opt = document.createElement('option');
-        opt.value = key;
-        opt.textContent = name; // عرض الاسم فقط بكل نظافة وسلاسة
-        select.appendChild(opt);
-    }
+function fallbackCopy(text, successMsg) {
+  const tempInput = document.createElement("textarea");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+  showToast(successMsg);
+}
+
+function copyMainLink() {
+  copyToClipboard(MAIN_URL, "تم نسخ الرابط الرئيسي");
+}
+
+function testMainPhone() {
+  syncDefaultPhone();
+  const cleanPhone = (currentConfig.defaultPhone || "").replace(/[^0-9]/g, "");
+  if (!cleanPhone) {
+    showToast("أدخل رقماً أساسياً صحيحاً أولاً");
+    return;
+  }
+  const testUrl = "https://wa.me/" + cleanPhone + "?text=" + encodeURIComponent("مرحباً، هذا فحص تجريبي للرقم الأساسي للمتجر.");
+  window.open(testUrl, "_blank");
+}
+
+function applyQuickPhone() {
+  const key = document.getElementById("quickPhoneSelect").value;
+  if (!key || !currentConfig.affiliates[key]) return;
+
+  const aff = currentConfig.affiliates[key];
+  const phone = (typeof aff === "object" ? aff.phone : aff || "").trim();
+  if (phone) {
+    document.getElementById("dfPhone").value = phone;
+    currentConfig.defaultPhone = phone;
+    updateSummaryBar();
+    showToast("تم تعيين رقم المسوق كرقم أساسي");
+  }
+}
+
+function renderSelectDropdowns() {
+  const select = document.getElementById("affSelect");
+  const quickSelect = document.getElementById("quickPhoneSelect");
+
+  select.innerHTML = '<option value="">-- اختر مسوقاً --</option>';
+  quickSelect.innerHTML = '<option value="">-- اختر مسوقاً لتعيين رقمه كرقم أساسي --</option>';
+  document.getElementById("selectedAffDetails").style.display = "none";
+
+  for (const key in currentConfig.affiliates) {
+    const aff = currentConfig.affiliates[key];
+    const displayName = (typeof aff === "object" && aff.name) ? aff.name : key;
+
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = displayName;
+    select.appendChild(opt);
+
+    const quickOpt = document.createElement("option");
+    quickOpt.value = key;
+    quickOpt.textContent = displayName;
+    quickSelect.appendChild(quickOpt);
+  }
 }
 
 function onAffiliateSelect() {
-    const key = document.getElementById('affSelect').value;
-    const detailsDiv = document.getElementById('selectedAffDetails');
-    
-    if (!key) {
-        detailsDiv.style.display = 'none';
-        return;
-    }
+  const key = document.getElementById("affSelect").value;
+  const detailsDiv = document.getElementById("selectedAffDetails");
 
-    const aff = currentConfig.affiliates[key];
-    const phone = typeof aff === 'object' ? aff.phone : aff;
-    const name = (typeof aff === 'object' && aff.name) ? aff.name : "";
+  if (!key || !currentConfig.affiliates[key]) {
+    detailsDiv.style.display = "none";
+    return;
+  }
 
-    document.getElementById('mKey').value = key;
-    document.getElementById('mPhone').value = phone;
-    document.getElementById('mName').value = name;
+  const aff = currentConfig.affiliates[key];
+  const phone = typeof aff === "object" ? aff.phone : aff;
+  const name = (typeof aff === "object" && aff.name) ? aff.name : "";
 
-    const fullLink = "https://glamourbeauty.online/?ref=" + key;
-    document.getElementById('selectedLinkBox').innerHTML = `🔗 ${fullLink}`;
-    detailsDiv.style.display = 'block';
+  document.getElementById("mKey").value = key;
+  document.getElementById("mPhone").value = phone || "";
+  document.getElementById("mName").value = name;
+
+  const fullLink = MAIN_URL + "?ref=" + encodeURIComponent(key);
+  document.getElementById("selectedLinkBox").textContent = "🔗 " + fullLink;
+  detailsDiv.style.display = "block";
 }
 
 function copySelectedLink() {
-    const key = document.getElementById('affSelect').value;
-    if(!key) return;
-    const fullLink = "https://glamourbeauty.online/?ref=" + key;
-    navigator.clipboard.writeText(fullLink);
-    alert('تم نسخ الرابط بنجاح!');
+  const key = document.getElementById("affSelect").value;
+  if (!key) return;
+  const fullLink = MAIN_URL + "?ref=" + encodeURIComponent(key);
+  copyToClipboard(fullLink, "تم نسخ رابط المسوق");
 }
 
 function testSelectedLink() {
-    const key = document.getElementById('affSelect').value;
-    if (!key) return;
-    
-    const aff = currentConfig.affiliates[key];
-    const phone = typeof aff === 'object' ? aff.phone : aff;
-    const cleanPhone = phone.replace(/[^0-9]/g, '');
-    
-    const testUrl = `https://wa.me/${cleanPhone}?text=` + encodeURIComponent(`مرحباً، هذا فحص تجريبي للرابط الخاص بالمسوق: ${key}`);
-    window.open(testUrl, '_blank');
+  const key = document.getElementById("affSelect").value;
+  if (!key || !currentConfig.affiliates[key]) return;
+
+  const aff = currentConfig.affiliates[key];
+  const rawPhone = typeof aff === "object" ? aff.phone : aff;
+  const cleanPhone = (rawPhone || "").replace(/[^0-9]/g, "");
+
+  if (!cleanPhone) {
+    showToast("رقم هذا المسوق غير صالح للفحص");
+    return;
+  }
+
+  const testUrl = "https://wa.me/" + cleanPhone + "?text=" + encodeURIComponent("مرحباً، هذا فحص تجريبي للرابط الخاص بالمسوق: " + key);
+  window.open(testUrl, "_blank");
+}
+
+function clearAffiliateForm() {
+  document.getElementById("mName").value = "";
+  document.getElementById("mPhone").value = "";
+  document.getElementById("mKey").value = "";
+  showToast("تم تفريغ الحقول");
 }
 
 function addOrUpdateAffiliate() {
-    const name = document.getElementById('mName').value.trim();
-    const phone = document.getElementById('mPhone').value.trim();
-    const key = document.getElementById('mKey').value.trim().toLowerCase();
+  const name = document.getElementById("mName").value.trim();
+  const phone = document.getElementById("mPhone").value.trim();
+  const key = document.getElementById("mKey").value.trim().toLowerCase();
 
-    if (!phone || !key) {
-        alert('يرجى إدخال رقم الواتساب واختصار الاسم على الأقل!');
-        return;
-    }
+  if (!phone || !key) {
+    showToast("أدخل رقم الواتساب واختصار المسوق على الأقل");
+    return;
+  }
 
-    currentConfig.affiliates[key] = {
-        phone: phone,
-        name: name || key
-    };
+  currentConfig.affiliates[key] = {
+    phone: phone,
+    name: name || key
+  };
 
-    renderSelectDropdown();
-    
-    document.getElementById('mName').value = '';
-    document.getElementById('mPhone').value = '';
-    document.getElementById('mKey').value = '';
-    
-    alert('تم حفظ المسوق بنجاح! لا تنسَ نسخ كود التحديث بالأسفل ولصقه في config.json.');
+  renderSelectDropdowns();
+  updateSummaryBar();
+  clearAffiliateForm();
+  showToast("تم الحفظ! صدّر كود JSON لتحديث config.json");
 }
 
 function deleteSelectedAffiliate() {
-    const key = document.getElementById('affSelect').value;
-    if (!key) return;
+  const key = document.getElementById("affSelect").value;
+  if (!key) return;
 
-    if (confirm(`هل أنت متأكد من حذف المسوق (${key})؟`)) {
-        delete currentConfig.affiliates[key];
-        renderSelectDropdown();
-        alert('تم الحذف بنجاح. تذكر نسخ كود التحديث في الأسفل وحفظه في ملف config.json.');
-    }
+  if (confirm("هل أنت متأكد من حذف المسوق (" + key + ")؟")) {
+    delete currentConfig.affiliates[key];
+    renderSelectDropdowns();
+    updateSummaryBar();
+    showToast("تم الحذف! صدّر كود JSON لتحديث config.json");
+  }
 }
 
 function exportJsonFile() {
-    currentConfig.defaultPhone = document.getElementById('dfPhone').value.trim();
-    const jsonString = JSON.stringify(currentConfig, null, 2);
-    
-    document.getElementById('outputArea').innerHTML = `
-        <label style="color:#00d9ff;margin-bottom:4px">انسخ هذا المحتوى بالكامل ولصقه داخل ملف config.json:</label>
-        <textarea style="width:100%;height:130px;background:#111;color:#48e0a4;padding:8px;font-size:12px;direction:ltr;border:1px solid #333;border-radius:6px" readonly>${jsonString}</textarea>
-    `;
+  syncDefaultPhone();
+  const jsonString = JSON.stringify(currentConfig, null, 2);
+
+  document.getElementById("outputArea").innerHTML =
+    '<label for="jsonExportBox" class="sub-label">انسخ هذا المحتوى بالكامل والصقه داخل ملف config.json:</label>' +
+    '<textarea id="jsonExportBox" class="json-textarea ltr-input" readonly onclick="this.select()"></textarea>' +
+    '<button type="button" class="btn btn-copy" onclick="copyExportedJson()">📋 نسخ كود JSON</button>';
+
+  document.getElementById("jsonExportBox").value = jsonString;
+  showToast("تم توليد كود config.json بنجاح");
+}
+
+function copyExportedJson() {
+  const box = document.getElementById("jsonExportBox");
+  if (!box || !box.value) return;
+  copyToClipboard(box.value, "تم نسخ كود config.json");
 }
 </script>
 </body>
