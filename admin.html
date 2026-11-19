@@ -284,6 +284,7 @@ input:focus,select:focus,textarea:focus{
       <div class="field-group">
         <label for="dfPhone">رقم المتجر الأساسي (خط الطوارئ عند الحظر)</label>
         <input type="text" id="dfPhone" class="ltr-input" placeholder="972567938099" oninput="syncDefaultPhone()">
+        <button type="button" class="btn btn-primary" onclick="saveDefaultPhone()">💾 حفظ الرقم الأساسي</button>
       </div>
 
       <div class="field-group">
@@ -291,6 +292,7 @@ input:focus,select:focus,textarea:focus{
         <select id="quickPhoneSelect" onchange="applyQuickPhone()">
           <option value="">-- اختر مسوقاً لتعيين رقمه كرقم أساسي --</option>
         </select>
+        <button type="button" class="btn btn-ghost" onclick="restoreDefaultPhone()">↩️ استعادة رقمي الأساسي</button>
       </div>
 
       <div class="field-group">
@@ -372,6 +374,7 @@ let currentConfig = {
   affiliates: {}
 };
 
+let previousDefaultPhone = "972567938099";
 let toastTimer = null;
 
 function showToast(message) {
@@ -413,11 +416,13 @@ function loadConfig() {
         defaultPhone: data.defaultPhone || "972567938099",
         affiliates: (data.affiliates && typeof data.affiliates === "object") ? data.affiliates : {}
       };
+      previousDefaultPhone = currentConfig.defaultPhone;
       document.getElementById("dfPhone").value = currentConfig.defaultPhone;
       renderSelectDropdowns();
       updateSummaryBar();
     })
     .catch(() => {
+      previousDefaultPhone = currentConfig.defaultPhone;
       document.getElementById("dfPhone").value = currentConfig.defaultPhone;
       renderSelectDropdowns();
       updateSummaryBar();
@@ -425,8 +430,36 @@ function loadConfig() {
 }
 
 function syncDefaultPhone() {
-  currentConfig.defaultPhone = document.getElementById("dfPhone").value.trim();
+  const val = document.getElementById("dfPhone").value.trim();
+  currentConfig.defaultPhone = val;
+  if (val && document.getElementById("quickPhoneSelect").value === "") {
+    previousDefaultPhone = val;
+  }
   updateSummaryBar();
+}
+
+function saveDefaultPhone() {
+  const rawPhone = document.getElementById("dfPhone").value.trim();
+  const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
+  if (!cleanPhone) {
+    showToast("أدخل رقماً صحيحاً أولاً");
+    return;
+  }
+  document.getElementById("dfPhone").value = cleanPhone;
+  currentConfig.defaultPhone = cleanPhone;
+  previousDefaultPhone = cleanPhone;
+  document.getElementById("quickPhoneSelect").value = "";
+  updateSummaryBar();
+  showToast("تم حفظ الرقم الأساسي، اضغط توليد الكود الآن");
+}
+
+function restoreDefaultPhone() {
+  const restored = previousDefaultPhone || currentConfig.defaultPhone || "972567938099";
+  document.getElementById("dfPhone").value = restored;
+  document.getElementById("quickPhoneSelect").value = "";
+  currentConfig.defaultPhone = restored;
+  updateSummaryBar();
+  showToast("تمت استعادة رقمك الأساسي");
 }
 
 function copyToClipboard(text, successMsg) {
@@ -466,7 +499,18 @@ function testMainPhone() {
 
 function applyQuickPhone() {
   const key = document.getElementById("quickPhoneSelect").value;
-  if (!key || !currentConfig.affiliates[key]) return;
+  if (!key) {
+    restoreDefaultPhone();
+    return;
+  }
+  if (!currentConfig.affiliates[key]) return;
+
+  const currentFieldVal = document.getElementById("dfPhone").value.trim();
+  if (currentFieldVal && currentFieldVal !== currentConfig.defaultPhone) {
+    previousDefaultPhone = currentFieldVal;
+  } else if (currentConfig.defaultPhone) {
+    previousDefaultPhone = currentConfig.defaultPhone;
+  }
 
   const aff = currentConfig.affiliates[key];
   const phone = (typeof aff === "object" ? aff.phone : aff || "").trim();
@@ -474,7 +518,7 @@ function applyQuickPhone() {
     document.getElementById("dfPhone").value = phone;
     currentConfig.defaultPhone = phone;
     updateSummaryBar();
-    showToast("تم تعيين رقم المسوق كرقم أساسي");
+    showToast("تم وضع رقم المسوق مؤقتاً (يمكنك الاستعادة بلمسة)");
   }
 }
 
