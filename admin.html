@@ -249,7 +249,6 @@ input:focus,select:focus,textarea:focus{
 
 <div class="card">
 
-  <!-- 1. قسم تسجيل الدخول -->
   <div id="loginBox" class="login-box">
     <h1 class="page-title">تسجيل الدخول للوحة الإدارة</h1>
     <div class="section-box">
@@ -261,11 +260,9 @@ input:focus,select:focus,textarea:focus{
     </div>
   </div>
 
-  <!-- 2. لوحة التحكم الرئيسية -->
   <div id="panelBox" class="panel-box">
     <h1 class="page-title">لوحة التحكم المركزية للمسوقين</h1>
 
-    <!-- شريط حالة سريع -->
     <div class="status-bar" aria-label="ملخص الحالة">
       <div class="status-item">
         <span class="status-label">عدد المسوقين</span>
@@ -277,7 +274,6 @@ input:focus,select:focus,textarea:focus{
       </div>
     </div>
 
-    <!-- القسم الأول: الرقم والرابط الرئيسي للمتجر -->
     <section class="section-box" aria-label="الرقم والرابط الرئيسي">
       <h2 class="section-title">📞 الرقم والرابط الرئيسي للمتجر</h2>
 
@@ -305,7 +301,6 @@ input:focus,select:focus,textarea:focus{
       </div>
     </section>
 
-    <!-- القسم الثاني: إضافة أو تحديث بيانات مسوق -->
     <section class="section-box" aria-label="إضافة أو تحديث مسوق">
       <h2 class="section-title">➕ إضافة أو تحديث مسوق</h2>
 
@@ -330,7 +325,6 @@ input:focus,select:focus,textarea:focus{
       </div>
     </section>
 
-    <!-- القسم الثالث: إدارة وفحص المسوقين الحاليين -->
     <section class="section-box" aria-label="قائمة المسوقين">
       <h2 class="section-title">📋 قائمة المسوقين</h2>
 
@@ -353,7 +347,6 @@ input:focus,select:focus,textarea:focus{
       </div>
     </section>
 
-    <!-- القسم الرابع: تصدير ملف الإعدادات config.json -->
     <section class="section-box" aria-label="تصدير الإعدادات">
       <h2 class="section-title">⚙️ تصدير التحديثات</h2>
       <button type="button" class="btn btn-export" onclick="exportJsonFile()">📤 توليد كود التحديث لملف config.json</button>
@@ -366,7 +359,7 @@ input:focus,select:focus,textarea:focus{
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-const CORRECT_PASS = "admin123";
+const CORRECT_PASS = "Moh@1983";
 const MAIN_URL = "https://glamourbeauty.online/";
 
 let currentConfig = {
