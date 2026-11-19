@@ -57,8 +57,8 @@ function getOrCreateExternalId() {
     return id;
 }
 
-// تحميل بكسل تيك توك بعد 300 جزء من الألف من الثانية لضمان ظهور الصفحة بسرعة البرق أولاً
-!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=r;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};ttq._o[e]=n||{};setTimeout(function(){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(n,s)},300)};
+// تحميل بكسل تيك توك فوراً لضمان جاهزية تتبع الأحداث بدون فقدان
+!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=r;ttq._t=ttq._t||{};ttq._t[e]=+new Date;ttq._o=ttq._o||{};ttq._o[e]=n||{};var s=document.createElement("script");s.type="text/javascript";s.async=!0;s.src=r+"?sdkid="+e+"&lib="+t;var f=document.getElementsByTagName("script")[0];f.parentNode.insertBefore(s,f)};
 ttq.load('DBI8H4JC77UF91063JE0');
 ttq.identify({external_id: getOrCreateExternalId()});
 ttq.page()}(window,document,'ttq');
@@ -131,37 +131,42 @@ function activateButtons() {
 window.addEventListener('scroll', activateButtons, {once: true, passive: true});
 window.addEventListener('touchstart', activateButtons, {once: true, passive: true});
 window.addEventListener('mousemove', activateButtons, {once: true, passive: true});
-setTimeout(activateButtons, 2500);
+setTimeout(activateButtons, 1000);
 
-const sk='glamour_whatsapp_event_sent';
-let et=false;
+let lastTrackTime = 0;
 function redirectToWa(e){
     e.preventDefault();
-    if(!userQualified) return;
-    const ib=/bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
-    let at=et;
-    try{if(sessionStorage.getItem(sk)==='1')at=true;}catch(err){}
-    
-    if(!at&&!ib&&typeof ttq!=='undefined'&&typeof ttq.track==='function'){
-        et=true;
-        try{sessionStorage.setItem(sk,'1');}catch(err){}
-        const id='evt_'+Date.now()+'_'+Math.random().toString(36).substring(2,9);
-        const clickId = localStorage.getItem('tt_click_id') || '';
+    if(!userQualified) activateButtons();
+
+    const now = Date.now();
+    const ib = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
+    const clickId = localStorage.getItem('tt_click_id') || '';
+    const extId = getOrCreateExternalId();
+
+    if(!ib && typeof ttq !== 'undefined' && typeof ttq.track === 'function' && (now - lastTrackTime > 800)){
+        lastTrackTime = now;
+        const baseId = 'evt_' + now + '_' + Math.random().toString(36).substring(2,8);
 
         const eventProperties = {
-            event_id: id,
+            event_id: baseId,
             contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}],
             value: 1,
             currency: 'USD',
             click_id: clickId
         };
-        ttq.track('InitiateCheckout', eventProperties, {external_id: getOrCreateExternalId()});
-        ttq.track('Contact', {event_id: 'con_'+id, contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}], click_id: clickId}, {external_id: getOrCreateExternalId()});
+
+        ttq.identify({external_id: extId});
+        ttq.track('InitiateCheckout', eventProperties);
+        ttq.track('Contact', {
+            event_id: 'con_' + baseId,
+            contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}],
+            click_id: clickId
+        });
     }
 
     setTimeout(function(){
         window.location.href = fu;
-    }, 300);
+    }, 180);
 }
 </script>
 </body>
