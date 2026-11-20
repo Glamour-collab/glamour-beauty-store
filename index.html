@@ -126,6 +126,25 @@ fetch('./config.json?t=' + Date.now(), { cache: 'no-store' })
   });
 
 let userQualified = false;
+let contactTracked = false;
+
+function trackContactOnce() {
+    if (contactTracked) return;
+    const ib = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
+    const clickId = localStorage.getItem('tt_click_id') || '';
+    const extId = getOrCreateExternalId();
+
+    if (!ib && typeof ttq !== 'undefined' && typeof ttq.track === 'function') {
+        contactTracked = true;
+        ttq.identify({external_id: extId});
+        ttq.track('Contact', {
+            event_id: 'con_' + Date.now() + '_' + Math.random().toString(36).substring(2,8),
+            contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}],
+            click_id: clickId
+        });
+    }
+}
+
 function activateButtons() {
     if (!userQualified) {
         userQualified = true;
@@ -133,6 +152,7 @@ function activateButtons() {
         const cb = document.getElementById("centerWhatsappButton");
         if(wb) wb.classList.add('active-btn');
         if(cb) cb.classList.add('active-btn');
+        trackContactOnce();
     }
 }
 window.addEventListener('scroll', activateButtons, {once: true, passive: true});
@@ -143,7 +163,13 @@ setTimeout(activateButtons, 1000);
 let lastTrackTime = 0;
 function redirectToWa(e){
     e.preventDefault();
-    if(!userQualified) activateButtons();
+    if(!userQualified) {
+        userQualified = true;
+        const wb = document.getElementById("whatsappButton");
+        const cb = document.getElementById("centerWhatsappButton");
+        if(wb) wb.classList.add('active-btn');
+        if(cb) cb.classList.add('active-btn');
+    }
 
     const now = Date.now();
     const ib = /bot|crawl|spider|bytespider|headless/i.test(navigator.userAgent);
@@ -164,11 +190,6 @@ function redirectToWa(e){
 
         ttq.identify({external_id: extId});
         ttq.track('InitiateCheckout', eventProperties);
-        ttq.track('Contact', {
-            event_id: 'con_' + baseId,
-            contents: [{content_id: 'glamour_beauty_product', content_type: 'product', quantity: 1}],
-            click_id: clickId
-        });
     }
 
     setTimeout(function(){
